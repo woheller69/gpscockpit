@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.mirfatif.mylocation">
+
+  <uses-feature android:name="android.hardware.location" />
+
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+  <application
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:name=".App"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/SplashTheme"
+    tools:ignore="AllowBackup">
+
+    <activity android:name=".MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <service
+      android:exported="false"
+      android:foregroundServiceType="location"
+      android:name=".GpsSvc" />
+
+    <service
+      android:exported="false"
+      android:name=".NotifDismissSvc" />
+
+    <provider
+      android:authorities="com.mirfatif.mylocation.FileProvider"
+      android:exported="false"
+      android:grantUriPermissions="true"
+      android:name="androidx.core.content.FileProvider">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+    </provider>
+
+  </application>
+
+  <queries>
+    <intent>
+      <action android:name="org.microg.nlp.LOCATION_BACKEND" />
+    </intent>
+
+    <intent>
+      <action android:name="android.support.customtabs.action.CustomTabsService" />
+    </intent>
+
+  </queries>
+
+</manifest>

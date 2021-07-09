@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="primaryDark">#365187</color>
+  <color name="primary">#496EB8</color>
+  <color name="accent">#56CBCD</color>
+  <color name="accentTrans">#8056CACC</color>
+
+  <color name="error">#804040</color>
+  <color name="fg">@android:color/black</color>
+  <color name="fgDim">#404040</color>
+
+</resources>

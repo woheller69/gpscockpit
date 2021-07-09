@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion compileSdkVer
+    buildToolsVersion buildToolsVer
+
+    defaultConfig {
+        applicationId "com.mirfatif.mylocation"
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 101
+        versionName "v1.01"
+
+        buildConfigField "boolean", "IS_PS", "false"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dependenciesInfo {
+        includeInApk false
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.browser:browser:1.3.0'
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+}
+
+apply plugin: 'com.github.sherter.google-java-format'
+preBuild.dependsOn(verifyGoogleJavaFormat)

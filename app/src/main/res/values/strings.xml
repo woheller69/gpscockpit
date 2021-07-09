@@ -1,0 +1,103 @@
+<resources>
+
+  <string name="app_name">My Location</string>
+
+  <string name="gps">GPS</string>
+  <string name="network">Network</string>
+  <string name="unified_nlp_backends">UnifiedNLP Backends</string>
+
+  <string name="grant_permission">Grant Permission</string>
+  <string name="clear_agps_data">Clear AGPS Data</string>
+  <string name="lock_gps">Lock GPS</string>
+  <string name="unlock_gps">Unlock GPS</string>
+
+  <string name="not_supported">Not supported</string>
+  <string name="not_installed">Not installed</string>
+  <string name="perm_not_granted">Permission required</string>
+  <string name="turned_off">Turned off</string>
+  <string name="failed">Failed</string>
+
+  <string name="map">Map</string>
+  <string name="copy">Copy</string>
+  <string name="satellites">Satellites</string>
+  <string name="settings">Settings</string>
+
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
+  <string name="accuracy">Accuracy</string>
+  <string name="updated">Updated</string>
+
+  <string name="total">Total</string>
+  <string name="good">Good</string>
+  <string name="fixed">Fixed</string>
+
+  <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
+  <string name="location">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$sm</string>
+  <string name="acc_unit">%sm</string>
+
+  <string name="no_email_app_installed" maxLength="20">No email app installed</string>
+  <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
+  <string name="no_maps_installed" maxLength="20">No maps app installed</string>
+  <string name="no_bitcoin_app_installed" maxLength="20">"Bitcoin Wallet app not found"</string>
+  <string name="failed_open_loc_settings" maxLength="20">Failed to open location settings</string>
+  <string name="failed_open_app_settings" maxLength="20">Failed to open app settings</string>
+  <string name="cleared" maxLength="20">Cleared</string>
+  <string name="copied" maxLength="20">Copied</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+  <string name="channel_crash_report">Crash Report</string>
+  <integer name="channel_crash_report">200</integer>
+
+  <!-- Notification -->
+  <string name="crash_report" maxLength="15">Crash Report</string>
+  <string name="ask_to_report_crash_small" maxLength="30">Send crash report to the developer</string>
+  <string name="ask_to_report_crash">Sorry, a component of the app had a problem and crashed.
+    Send the log file to the developer through email or Telegram so that the bug can be fixed.
+  </string>
+  <string name="send_report" maxLength="10">Send Report</string>
+
+  <!-- Preferences -->
+  <string name="pref_main_gps_enabled_key" translatable="false">pref_main_gps_enabled</string>
+  <string name="pref_main_network_enabled_key" translatable="false">pref_main_network_enabled</string>
+  <string name="pref_main_nlp_enabled_key" translatable="false">pref_main_nlp_enabled</string>
+  <string name="pref_main_crash_report_count_key" translatable="false">pref_main_crash_report_count</string>
+  <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
+  <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
+
+  <!-- Menu -->
+  <string name="location_settings_menu_item"  maxLength="15">Location Settings</string>
+  <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
+  <string name="donate_menu_item"  maxLength="15">Donate</string>
+  <string name="about_menu_item"  maxLength="15">About</string>
+
+  <!-- AboutDialog -->
+  <string name="email_address" translatable="false">mirfatif@gmail.com</string>
+  <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.mirfatif.mylocation.ps</string>
+  <string name="email" maxLength="15">Email</string>
+  <string name="telegram_group" maxLength="15">Telegram Group</string>
+  <string name="telegram_link" translatable="false">https://t.me/MyLocationApp</string>
+  <string name="source" maxLength="15">Source</string>
+  <string name="source_url" translatable="false">https://github.com/mirfatif/MyLocation</string>
+  <string name="app_rating" maxLength="15">Rate Me</string>
+  <string name="app_rating_summary" maxLength="20">Rating / review on Play Store</string>
+  <string name="privacy_policy" maxLength="20">Privacy Policy</string>
+  <string name="privacy_policy_link" translatable="false">https://mirfatif.github.io/MyLocation/privacy_policy.html</string>
+  <string name="share" maxLength="15">Share</string>
+  <string name="share_summary">Share the app with others</string>
+  <string name="share_text">Check out this amazing app! %s</string>
+  <string name="update" maxLength="15">Update</string>
+  <string name="update_summary" maxLength="20">Check for app updates</string>
+  <string name="release_url" translatable="false">https://github.com/mirfatif/MyLocation/releases</string>
+
+  <!-- Donate -->
+  <string name="send_bitcoin">Send Bitcoins</string>
+  <string name="ask_for_bank_account">Ask For Bank Account</string>
+  <string name="get_paid_version">Get Paid Version From Play Store</string>
+  <string name="bitcoin_address" translatable="false">18ijfsv5fcDKQ6CTe4wycKxZMmti4oUXjW</string>
+  <string name="bank_account_request" translatable="false">Hello,\n\nI need your IBAN and SWIFT/BIC
+    to make a donation.
+  </string>
+
+</resources>

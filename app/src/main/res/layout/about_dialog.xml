@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:paddingTop="8dp"
+  android:paddingBottom="8dp"
+  android:paddingStart="4dp"
+  android:paddingEnd="4dp"
+  android:scrollbars="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/icon"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:src="@drawable/icon"
+      tools:ignore="ContentDescription" />
+
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="2dp"
+      android:layout_gravity="center_horizontal"
+      android:text="@string/app_name"
+      android:textSize="18sp" />
+
+    <TextView
+      android:id="@+id/version"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:layout_marginBottom="8dp"
+      android:layout_gravity="center_horizontal" />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/contact"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/email"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/email" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/email_address" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/telegram"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/telegram"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/telegram_group" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/telegram_link" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/source_code"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/github_mark"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/source" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/source_url" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/rating"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/star"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/app_rating" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/app_rating_summary" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/privacy_policy"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/privacy_policy"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/privacy_policy" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/privacy_policy_link" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/share_app"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/share"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/share" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/share_summary" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
+      android:id="@+id/check_update"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/update"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/update" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/update_summary" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+</androidx.core.widget.NestedScrollView>

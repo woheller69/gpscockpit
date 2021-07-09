@@ -1,0 +1,13 @@
+<b>My Location</b> is a small app to know your geo coordinates using on-device GPS and Network location providers. It finds your device's location in the following ways:
+
+* GPS is usually the most accurate method. But a position fix may take some time or may not work at all due to signal loss. "Lock GPS" feature runs a persistent service to keep connected with the satellites.
+
+  You can also see the list of visible satellites with their PRNs (unique identifiers) and SNR (signal quality).
+ 
+* Network Location Provider uses Wi-Fi or Cellular ids to estimate the location. On the devices with Google Play Services installed, NLP usually uses Google Location Service at backend.
+* UnifiedNLP is an open source API which has been used to develop multiple NLP backends (https://github.com/microg/UnifiedNlp/wiki/Backends).
+
+Furthermore:
+
+* Location coordinates can be copied to clipboard or opened in a maps app, if installed.
+* Clearing A-GPS aiding data is also supported.

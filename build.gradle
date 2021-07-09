@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.2'
+    }
+}
+
+plugins {
+    id 'com.github.sherter.google-java-format' version '0.9'
+}
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    project.ext {
+        compileSdkVer = 30
+        buildToolsVer = "30.0.3"
+        minSdkVer = 21
+        targetSdkVer = 30
+        ndkVer = "22.1.7171670"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

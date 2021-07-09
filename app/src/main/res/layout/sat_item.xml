@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:paddingTop="8dp"
+  android:paddingBottom="8dp"
+  android:paddingStart="20dp"
+  android:paddingEnd="20dp"
+  android:orientation="horizontal">
+
+  <TextView
+    android:id="@+id/id_v"
+    android:textStyle="bold"
+    android:layout_width="32dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:maxLines="1"
+    android:textSize="16sp"
+    app:autoSizeTextType="uniform" />
+
+  <ProgressBar
+    android:id="@+id/prog_v"
+    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    android:layout_width="0dp"
+    android:layout_height="12dp"
+    android:layout_weight="1"
+    android:layout_marginStart="8dp"
+    android:layout_gravity="center_vertical"
+    android:background="#1A808080"
+    android:max="100"
+    android:progressDrawable="@drawable/progress" />
+
+  <ImageView
+    android:id="@+id/fixed_v"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_gravity="center_vertical"
+    android:scaleType="fitCenter"
+    android:src="@drawable/lock"
+    tools:ignore="ContentDescription" />
+
+  <TextView
+    android:id="@+id/signal_v"
+    android:layout_width="32dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_gravity="center_vertical"
+    android:gravity="end"
+    android:maxLines="1"
+    android:textAlignment="textEnd"
+    android:textColor="@color/fg"
+    android:textSize="12sp"
+    app:autoSizeTextType="uniform" />
+
+</LinearLayout>
