@@ -1,19 +1,19 @@
 # MyLocation [![Download](https://img.shields.io/github/v/release/mirfatif/MyLocation?label="Download")](https://github.com/mirfatif/MyLocation/releases/latest)
 Know your geo coordinates using on-device GPS and Network location providers
 
-<!-- a href="https://f-droid.org/packages/com.mirfatif.mylocation"><img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="100"></a>
-<a href="https://play.google.com/store/apps/details?id=com.mirfatif.mylocation.ps"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="100"></a -->
+<!-- a href="https://f-droid.org/packages/com.mirfatif.mylocation"><img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="100"></a -->
+<a href="https://play.google.com/store/apps/details?id=com.mirfatif.mylocation.ps"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="100"></a>
 
 ## Features
 
 My Location finds your device's location in the following ways:
 
-* GPS is usually the most accurate method. But a position fix may take some time or may not work at all due to signal loss. "Lock GPS" feature runs a persistent service to keep connected with the satellites.
+* <b>GPS</b> is usually the most accurate method. But a position fix may take some time or may not work at all due to signal loss. <b>Lock GPS</b> feature runs a persistent service to keep connected with the satellites.
 
   You can also see the list of visible satellites with their PRNs (unique identifiers) and SNR (signal quality).
  
-* Network Location Provider uses Wi-Fi or Cellular ids to estimate the location. On the devices with Google Play Services installed, NLP usually uses Google Location Service at backend.
-* UnifiedNLP is an open source API which has been used to develop multiple NLP backends (https://github.com/microg/UnifiedNlp/wiki/Backends).
+* <b>Network Location Provider</b> uses Wi-Fi or Cellular ids to estimate the location. On the devices with Google Play Services installed, NLP usually uses Google Location Service at backend.
+* <b>UnifiedNLP</b> is an open source API which has been used to develop multiple NLP backends (https://github.com/microg/UnifiedNlp/wiki/Backends).
 
 Furthermore:
 
