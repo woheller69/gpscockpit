@@ -10,11 +10,7 @@
 ##############
 #   Custom   #
 ##############
-publish-checklist.txt
-build_signed_release.sh
-build_debug.sh
-*icon.svg
-banner.svg
+0
 *ic_launcher-playstore.png
 .idea/
 app/release/

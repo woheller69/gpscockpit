@@ -8,8 +8,8 @@ android {
         applicationId "com.mirfatif.mylocation"
         minSdk minSdkVer
         targetSdk targetSdkVer
-        versionCode 101
-        versionName "v1.01"
+        versionCode 102
+        versionName "v1.02"
 
         buildConfigField "boolean", "IS_PS", "false"
     }
