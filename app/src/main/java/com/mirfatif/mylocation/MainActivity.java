@@ -587,6 +587,7 @@ public class MainActivity extends AppCompatActivity {
     mB.netCont.timeV.setText(time);
   }
 
+  @SuppressLint("NotifyDataSetChanged")
   private void updateNlpUi() {
     boolean hasLocPerm = hasCoarseLocPerm();
     mB.nlpCont.switchV.setEnabled(hasLocPerm);

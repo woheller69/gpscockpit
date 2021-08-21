@@ -6,7 +6,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static com.mirfatif.mylocation.MySettings.SETTINGS;
 
 import android.app.Activity;
-import android.app.NotificationManager.Importance;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -350,7 +349,7 @@ public class Utils {
     toast.show();
   }
 
-  public static void createNotifChannel(String id, String name, @Importance int importance) {
+  public static void createNotifChannel(String id, String name, int importance) {
     NotificationManagerCompat nm = NotificationManagerCompat.from(App.getCxt());
     NotificationChannelCompat ch = nm.getNotificationChannelCompat(id);
     if (ch == null) {
@@ -456,9 +455,7 @@ public class Utils {
         .putExtra(NotifDismissSvc.EXTRA_INTENT_TYPE, NotifDismissSvc.INTENT_TYPE_ACTIVITY)
         .putExtra(NotifDismissSvc.EXTRA_NOTIF_ID, UNIQUE_ID);
 
-    PendingIntent pi =
-        PendingIntent.getService(
-            App.getCxt(), UNIQUE_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    PendingIntent pi = getNotifDismissSvcPi(UNIQUE_ID, intent);
     createNotifChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManagerCompat.IMPORTANCE_HIGH);
 
     NotificationCompat.Builder nb =
@@ -476,5 +473,13 @@ public class Utils {
             .setAutoCancel(true);
 
     NotificationManagerCompat.from(App.getCxt()).notify(UNIQUE_ID, nb.build());
+  }
+
+  private static PendingIntent getNotifDismissSvcPi(int uniqueId, Intent intent) {
+    return PendingIntent.getService(App.getCxt(), uniqueId, intent, getPiFlags());
+  }
+
+  public static int getPiFlags() {
+    return PendingIntent.FLAG_UPDATE_CURRENT;
   }
 }

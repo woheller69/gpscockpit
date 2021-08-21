@@ -1,11 +1,11 @@
 package com.mirfatif.mylocation;
 
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_DEFAULT;
 import static com.mirfatif.mylocation.BuildConfig.APPLICATION_ID;
 import static com.mirfatif.mylocation.Utils.formatLatLng;
 import static com.mirfatif.mylocation.Utils.formatLocAccuracy;
+import static com.mirfatif.mylocation.Utils.getPiFlags;
 import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
 
 import android.annotation.SuppressLint;
@@ -123,8 +123,7 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
     Utils.createNotifChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE_DEFAULT);
 
     Intent intent = new Intent(App.getCxt(), MainActivity.class);
-    PendingIntent pi =
-        PendingIntent.getActivity(App.getCxt(), NOTIF_ID, intent, FLAG_UPDATE_CURRENT);
+    PendingIntent pi = PendingIntent.getActivity(App.getCxt(), NOTIF_ID, intent, getPiFlags());
 
     mNotifBuilder =
         new Builder(App.getCxt(), CHANNEL_ID)

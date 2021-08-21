@@ -1,5 +1,6 @@
 package com.mirfatif.mylocation;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class SatAdapter extends RecyclerView.Adapter<SatViewHolder> {
 
   private final List<Sat> mSats = new ArrayList<>();
 
+  @SuppressLint("NotifyDataSetChanged")
   void submitList(List<Sat> sats) {
     synchronized (mSats) {
       mSats.clear();
