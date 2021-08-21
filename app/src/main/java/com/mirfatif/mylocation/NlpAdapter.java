@@ -4,7 +4,6 @@ import static com.mirfatif.mylocation.MySettings.SETTINGS;
 import static com.mirfatif.mylocation.Utils.getString;
 import static com.mirfatif.mylocation.Utils.hasCoarseLocPerm;
 import static com.mirfatif.mylocation.Utils.isNaN;
-import static com.mirfatif.mylocation.Utils.setTooltip;
 
 import android.location.Location;
 import android.text.format.DateUtils;
@@ -51,8 +50,9 @@ public class NlpAdapter extends RecyclerView.Adapter<NlpViewHolder> {
     public NlpViewHolder(NlpItemBinding binding) {
       super(binding.getRoot());
       mB = binding;
-      setTooltip(mB.map);
-      setTooltip(mB.copy);
+      Utils.setTooltip(mB.settings);
+      Utils.setTooltip(mB.map);
+      Utils.setTooltip(mB.copy);
       mB.map.setOnClickListener(
           v -> {
             int pos = getBindingAdapterPosition();

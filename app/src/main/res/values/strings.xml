@@ -12,7 +12,6 @@
   <string name="unlock_gps">Unlock GPS</string>
 
   <string name="not_supported">Not supported</string>
-  <string name="not_installed">Not installed</string>
   <string name="perm_not_granted">Permission required</string>
   <string name="turned_off">Turned off</string>
   <string name="failed">Failed</string>
@@ -20,6 +19,7 @@
   <string name="map">Map</string>
   <string name="copy">Copy</string>
   <string name="satellites">Satellites</string>
+  <string name="download">Download</string>
   <string name="settings">Settings</string>
 
   <string name="latitude">Latitude</string>

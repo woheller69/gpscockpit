@@ -7,28 +7,28 @@
   android:layout_marginBottom="16dp"
   android:orientation="vertical">
 
+  <TextView
+    android:id="@+id/name"
+    android:textStyle="bold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp" />
+
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
-
-    <TextView
-      android:id="@+id/name"
-      android:textStyle="bold"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_vertical"
-      android:textSize="16sp" />
 
     <TextView
       android:id="@+id/state_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:layout_marginStart="12dp"
       android:layout_gravity="center_vertical"
       android:textColor="@color/error"
-      android:textSize="12sp"
+      android:textSize="14sp"
       app:autoSizeTextType="uniform" />
 
     <ImageView
@@ -69,7 +69,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="12dp"
     android:orientation="horizontal">
 
     <TextView

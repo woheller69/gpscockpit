@@ -278,9 +278,10 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
-    if (infoList.size() == 0) {
-      mB.nlpCont.stateV.setText(R.string.not_installed);
-    }
+    Utils.setTooltip(mB.nlpCont.download);
+    mB.nlpCont.download.setOnClickListener(
+        v -> Utils.openWebUrl(this, "https://github.com/microg/UnifiedNlp/wiki/Backends"));
+
     mB.nlpCont.switchV.setOnClickListener(
         v -> {
           if (SETTINGS.getNlpEnabled() != mB.nlpCont.switchV.isChecked()) {
@@ -493,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
       } else if (!mLocManager.isProviderEnabled(GPS_PROVIDER)) {
         state = getString(R.string.turned_off);
       } else {
-        showSats = SETTINGS.getGpsEnabled();
+        showSats = SETTINGS.getGpsEnabled() && !mSats.isEmpty();
         if (mGpsLocation != null
             && !isNaN(mGpsLocation.getLatitude())
             && !isNaN(mGpsLocation.getLongitude())) {
@@ -522,9 +523,6 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);
-    if (!showSats && mSatsDialog != null) {
-      mSatsDialog.dismissAllowingStateLoss();
-    }
 
     int total, good = 0, used = 0;
     synchronized (mSats) {
@@ -545,7 +543,11 @@ public class MainActivity extends AppCompatActivity {
 
     synchronized (SATS_DIALOG_TAG) {
       if (mSatsDialog != null) {
-        mSatsDialog.submitList(mSats);
+        if (showSats) {
+          mSatsDialog.submitList(mSats);
+        } else {
+          mSatsDialog.dismissAllowingStateLoss();
+        }
       }
     }
   }
@@ -594,6 +596,7 @@ public class MainActivity extends AppCompatActivity {
     mB.nlpCont.switchV.setChecked(hasLocPerm && SETTINGS.getNlpEnabled());
     synchronized (mBackends) {
       for (NlpBackend backend : mBackends) {
+        mB.nlpCont.download.setVisibility(mBackends.isEmpty() ? View.VISIBLE : View.GONE);
         backend.refresh();
         if (mNlpAdapter != null) {
           mNlpAdapter.notifyDataSetChanged();
