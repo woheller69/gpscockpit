@@ -452,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
         new TimerTask() {
           @Override
           public void run() {
-            Utils.runUi(() -> updateUi());
+            Utils.runUi(MainActivity.this, () -> updateUi());
             mTickCount++;
             if (mTickCount == 5) {
               mPeriod = 5000;

@@ -40,6 +40,8 @@ import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.Lifecycle.State;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme;
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme;
@@ -53,6 +55,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -274,6 +277,13 @@ public class Utils {
 
   private static final Handler UI_EXECUTOR = new Handler(Looper.getMainLooper());
 
+  public static UiRunnable runUi(LifecycleOwner lifecycleOwner, Runnable runnable) {
+    if (lifecycleOwner.getLifecycle().getCurrentState().isAtLeast(State.INITIALIZED)) {
+      return runUi(runnable);
+    }
+    return new UiRunnable();
+  }
+
   public static UiRunnable runUi(Runnable runnable) {
     UiRunnable uiRunnable = new UiRunnable(runnable);
     UI_EXECUTOR.post(uiRunnable);
@@ -288,9 +298,14 @@ public class Utils {
       mRunnable = runnable;
     }
 
+    UiRunnable() {
+      mRunnable = null;
+      mDone = true;
+    }
+
     @Override
     public void run() {
-      mRunnable.run();
+      Objects.requireNonNull(mRunnable).run();
       mDone = true;
       synchronized (WAITER) {
         WAITER.notify();
