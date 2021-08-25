@@ -1,6 +1,6 @@
 <resources>
 
-  <string name="app_name">My Location</string>
+  <string name="app_name" translatable="false">My Location</string>
 
   <string name="gps">GPS</string>
   <string name="network">Network</string>
@@ -32,8 +32,8 @@
   <string name="fixed">Fixed</string>
 
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
-  <string name="location">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$sm</string>
-  <string name="acc_unit">%sm</string>
+  <string name="location">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$s m</string>
+  <string name="acc_unit">%s m</string>
 
   <string name="no_email_app_installed" maxLength="20">No email app installed</string>
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>

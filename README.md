@@ -25,6 +25,9 @@ Furthermore:
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg" width="250"> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg" width="250">
 
+## Translations [![Crowdin](https://badges.crowdin.net/my-location/localized.svg)](https://crowdin.com/project/my-location)
+[Crowdin](https://crowdin.com/project/my-location)
+
 ## Third-Party Resources
 
 * https://github.com/androidx/androidx
