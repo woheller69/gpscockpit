@@ -18,6 +18,7 @@ public class App extends Application {
   public void onCreate() {
     super.onCreate();
     mAppContext = getApplicationContext();
+    updateContext();
     defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
     Thread.setDefaultUncaughtExceptionHandler(
@@ -34,6 +35,10 @@ public class App extends Application {
         });
 
     Utils.runBg(this::getEncPrefs);
+  }
+
+  public static void updateContext() {
+    mAppContext = Utils.setLocale(mAppContext);
   }
 
   public static Context getCxt() {

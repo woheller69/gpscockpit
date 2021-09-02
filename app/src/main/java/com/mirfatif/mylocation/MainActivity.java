@@ -158,6 +158,14 @@ public class MainActivity extends AppCompatActivity {
     if (menu instanceof MenuBuilder) {
       ((MenuBuilder) menu).setOptionalIconsVisible(true);
     }
+    String locale = SETTINGS.getLocale();
+    if (locale.equals(getString(R.string.lang_code_en))) {
+      menu.findItem(R.id.action_locale_en).setChecked(true);
+    } else if (locale.equals(getString(R.string.lang_code_pt_rBr))) {
+      menu.findItem(R.id.action_locale_pt_rBr).setChecked(true);
+    } else {
+      menu.findItem(R.id.action_locale_system).setChecked(true);
+    }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
     if (BuildConfig.IS_PS) {
       menu.findItem(R.id.action_donate).setVisible(false);
@@ -176,6 +184,29 @@ public class MainActivity extends AppCompatActivity {
       }
       return true;
     }
+    if (item.getGroupId() == R.id.action_locale_group) {
+      if (!item.isChecked()) {
+        String locale = null;
+        if (itemId == R.id.action_locale_system) {
+          locale = "";
+        } else if (itemId == R.id.action_locale_en) {
+          locale = getString(R.string.lang_code_en);
+        } else if (itemId == R.id.action_locale_pt_rBr) {
+          locale = getString(R.string.lang_code_pt_rBr);
+        }
+        if (locale != null) {
+          SETTINGS.setLocale(locale);
+          /*
+           Nlp backends bind to services using App context. So they must be
+           unregistered before creating new App context.
+          */
+          stopNlpBackends();
+          App.updateContext();
+          recreate();
+        }
+      }
+      return true;
+    }
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());
       setNightTheme(this);
@@ -190,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  protected void attachBaseContext(Context context) {
+    super.attachBaseContext(Utils.setLocale(context));
   }
 
   //////////////////////////////////////////////////////////////////

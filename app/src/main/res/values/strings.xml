@@ -66,10 +66,17 @@
   <string name="pref_main_crash_report_count_key" translatable="false">pref_main_crash_report_count</string>
   <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
   <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
+  <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
 
   <!-- Menu -->
   <string name="location_settings_menu_item"  maxLength="15">Location Settings</string>
   <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
+  <string name="language_menu_item" maxLength="15">Language</string>
+  <string name="lang_system_menu_item" maxLength="15">System</string>
+  <string name="lang_en_menu_item" maxLength="15">English</string>
+  <string name="lang_pt_rBr_menu_item" maxLength="15">Portuguese, Brazilian</string>
+  <string name="lang_code_en" translatable="false">en</string>
+  <string name="lang_code_pt_rBr" translatable="false">pt|Br</string>
   <string name="donate_menu_item"  maxLength="15">Donate</string>
   <string name="about_menu_item"  maxLength="15">About</string>
 

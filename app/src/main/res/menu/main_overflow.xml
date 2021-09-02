@@ -16,6 +16,30 @@
     app:showAsAction="never" />
 
   <group android:id="@+id/group1">
+    <item
+      android:id="@+id/action_locale"
+      android:icon="@drawable/locale"
+      android:title="@string/language_menu_item"
+      app:showAsAction="never">
+      <menu>
+        <group
+          android:id="@+id/action_locale_group"
+          android:checkableBehavior="single">
+          <item
+            android:id="@+id/action_locale_system"
+            android:title="@string/lang_system_menu_item" />
+          <item
+            android:id="@+id/action_locale_en"
+            android:title="@string/lang_en_menu_item" />
+          <item
+            android:id="@+id/action_locale_pt_rBr"
+            android:title="@string/lang_pt_rBr_menu_item" />
+        </group>
+      </menu>
+    </item>
+  </group>
+
+  <group android:id="@+id/group2">
 
     <item
       android:id="@+id/action_donate"

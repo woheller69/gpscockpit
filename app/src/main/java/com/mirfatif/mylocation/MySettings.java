@@ -5,15 +5,10 @@ import static com.mirfatif.mylocation.Utils.getString;
 import android.content.SharedPreferences;
 import java.util.concurrent.TimeUnit;
 
-public class MySettings {
+public enum MySettings {
+  SETTINGS;
 
-  public static final MySettings SETTINGS = new MySettings();
-
-  private final SharedPreferences mPrefs;
-
-  private MySettings() {
-    mPrefs = Utils.getDefPrefs();
-  }
+  private final SharedPreferences mPrefs = Utils.getDefPrefs();
 
   public boolean getBoolPref(int keyResId, boolean defValue) {
     String prefKey = getString(keyResId);
@@ -92,5 +87,13 @@ public class MySettings {
 
   public void setForceDarkMode(boolean force) {
     savePref(R.string.pref_main_dark_theme_key, force);
+  }
+
+  public String getLocale() {
+    return mPrefs.getString(getString(R.string.pref_main_locale_key), "");
+  }
+
+  public void setLocale(String langCode) {
+    mPrefs.edit().putString(getString(R.string.pref_main_locale_key), langCode).apply();
   }
 }

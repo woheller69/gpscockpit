@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.BulletSpan;
 import android.text.style.ImageSpan;
 import android.text.style.RelativeSizeSpan;
@@ -314,7 +315,7 @@ public class Utils {
   }
 
   //////////////////////////////////////////////////////////////////
-  ////////////////////////////// PERMS /////////////////////////////
+  ////////////////////////// PERMS / PREFS /////////////////////////
   //////////////////////////////////////////////////////////////////
 
   public static boolean hasFineLocPerm() {
@@ -367,6 +368,29 @@ public class Utils {
       mEncPrefs = App.getCxt().getSharedPreferences("_nb_prefs2", Context.MODE_PRIVATE);
       return mEncPrefs;
     }
+  }
+
+  public static Context setLocale(Context context) {
+    String lang = SETTINGS.getLocale();
+    Locale locale;
+    if (TextUtils.isEmpty(lang)) {
+      if (VERSION.SDK_INT >= VERSION_CODES.N) {
+        locale = Resources.getSystem().getConfiguration().getLocales().get(0);
+      } else {
+        locale = Resources.getSystem().getConfiguration().locale;
+      }
+    } else {
+      String[] langSpecs = lang.split("\\|");
+      if (langSpecs.length == 2) {
+        locale = new Locale(langSpecs[0], langSpecs[1]);
+      } else {
+        locale = new Locale(lang);
+      }
+    }
+    Locale.setDefault(locale);
+    Configuration config = context.getResources().getConfiguration();
+    config.setLocale(locale);
+    return context.createConfigurationContext(config);
   }
 
   //////////////////////////////////////////////////////////////////
