@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import com.mirfatif.mylocation.databinding.AboutDialogBinding;
 
 public class AboutDialogFragment extends AppCompatDialogFragment {
 
-  public AboutDialogFragment() {}
+  private AboutDialogFragment() {}
 
   private MainActivity mA;
 
@@ -55,5 +56,9 @@ public class AboutDialogFragment extends AppCompatDialogFragment {
     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
     String text = getString(R.string.share_text, getString(R.string.play_store_url));
     startActivity(Intent.createChooser(intent.putExtra(Intent.EXTRA_TEXT, text), null));
+  }
+
+  public static void show(FragmentActivity activity) {
+    new AboutDialogFragment().show(activity.getSupportFragmentManager(), "ABOUT");
   }
 }

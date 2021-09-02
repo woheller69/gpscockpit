@@ -1,68 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:keepScreenOn="true"
-  android:scrollbars="vertical">
+  android:keepScreenOn="true">
 
-  <LinearLayout
+  <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:orientation="vertical">
+    android:scrollbars="vertical">
 
-    <Button
-      android:id="@+id/grant_perm"
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="8dp"
+      android:orientation="vertical">
+
+      <Button
+        android:id="@+id/grant_perm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/grant_permission"
+        android:visibility="gone" />
+
+      <Button
+        android:id="@+id/clear_agps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_agps_data" />
+
+      <ToggleButton
+        android:id="@+id/lock_gps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textOff="@string/lock_gps"
+        android:textOn="@string/unlock_gps" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/accentTrans" />
+
+      <include
+        android:id="@+id/gps_cont"
+        layout="@layout/gps_container" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/accentTrans" />
+
+      <include
+        android:id="@+id/net_cont"
+        layout="@layout/net_container" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/accentTrans" />
+
+      <include
+        android:id="@+id/nlp_cont"
+        layout="@layout/nlp_container" />
+
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+
+  <!--
+   The only layout inside CoordinatorLayout must be the moving container. Otherwise
+   the other layout may intercept the touch events and Behaviour may not work correctly.
+  -->
+  <com.mirfatif.mylocation.MyCoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom">
+
+    <LinearLayout
+      android:id="@+id/feedback_cont"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/grant_permission"
-      android:visibility="gone" />
+      android:orientation="vertical"
+      android:visibility="gone">
 
-    <Button
-      android:id="@+id/clear_agps"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/clear_agps_data" />
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/accentTrans" />
 
-    <ToggleButton
-      android:id="@+id/lock_gps"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textOff="@string/lock_gps"
-      android:textOn="@string/unlock_gps" />
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@color/dynamicBg"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="16dp"
-      android:background="@color/accentTrans" />
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:layout_margin="8dp"
+          android:gravity="center_vertical"
+          android:maxLines="1"
+          android:text="@string/love_using_app"
+          android:textColor="@color/dynamicText"
+          android:textSize="16sp"
+          app:autoSizeTextType="uniform" />
 
-    <include
-      android:id="@+id/gps_cont"
-      layout="@layout/gps_container" />
+        <Button
+          android:id="@+id/liking_app_no_button"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:minWidth="72dp"
+          android:text="@string/no"
+          android:textColor="@color/accent" />
 
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="16dp"
-      android:background="@color/accentTrans" />
+        <Button
+          android:id="@+id/liking_app_yes_button"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:minWidth="72dp"
+          android:text="@string/yes"
+          android:textColor="@color/accent" />
 
-    <include
-      android:id="@+id/net_cont"
-      layout="@layout/net_container" />
+      </LinearLayout>
+    </LinearLayout>
 
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="16dp"
-      android:background="@color/accentTrans" />
+  </com.mirfatif.mylocation.MyCoordinatorLayout>
 
-    <include
-      android:id="@+id/nlp_cont"
-      layout="@layout/nlp_container" />
-
-  </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

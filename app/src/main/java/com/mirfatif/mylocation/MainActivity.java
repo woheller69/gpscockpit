@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
 
     mLicenseChecker = new LicenseChecker(this);
+
+    if (Intent.ACTION_MAIN.equals(getIntent().getAction())) {
+      SETTINGS.plusAppLaunchCount();
+    }
   }
 
   @Override
@@ -213,11 +217,11 @@ public class MainActivity extends AppCompatActivity {
       return true;
     }
     if (itemId == R.id.action_donate) {
-      new DonateDialogFragment().show(getSupportFragmentManager(), "DONATE");
+      DonateDialogFragment.show(this);
       return true;
     }
     if (itemId == R.id.action_about) {
-      new AboutDialogFragment().showNow(getSupportFragmentManager(), "ABOUT_DIALOG");
+      AboutDialogFragment.show(this);
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -786,5 +790,13 @@ public class MainActivity extends AppCompatActivity {
 
     static float maxSnr;
     private static float minSnr, correction;
+  }
+
+  //////////////////////////////////////////////////////////////////
+  ////////////////////////// FOR SUBCLASSES ////////////////////////
+  //////////////////////////////////////////////////////////////////
+
+  ActivityMainBinding getRootView() {
+    return mB;
   }
 }

@@ -51,7 +51,7 @@
     android:gravity="end"
     android:maxLines="1"
     android:textAlignment="textEnd"
-    android:textColor="@color/fg"
+    android:textColor="@color/dynamicText"
     android:textSize="12sp"
     app:autoSizeTextType="uniform" />
 

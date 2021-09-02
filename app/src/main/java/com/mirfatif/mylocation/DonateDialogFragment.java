@@ -13,11 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import com.mirfatif.mylocation.databinding.DonateDialogBinding;
 
 public class DonateDialogFragment extends AppCompatDialogFragment {
 
-  public DonateDialogFragment() {}
+  private DonateDialogFragment() {}
 
   private MainActivity mA;
 
@@ -73,5 +74,9 @@ public class DonateDialogFragment extends AppCompatDialogFragment {
     } else {
       mA.startActivity(intent);
     }
+  }
+
+  public static void show(FragmentActivity activity) {
+    new DonateDialogFragment().show(activity.getSupportFragmentManager(), "DONATE");
   }
 }

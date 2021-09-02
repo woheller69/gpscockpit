@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <color name="fg">@android:color/white</color>
-  <color name="fgDim">#BFBFBF</color>
+  <color name="dynamicText">@android:color/white</color>
+  <color name="dynamicFg">@android:color/black</color>
+  <color name="dynamicFgDim">#BFBFBF</color>
+  <color name="dynamicBg">#303030</color>
 
 </resources>
