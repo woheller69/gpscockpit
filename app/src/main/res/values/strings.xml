@@ -1,6 +1,7 @@
 <resources>
 
   <string name="app_name" translatable="false">My Location</string>
+  <string name="img_span_link" translatable="false">IMG_SPAN_LINK</string>
 
   <string name="gps">GPS</string>
   <string name="network">Network</string>
@@ -84,6 +85,18 @@
   <string name="app_rating_summary" maxLength="20">Rating / review on Play Store</string>
   <string name="privacy_policy" maxLength="20">Privacy Policy</string>
   <string name="privacy_policy_link" translatable="false">https://mirfatif.github.io/MyLocation/privacy_policy.html</string>
+  <string name="translations" maxLength="20">Translations</string>
+  <string name="translations_summary">Want to see the app in your language?</string>
+  <string name="language_credits">
+    <![CDATA[
+      <b>Portuguese, Brazilian</b>
+      <ul>
+        <li>mezysinc <a href="https://github.com/mezysinc">IMG_SPAN_LINK</a></li>
+      </ul>
+      <br/>
+      <a href="https://crowdin.com/project/my-location">Add my language</a>
+    ]]>
+  </string>
   <string name="share" maxLength="15">Share</string>
   <string name="share_summary">Share the app with others</string>
   <string name="share_text">Check out this amazing app! %s</string>

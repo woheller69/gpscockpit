@@ -34,6 +34,7 @@ Furthermore:
 * https://github.com/microg/android_external_UnifiedNlpApi
 * https://github.com/square/leakcanary
 * https://github.com/sherter/google-java-format-gradle-plugin
+* [https://github.com/saket/Better-Link-Movement-Method](https://github.com/saket/Better-Link-Movement-Method)
 
 ## License [![License](https://img.shields.io/github/license/mirfatif/MyLocation?label="License")](https://github.com/mirfatif/MyLocation/blob/master/LICENSE)
 

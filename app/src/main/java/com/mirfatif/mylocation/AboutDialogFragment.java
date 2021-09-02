@@ -33,6 +33,8 @@ public class AboutDialogFragment extends AppCompatDialogFragment {
     openWebUrl(b.rating, R.string.play_store_url);
     openWebUrl(b.privacyPolicy, R.string.privacy_policy_link);
     b.contact.setOnClickListener(v -> Utils.sendMail(mA, null));
+    b.translate.setOnClickListener(
+        v -> new TransDialogFragment().showNow(mA.getSupportFragmentManager(), "LOCALE"));
     b.shareApp.setOnClickListener(v -> sendShareIntent());
     if (BuildConfig.IS_PS) {
       openWebUrl(b.checkUpdate, R.string.play_store_url);

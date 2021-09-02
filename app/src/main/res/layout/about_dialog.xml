@@ -182,6 +182,33 @@
       android:background="@color/accentTrans" />
 
     <LinearLayout
+      android:id="@+id/translate"
+      style="@style/AboutActivityItemContainer">
+
+      <ImageView
+        style="@style/AboutActivityIconImg"
+        android:src="@drawable/locale"
+        tools:ignore="ContentDescription" />
+
+      <LinearLayout style="@style/AboutActivityItemTextBox">
+
+        <TextView
+          style="@style/AboutActivityItemTitle"
+          android:text="@string/translations" />
+
+        <TextView
+          style="@style/AboutActivityItemSummary"
+          android:text="@string/translations_summary" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/accentTrans" />
+
+    <LinearLayout
       android:id="@+id/share_app"
       style="@style/AboutActivityItemContainer">
 
