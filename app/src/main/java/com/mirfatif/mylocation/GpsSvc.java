@@ -158,7 +158,9 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
 
   private void stopGpsLocListener() {
     if (mWakeLock != null) {
-      mWakeLock.release();
+      if (mWakeLock.isHeld()) {
+        mWakeLock.release();
+      }
       mWakeLock = null;
     }
     mLocManager.removeUpdates(this);
