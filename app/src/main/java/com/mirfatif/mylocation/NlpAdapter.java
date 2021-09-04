@@ -59,8 +59,9 @@ public class NlpAdapter extends RecyclerView.Adapter<NlpViewHolder> {
             NlpBackend backend;
             if (pos != RecyclerView.NO_POSITION
                 && pos < mBackends.size()
-                && (backend = mBackends.get(pos)) != null)
+                && (backend = mBackends.get(pos)) != null) {
               mListener.mapClicked(backend.getLocation());
+            }
           });
       mB.copy.setOnClickListener(
           v -> {
@@ -68,8 +69,9 @@ public class NlpAdapter extends RecyclerView.Adapter<NlpViewHolder> {
             NlpBackend backend;
             if (pos != RecyclerView.NO_POSITION
                 && pos < mBackends.size()
-                && (backend = mBackends.get(pos)) != null)
+                && (backend = mBackends.get(pos)) != null) {
               mListener.copyClicked(backend.getLocation());
+            }
           });
       mB.settings.setOnClickListener(
           v -> {
@@ -77,8 +79,9 @@ public class NlpAdapter extends RecyclerView.Adapter<NlpViewHolder> {
             NlpBackend backend;
             if (pos != RecyclerView.NO_POSITION
                 && pos < mBackends.size()
-                && (backend = mBackends.get(pos)) != null)
-              mListener.settingsClicked(backend.getPkgName());
+                && (backend = mBackends.get(pos)) != null) {
+              mListener.settingsClicked(backend);
+            }
           });
     }
 
@@ -133,6 +136,6 @@ public class NlpAdapter extends RecyclerView.Adapter<NlpViewHolder> {
 
     void copyClicked(Location loc);
 
-    void settingsClicked(String pkg);
+    void settingsClicked(NlpBackend backend);
   }
 }

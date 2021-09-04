@@ -7,6 +7,7 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static android.text.style.DynamicDrawableSpan.ALIGN_BASELINE;
 import static com.mirfatif.mylocation.MySettings.SETTINGS;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -30,6 +31,7 @@ import android.os.Looper;
 import android.os.Parcel;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -67,6 +69,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -190,14 +193,14 @@ public class Utils {
   /////////////////////////// FORMATTING ///////////////////////////
   //////////////////////////////////////////////////////////////////
 
-  private static final DecimalFormat mLatLngFormat = new DecimalFormat();
+  private static final DecimalFormat sLatLngFormat = new DecimalFormat();
 
   static {
-    mLatLngFormat.setMaximumFractionDigits(5);
+    sLatLngFormat.setMaximumFractionDigits(5);
   }
 
   public static String formatLatLng(double coordinate) {
-    return mLatLngFormat.format(coordinate);
+    return sLatLngFormat.format(coordinate);
   }
 
   public static String formatLocAccuracy(float accuracy) {
@@ -334,26 +337,26 @@ public class Utils {
     return App.getCxt().getSharedPreferences("def_prefs", Context.MODE_PRIVATE);
   }
 
-  private static SharedPreferences mEncPrefs;
+  private static SharedPreferences sEncPrefs;
   private static final Object ENC_PREFS_LOCK = new Object();
 
   @SuppressWarnings("UnusedReturnValue")
   public static SharedPreferences getEncPrefs() {
     synchronized (ENC_PREFS_LOCK) {
-      if (mEncPrefs != null) {
-        return mEncPrefs;
+      if (sEncPrefs != null) {
+        return sEncPrefs;
       }
 
       for (int i = 0; i < 10; i++) {
         try {
-          mEncPrefs =
+          sEncPrefs =
               EncryptedSharedPreferences.create(
                   App.getCxt(),
                   BuildConfig.APPLICATION_ID + "_nb_prefs",
                   new MasterKey.Builder(App.getCxt()).setKeyScheme(KeyScheme.AES256_GCM).build(),
                   PrefKeyEncryptionScheme.AES256_SIV,
                   PrefValueEncryptionScheme.AES256_GCM);
-          return mEncPrefs;
+          return sEncPrefs;
         } catch (Exception e) {
           if (i == 9) {
             e.printStackTrace();
@@ -365,8 +368,23 @@ public class Utils {
       }
 
       // Temp fix for https://github.com/google/tink/issues/413
-      mEncPrefs = App.getCxt().getSharedPreferences("_nb_prefs2", Context.MODE_PRIVATE);
-      return mEncPrefs;
+      return sEncPrefs = getEncPrefsInternal();
+    }
+  }
+
+  @SuppressLint("HardwareIds")
+  @SuppressWarnings("deprecation")
+  private static SharedPreferences getEncPrefsInternal() {
+    try {
+      return EncryptedSharedPreferences.create(
+          BuildConfig.APPLICATION_ID + "_nb_prefs2",
+          Secure.getString(App.getCxt().getContentResolver(), Secure.ANDROID_ID),
+          App.getCxt(),
+          PrefKeyEncryptionScheme.AES256_SIV,
+          PrefValueEncryptionScheme.AES256_GCM);
+    } catch (GeneralSecurityException | IOException e) {
+      e.printStackTrace();
+      throw new Error(e);
     }
   }
 
@@ -399,6 +417,7 @@ public class Utils {
 
   private static final Handler UI_EXECUTOR = new Handler(Looper.getMainLooper());
 
+  @SuppressWarnings("UnusedReturnValue")
   public static UiRunnable runUi(LifecycleOwner lifecycleOwner, Runnable runnable) {
     if (lifecycleOwner.getLifecycle().getCurrentState().isAtLeast(State.INITIALIZED)) {
       return runUi(runnable);
@@ -437,6 +456,7 @@ public class Utils {
     private boolean mDone = false;
     private final Object WAITER = new Object();
 
+    @SuppressWarnings("UnusedDeclaration")
     public void waitForMe() {
       if (Thread.currentThread() == UI_EXECUTOR.getLooper().getThread()) {
         Log.e(TAG, "UiRunnable: waitForMe() called on main thread");

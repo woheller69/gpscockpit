@@ -34,6 +34,7 @@ public class App extends Application {
           defaultExceptionHandler.uncaughtException(t, e);
         });
 
+    new AppFlav().onCreate();
     Utils.runBg(this::getEncPrefs);
   }
 

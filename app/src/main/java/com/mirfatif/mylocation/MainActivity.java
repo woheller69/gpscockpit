@@ -13,6 +13,7 @@ import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
 import static com.mirfatif.mylocation.Utils.isNaN;
 import static com.mirfatif.mylocation.Utils.openMap;
 import static com.mirfatif.mylocation.Utils.setNightTheme;
+import static org.microg.nlp.api.Constants.ACTION_LOCATION_BACKEND;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
-  private LicenseChecker mLicenseChecker;
+  private LicenseVerifierFlav mLicenseVerifier;
   private boolean mGpsProviderSupported = false;
   private boolean mNetProviderSupported = false;
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
 
-    mLicenseChecker = new LicenseChecker(this);
+    mLicenseVerifier = new LicenseVerifierFlav(this);
 
     if (Intent.ACTION_MAIN.equals(getIntent().getAction())) {
       SETTINGS.plusAppLaunchCount();
@@ -128,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onDestroy() {
-    if (mLicenseChecker != null) {
-      mLicenseChecker.onDestroy();
+    if (mLicenseVerifier != null) {
+      mLicenseVerifier.onDestroy();
     }
     super.onDestroy();
   }
@@ -303,8 +304,6 @@ public class MainActivity extends AppCompatActivity {
     Utils.setTooltip(mB.netCont.copy);
   }
 
-  private static final String ACTION_LOCATION_BACKEND = "org.microg.nlp.LOCATION_BACKEND";
-
   private final List<NlpBackend> mBackends = new ArrayList<>();
   private NlpAdapter mNlpAdapter;
 
@@ -345,8 +344,9 @@ public class MainActivity extends AppCompatActivity {
               }
 
               @Override
-              public void settingsClicked(String pkg) {
-                Utils.openAppSettings(MainActivity.this, pkg);
+              public void settingsClicked(NlpBackend backend) {
+                Utils.openAppSettings(MainActivity.this, backend.getPkgName());
+                backend.openInitActivity(MainActivity.this);
               }
             },
             mBackends);
@@ -515,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
   private Location mGpsLocation, mNetLocation;
 
   private void updateUi() {
-    if (mB != null && mLicenseChecker != null && mLicenseChecker.isVerified()) {
+    if (mB != null && mLicenseVerifier != null && mLicenseVerifier.isVerified()) {
       updateGpsUi();
       updateNetUi();
       updateNlpUi();
@@ -707,8 +707,8 @@ public class MainActivity extends AppCompatActivity {
   //////////////////////////////////////////////////////////////////
 
   void checkLicense() {
-    if (mLicenseChecker != null) {
-      mLicenseChecker.check();
+    if (mLicenseVerifier != null) {
+      mLicenseVerifier.check();
     }
   }
 

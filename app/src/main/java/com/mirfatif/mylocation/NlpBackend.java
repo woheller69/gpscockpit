@@ -1,5 +1,8 @@
 package com.mirfatif.mylocation;
 
+import static org.microg.nlp.api.Constants.METADATA_BACKEND_INIT_ACTIVITY;
+
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -79,10 +82,30 @@ public class NlpBackend {
     return mInitialized && (!mBound || !mConnected);
   }
 
-  private boolean mPermsRequired;
+  private Intent mInitIntent;
 
   boolean permsRequired() {
-    return mPermsRequired;
+    return mInitIntent != null;
+  }
+
+  // org.microg.nlp.ui.AbstractBackendPreference.java
+  void openInitActivity(MainActivity activity) {
+    String initClass = mInfo.metaData.getString(METADATA_BACKEND_INIT_ACTIVITY);
+    Intent intent;
+    if (initClass != null) {
+      intent = new Intent(Intent.ACTION_VIEW);
+      intent.setPackage(mInfo.packageName);
+      intent.setClassName(mInfo.packageName, initClass);
+    } else if (mInitIntent != null) {
+      intent = mInitIntent;
+    } else {
+      return;
+    }
+
+    try {
+      activity.startActivity(intent);
+    } catch (ActivityNotFoundException ignored) {
+    }
   }
 
   private long mLastCall;
@@ -93,20 +116,21 @@ public class NlpBackend {
             || (mLoc != null && (curr - mLastCall) > 30000))
         && mSvc != null
         && !failed()
-        && !mPermsRequired) {
+        && !permsRequired()) {
       mLastCall = curr;
-      Utils.runBg(
-          () -> {
-            try {
-              Location loc = mSvc.update();
-              if (loc != null) {
-                mLoc = loc;
-              }
-            } catch (RemoteException e) {
-              Log.e(TAG, mLabel + ": " + e.toString());
-              cleanUp();
-            }
-          });
+      Utils.runBg(this::updateLoc);
+    }
+  }
+
+  private void updateLoc() {
+    try {
+      Location loc = mSvc.update();
+      if (loc != null) {
+        mLoc = loc;
+      }
+    } catch (Exception e) {
+      Log.e(TAG, mLabel + ": " + e.toString());
+      cleanUp();
     }
   }
 
@@ -123,7 +147,8 @@ public class NlpBackend {
     if (mSvc != null) {
       try {
         mSvc.close();
-      } catch (RemoteException ignored) {
+      } catch (Exception e) {
+        Log.e(TAG, mLabel + ": cleanUp: " + e.toString());
       }
       mSvc = null;
     }
@@ -139,20 +164,22 @@ public class NlpBackend {
   private LocationBackend mSvc;
   private boolean mConnected = false;
 
+  // org.microg.nlp.location.BackendHelper.java
   private class SvcConnection implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
+      mInitialized = true;
       mSvc = Stub.asInterface(service);
       try {
         mSvc.open(new Callback());
-        mPermsRequired = mSvc.getInitIntent() != null;
-        Location loc = mSvc.update();
-        if (loc != null) {
-          mLoc = loc;
+        mConnected = true;
+        mInitIntent = mSvc.getInitIntent();
+        Utils.runBg(NlpBackend.this::updateLoc);
+      } catch (Exception e) {
+        Log.e(TAG, mLabel + ": onServiceConnected: " + e.toString());
+        if (!(e instanceof RemoteException) && !(e instanceof SecurityException)) {
+          e.printStackTrace();
         }
-        mConnected = mInitialized = true;
-      } catch (RemoteException | SecurityException e) {
-        Log.e(TAG, mLabel + ": " + e.toString());
         cleanUp();
       }
     }

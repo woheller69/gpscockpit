@@ -4,11 +4,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class LicenseChecker {
+public class LicenseVerifierFlav {
 
   private final Runnable mTask;
 
-  LicenseChecker(MainActivity activity) {
+  LicenseVerifierFlav(MainActivity activity) {
     mTask = () -> new Feedback(activity).askForFeedback();
   }
 
