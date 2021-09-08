@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="?android:attr/colorControlHighlight">
+  android:color="@android:color/white">
+  <!-- colorControlHighlight in not very visible, so we use white for ripple -->
   <item android:drawable="@drawable/round_border" />
 </ripple>
