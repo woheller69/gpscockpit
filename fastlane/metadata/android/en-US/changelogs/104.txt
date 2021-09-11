@@ -1,0 +1,2 @@
+Fixed a crash
+Updated translation
