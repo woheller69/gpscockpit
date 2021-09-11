@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ServiceInfo;
 import android.location.Location;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -90,7 +91,11 @@ public class NlpBackend {
 
   // org.microg.nlp.ui.AbstractBackendPreference.java
   void openInitActivity(MainActivity activity) {
-    String initClass = mInfo.metaData.getString(METADATA_BACKEND_INIT_ACTIVITY);
+    String initClass = null;
+    Bundle metaData = mInfo.metaData;
+    if (metaData != null) {
+      initClass = metaData.getString(METADATA_BACKEND_INIT_ACTIVITY);
+    }
     Intent intent;
     if (initClass != null) {
       intent = new Intent(Intent.ACTION_VIEW);
