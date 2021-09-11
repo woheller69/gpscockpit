@@ -26,9 +26,9 @@
   <string name="satellites_count">Satélites Total: %1$d, Bom: %2$d, Fixos: %3$d</string>
   <string name="location">Latitude: %1$s, Longitude: %2$s, Precisão: %3$s m</string>
   <string name="acc_unit">%s m</string>
-  <string name="no_email_app_installed" maxLength="20">Nenhum app de e-mail instalado</string>
-  <string name="no_browser_installed" maxLength="20">Nenhum navegador instalado</string>
-  <string name="no_maps_installed" maxLength="20">Nenhum app de mapas instalado</string>
+  <string name="no_email_app_installed" maxLength="20">Nenhum app de e-mail</string>
+  <string name="no_browser_installed" maxLength="20">Nenhum navegador web</string>
+  <string name="no_maps_installed" maxLength="20">Nenhum app de mapas</string>
   <string name="no_bitcoin_app_installed" maxLength="20">"Nenhum Bitcoin Wallet instalado"</string>
   <string name="failed_open_loc_settings" maxLength="20">Falha ao abrir as configurações de localização</string>
   <string name="failed_open_app_settings" maxLength="20">Falha ao abrir as configurações do App</string>
@@ -48,6 +48,10 @@
   <!-- Menu -->
   <string name="location_settings_menu_item" maxLength="15">Configurações de localização</string>
   <string name="dark_theme_menu_item" maxLength="15">Tema escuro</string>
+  <string name="language_menu_item" maxLength="15">Idioma</string>
+  <string name="lang_system_menu_item" maxLength="15">Sistema</string>
+  <string name="lang_en_menu_item" maxLength="15">Inglês</string>
+  <string name="lang_pt_rBr_menu_item" maxLength="15">Português, BR</string>
   <string name="donate_menu_item" maxLength="15">Doar</string>
   <string name="about_menu_item" maxLength="15">Sobre</string>
   <!-- AboutDialog -->
@@ -57,6 +61,15 @@
   <string name="app_rating" maxLength="15">Avaliar</string>
   <string name="app_rating_summary" maxLength="20">Avaliação / resenha na Play Store</string>
   <string name="privacy_policy" maxLength="20">Política de Privacidade</string>
+  <string name="translations" maxLength="20">Traduções</string>
+  <string name="translations_summary">Quer ver o App no seu idioma?</string>
+  <string name="language_credits"><![CDATA[      <b>Português do Brasil</b>
+      <ul>
+        <li>mezysinc <a href="https://github.com/mezysinc">IMG_SPAN_LINK</a></li>
+      </ul>
+      <br/>
+      <a href="https://crowdin.com/project/my-location">Adicionar meu idioma</a>
+    ]]></string>
   <string name="share" maxLength="15">Compartilhar</string>
   <string name="share_summary">Compartilhar o App com outros</string>
   <string name="share_text">Confira este App incrível! %s</string>
@@ -66,4 +79,23 @@
   <string name="send_bitcoin">Enviar Bitcoins</string>
   <string name="ask_for_bank_account">Perguntar por conta bancária</string>
   <string name="get_paid_version">Baixe a versão paga da Play Store</string>
+  <!-- Feedback -->
+  <string name="yes" maxLength="10">Sim</string>
+  <string name="no" maxLength="10">Não</string>
+  <string name="do_not_ask" maxLength="15">Não pr. de novo</string>
+  <string name="i_will" maxLength="10">Ok</string>
+  <string name="rate" maxLength="10">Avaliar</string>
+  <string name="contact" maxLength="10">Faça agora</string>
+  <string name="love_using_app" maxLength="20">Gostando do App?</string>
+  <string name="rate_the_app">Boas avaliações e comentários nos ajudam a melhorar o aplicativo e
+    às suas funcionalidades.
+  </string>
+  <string name="purchase_and_rate_the_app">Você pode nos ajudar fazendo uma pequena doação
+    ou deixando uma boa avaliação para que possamos melhorar às suas funcionalidades. 
+
+  </string>
+  <string name="ask_to_provide_feedback">Lamentamos ouvir isso. Ajude a melhorar o App
+    entrando em contato via e-mail ou Telegram, para melhorar às suas funcionalidades.
+  </string>
+  <string name="thank_you" maxLength="20">Obrigado</string>
 </resources>
