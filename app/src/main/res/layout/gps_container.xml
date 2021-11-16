@@ -137,6 +137,38 @@
   </LinearLayout>
 
   <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:text="@string/altitude" />
+
+    <TextView
+        android:id="@+id/altitude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:text="@string/altitude_MSL" />
+
+    <TextView
+        android:id="@+id/altitude_MSL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="24dp"

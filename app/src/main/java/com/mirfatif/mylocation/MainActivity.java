@@ -26,15 +26,21 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.OnNmeaMessageListener;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
@@ -366,6 +372,8 @@ public class MainActivity extends AppCompatActivity {
 
   private LocListener mGpsLocListener;
   private GpsStatus.Listener mGpsStatusListener;
+  private OnNmeaMessageListener mOnNmeaMessageListener;
+
 
   @SuppressLint("MissingPermission")
   private void startGpsLocListener() {
@@ -376,6 +384,16 @@ public class MainActivity extends AppCompatActivity {
         mLocManager.requestLocationUpdates(GPS_PROVIDER, MIN_DELAY, 0, mGpsLocListener);
         mGpsStatusListener = new GpsStatusListener();
         mLocManager.addGpsStatusListener(mGpsStatusListener);
+
+        if (Build.VERSION.SDK_INT >= 24) {
+          mOnNmeaMessageListener = (message, timestamp) -> {
+            Double msl = getAltitudeMeanSeaLevel(message);
+            if (msl != null) {
+              mNmeaAltitude = msl;
+            }
+          };
+          mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
+        }
       }
     }
   }
@@ -416,6 +434,9 @@ public class MainActivity extends AppCompatActivity {
     synchronized (LOC_LISTENER_LOCK) {
       if (mGpsLocListener != null) {
         mLocManager.removeUpdates(mGpsLocListener);
+        if (Build.VERSION.SDK_INT >= 24) {
+          mLocManager.removeNmeaListener(mOnNmeaMessageListener);
+        }
         mGpsLocListener = null;
       }
       if (mGpsStatusListener != null) {
@@ -428,6 +449,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void clearGpsData() {
     mGpsLocation = null;
+    mNmeaAltitude = null;
     synchronized (mSats) {
       mSats.clear();
     }
@@ -513,6 +535,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private Location mGpsLocation, mNetLocation;
+  private Double mNmeaAltitude;
 
   private void updateUi() {
     if (mB != null && mLicenseVerifier != null && mLicenseVerifier.isVerified()) {
@@ -523,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateGpsUi() {
-    String state = null, lat = "--", lng = "--", acc = "--", time = "--";
+    String state = null, lat = "--", lng = "--", acc = "--", time = "--", alt = "--", altMSL = "--" ;
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
     if (!mGpsProviderSupported) {
       state = getString(R.string.not_supported);
@@ -541,6 +564,8 @@ public class MainActivity extends AppCompatActivity {
           locAvailable = true;
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
+          alt = mGpsLocation.getAltitude() + " m";
+          if (mNmeaAltitude!=null) altMSL = mNmeaAltitude + " m";
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
@@ -560,6 +585,8 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.stateV.setText(state);
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);
+    mB.gpsCont.altitude.setText(alt);
+    mB.gpsCont.altitudeMSL.setText(altMSL);
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);
@@ -798,5 +825,50 @@ public class MainActivity extends AppCompatActivity {
 
   ActivityMainBinding getRootView() {
     return mB;
+  }
+
+  /* Taken from https://github.com/barbeau/gpstest/
+   * Copyright (C) 2013-2019 Sean J. Barbeau
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   *      http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+  public static Double getAltitudeMeanSeaLevel(String nmeaSentence) {
+    final int ALTITUDE_INDEX = 9;
+    String[] tokens = nmeaSentence.split(",");
+
+    if (nmeaSentence.startsWith("$GPGGA") || nmeaSentence.startsWith("$GNGNS") || nmeaSentence.startsWith("$GNGGA")) {
+      String altitude;
+      try {
+        altitude = tokens[ALTITUDE_INDEX];
+      } catch (ArrayIndexOutOfBoundsException e) {
+        //Log.d("Nmea", "Bad NMEA sentence for geoid altitude - " + nmeaSentence + " :" + e);
+        return null;
+      }
+      if (!TextUtils.isEmpty(altitude)) {
+        Double altitudeParsed = null;
+        try {
+          altitudeParsed = Double.parseDouble(altitude);
+        } catch (NumberFormatException e) {
+          //Log.d("Nmea", "Bad geoid altitude value of '" + altitude + "' in NMEA sentence " + nmeaSentence + " :" + e);
+        }
+        return altitudeParsed;
+      } else {
+        //Log.d("Nmea", "Couldn't parse geoid altitude from NMEA: " + nmeaSentence);
+        return null;
+      }
+    } else {
+      //Log.d("Nmea", "Input must be $GPGGA, $GNGNS, or $GNGGA NMEA: " + nmeaSentence);
+      return null;
+    }
   }
 }

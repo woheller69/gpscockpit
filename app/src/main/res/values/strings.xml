@@ -140,5 +140,7 @@
     contacting us via email or Telegram so that we are able to better serve your needs.
   </string>
   <string name="thank_you" maxLength="20">Thank you</string>
+  <string name="altitude">Altitude</string>
+  <string name="altitude_MSL">Altitude (MSL)</string>
 
 </resources>

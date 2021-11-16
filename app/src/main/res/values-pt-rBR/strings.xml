@@ -98,4 +98,6 @@
     entrando em contato via e-mail ou Telegram, para melhorar às suas funcionalidades.
   </string>
   <string name="thank_you" maxLength="20">Obrigado</string>
+  <string name="altitude">Altitude</string>
+  <string name="altitude_MSL">Altitude (MSL)</string>
 </resources>
