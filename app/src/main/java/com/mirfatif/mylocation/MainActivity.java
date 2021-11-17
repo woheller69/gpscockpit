@@ -373,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
   private LocListener mGpsLocListener;
   private GpsStatus.Listener mGpsStatusListener;
   private OnNmeaMessageListener mOnNmeaMessageListener;
+  private GpsStatus.NmeaListener mNmeaListener;
 
 
   @SuppressLint("MissingPermission")
@@ -393,6 +394,14 @@ public class MainActivity extends AppCompatActivity {
             }
           };
           mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
+        } else {
+          mNmeaListener = (timestamp, nmea) -> {
+            Double msl = getAltitudeMeanSeaLevel(nmea);
+            if (msl != null) {
+              mNmeaAltitude = msl;
+            }
+          };
+          mLocManager.addNmeaListener(mNmeaListener);
         }
       }
     }
@@ -436,6 +445,8 @@ public class MainActivity extends AppCompatActivity {
         mLocManager.removeUpdates(mGpsLocListener);
         if (Build.VERSION.SDK_INT >= 24) {
           mLocManager.removeNmeaListener(mOnNmeaMessageListener);
+        }else{
+          mLocManager.removeNmeaListener(mNmeaListener);
         }
         mGpsLocListener = null;
       }
