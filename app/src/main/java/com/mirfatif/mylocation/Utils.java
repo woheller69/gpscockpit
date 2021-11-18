@@ -69,6 +69,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -194,9 +195,15 @@ public class Utils {
   //////////////////////////////////////////////////////////////////
 
   private static final DecimalFormat sLatLngFormat = new DecimalFormat();
+  private static final DecimalFormat intFormat = new DecimalFormat("0");
 
   static {
     sLatLngFormat.setMaximumFractionDigits(5);
+  }
+
+  public static String formatInt(double value) {
+    intFormat.setRoundingMode(RoundingMode.HALF_UP);
+    return intFormat.format(value).replaceAll("^-(?=0(\\.0*)?$)", "");  //remove the minus sign if it's followed by 0-n characters of "0.00000..."
   }
 
   public static String formatLatLng(double coordinate) {

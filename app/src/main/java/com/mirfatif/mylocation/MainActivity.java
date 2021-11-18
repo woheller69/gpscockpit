@@ -575,8 +575,8 @@ public class MainActivity extends AppCompatActivity {
           locAvailable = true;
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
-          alt = mGpsLocation.getAltitude() + " m";
-          if (mNmeaAltitude!=null) altMSL = mNmeaAltitude + " m";
+          alt = Utils.formatInt(mGpsLocation.getAltitude()) + " m";
+          if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
