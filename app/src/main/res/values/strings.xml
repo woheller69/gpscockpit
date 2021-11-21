@@ -142,5 +142,6 @@
   <string name="thank_you" maxLength="20">Thank you</string>
   <string name="altitude">Altitude</string>
   <string name="altitude_MSL">Altitude (MSL)</string>
+  <string name="speed">Speed</string>
 
 </resources>
