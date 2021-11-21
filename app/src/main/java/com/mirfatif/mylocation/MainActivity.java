@@ -2,7 +2,6 @@ package com.mirfatif.mylocation;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.location.LocationManager.GPS_PROVIDER;
-import static android.location.LocationManager.NETWORK_PROVIDER;
 import static android.os.Build.VERSION.SDK_INT;
 import static com.mirfatif.mylocation.GpsSvc.ACTION_STOP_SERVICE;
 import static com.mirfatif.mylocation.GpsSvc.MIN_DELAY;
@@ -13,14 +12,12 @@ import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
 import static com.mirfatif.mylocation.Utils.isNaN;
 import static com.mirfatif.mylocation.Utils.openMap;
 import static com.mirfatif.mylocation.Utils.setNightTheme;
-import static org.microg.nlp.api.Constants.ACTION_LOCATION_BACKEND;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
@@ -62,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
-  private LicenseVerifierFlav mLicenseVerifier;
   private boolean mGpsProviderSupported = false;
-  private boolean mNetProviderSupported = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -86,21 +81,15 @@ public class MainActivity extends AppCompatActivity {
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
         mGpsProviderSupported = true;
-      }
-      if (provider.equals(NETWORK_PROVIDER)) {
-        mNetProviderSupported = true;
+        break;
       }
     }
 
     setupGps();
     updateGpsUi();
-    setupNetwork();
-    updateNetUi();
     checkPerms();
 
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
-
-    mLicenseVerifier = new LicenseVerifierFlav(this);
 
     if (Intent.ACTION_MAIN.equals(getIntent().getAction())) {
       SETTINGS.plusAppLaunchCount();
@@ -125,14 +114,10 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    checkLicense();
   }
 
   @Override
   protected void onDestroy() {
-    if (mLicenseVerifier != null) {
-      mLicenseVerifier.onDestroy();
-    }
     super.onDestroy();
   }
 
@@ -272,19 +257,11 @@ public class MainActivity extends AppCompatActivity {
     Utils.setTooltip(mB.gpsCont.satDetail);
   }
 
-  private void setupNetwork() {
-    if (!mNetProviderSupported) {
-      return;
-    }
-
-  }
-
 
   private final Object LOC_LISTENER_LOCK = new Object();
 
   private void startLocListeners() {
     startGpsLocListener();
-    startNetLocListener();
   }
 
   private LocListener mGpsLocListener;
@@ -324,25 +301,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private LocListener mNetLocListener;
-
-  @SuppressLint("MissingPermission")
-  private void startNetLocListener() {
-    synchronized (LOC_LISTENER_LOCK) {
-      stopNetLocListener();
-      if (SETTINGS.getNetworkEnabled()
-          && mNetProviderSupported
-          && (hasCoarseLocPerm() || hasFineLocPerm())) {
-        mNetLocListener = new LocListener(false);
-        mLocManager.requestLocationUpdates(NETWORK_PROVIDER, MIN_DELAY, 0, mNetLocListener);
-      }
-    }
-  }
-
 
   private void stopLocListeners() {
     stopGpsLocListener();
-    stopNetLocListener();
   }
 
   private void stopGpsLocListener() {
@@ -369,16 +330,6 @@ public class MainActivity extends AppCompatActivity {
     mNmeaAltitude = null;
     synchronized (mSats) {
       mSats.clear();
-    }
-  }
-
-  private void stopNetLocListener() {
-    synchronized (LOC_LISTENER_LOCK) {
-      if (mNetLocListener != null) {
-        mLocManager.removeUpdates(mNetLocListener);
-        mNetLocListener = null;
-      }
-      mNetLocation = null;
     }
   }
 
@@ -448,9 +399,8 @@ public class MainActivity extends AppCompatActivity {
   private Double mNmeaAltitude;
 
   private void updateUi() {
-    if (mB != null && mLicenseVerifier != null && mLicenseVerifier.isVerified()) {
+    if (mB != null) {
       updateGpsUi();
-      updateNetUi();
     }
   }
 
@@ -530,34 +480,6 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private void updateNetUi() {
-    String state = null, lat = "--", lng = "--", acc = "--", time = "--";
-    boolean hasLocPerm = false, locAvailable = false;
-    if (!mNetProviderSupported) {
-      state = getString(R.string.not_supported);
-    } else {
-      hasLocPerm = hasCoarseLocPerm() || hasFineLocPerm();
-      if (!hasLocPerm) {
-        state = getString(R.string.perm_not_granted);
-      } else if (!mLocManager.isProviderEnabled(NETWORK_PROVIDER)) {
-        state = getString(R.string.turned_off);
-      } else if (mNetLocation != null
-          && !isNaN(mNetLocation.getLatitude())
-          && !isNaN(mNetLocation.getLongitude())) {
-        locAvailable = true;
-        lat = Utils.formatLatLng(mNetLocation.getLatitude());
-        lng = Utils.formatLatLng(mNetLocation.getLongitude());
-        if (!isNaN(mNetLocation.getAccuracy()) && mNetLocation.getAccuracy() != 0) {
-          acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mNetLocation.getAccuracy()));
-        }
-        long curr = System.currentTimeMillis();
-        long t = mNetLocation.getTime();
-        t = t - Math.max(0, t - curr);
-        time = DateUtils.getRelativeTimeSpanString(t).toString();
-      }
-    }
-
-  }
 
 
   private void setGrantPermButtonState() {
@@ -621,11 +543,6 @@ public class MainActivity extends AppCompatActivity {
   ////////////////////////////// OTHER /////////////////////////////
   //////////////////////////////////////////////////////////////////
 
-  void checkLicense() {
-    if (mLicenseVerifier != null) {
-      mLicenseVerifier.check();
-    }
-  }
 
   private void clearAGPSData() {
     if (hasFineLocPerm()) {
