@@ -33,9 +33,6 @@ class Feedback {
       return;
     }
 
-    mB.likingAppYesButton.setOnClickListener(v -> showDialog(true));
-    mB.likingAppNoButton.setOnClickListener(v -> showDialog(false));
-
     OnDismissListener listener = () -> mB.feedbackCont.setVisibility(View.GONE);
     MySwipeDismissBehavior dismissBehavior = new MySwipeDismissBehavior(listener);
     ((LayoutParams) mB.feedbackCont.getLayoutParams()).setBehavior(dismissBehavior);
@@ -43,10 +40,5 @@ class Feedback {
     Animation animation = AnimationUtils.loadAnimation(App.getCxt(), R.anim.shake);
     Runnable shake = () -> mB.feedbackCont.startAnimation(animation);
     mB.feedbackCont.postDelayed(shake, 1000);
-  }
-
-  private void showDialog(boolean isYes) {
-    FeedbackDialogFrag.show(mA, isYes);
-    mB.feedbackCont.setVisibility(View.GONE);
   }
 }

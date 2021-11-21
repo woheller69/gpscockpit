@@ -51,5 +51,4 @@ dependencies {
     implementation 'me.saket:better-link-movement-method:2.2.0'
 }
 
-apply plugin: 'com.github.sherter.google-java-format'
-preBuild.dependsOn(verifyGoogleJavaFormat)
+

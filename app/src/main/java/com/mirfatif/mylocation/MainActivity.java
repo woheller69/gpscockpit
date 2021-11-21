@@ -177,9 +177,6 @@ public class MainActivity extends AppCompatActivity {
       menu.findItem(R.id.action_locale_system).setChecked(true);
     }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
-    if (BuildConfig.IS_PS) {
-      menu.findItem(R.id.action_donate).setVisible(false);
-    }
     return true;
   }
 
@@ -220,10 +217,6 @@ public class MainActivity extends AppCompatActivity {
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());
       setNightTheme(this);
-      return true;
-    }
-    if (itemId == R.id.action_donate) {
-      DonateDialogFragment.show(this);
       return true;
     }
     if (itemId == R.id.action_about) {

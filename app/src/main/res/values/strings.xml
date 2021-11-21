@@ -89,7 +89,7 @@
   <string name="telegram_group" maxLength="15">Telegram Group</string>
   <string name="telegram_link" translatable="false">https://t.me/MyLocationApp</string>
   <string name="source" maxLength="15">Source</string>
-  <string name="source_url" translatable="false">https://github.com/mirfatif/MyLocation</string>
+  <string name="source_url" translatable="false">https://github.com/woheller69/MyLocation</string>
   <string name="app_rating" maxLength="15">Rate Me</string>
   <string name="app_rating_summary" maxLength="20">Rating / review on Play Store</string>
   <string name="privacy_policy" maxLength="20">Privacy Policy</string>
