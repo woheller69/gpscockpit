@@ -55,6 +55,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
@@ -144,7 +145,7 @@ public class Utils {
     if (customTabsSupported) {
       CustomTabColorSchemeParams colorSchemeParams =
           new CustomTabColorSchemeParams.Builder()
-              .setToolbarColor(App.getRes().getColor(R.color.primary))
+              .setToolbarColor(ContextCompat.getColor(App.getCxt(),R.color.primary))
               .build();
       CustomTabsIntent customTabsIntent =
           new CustomTabsIntent.Builder()
@@ -274,7 +275,7 @@ public class Utils {
     Drawable d = ResourcesCompat.getDrawable(App.getRes(), R.drawable.link, null);
     if (d != null) {
       // DrawableCompat.setTint()
-      d.setTint(App.getRes().getColor(R.color.accent));
+      d.setTint(ContextCompat.getColor(App.getCxt(),R.color.accent));
       d.setBounds(0, 0, dpToPx(12), dpToPx(12));
     }
 
