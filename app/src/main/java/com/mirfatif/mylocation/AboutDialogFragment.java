@@ -39,12 +39,6 @@ public class AboutDialogFragment extends AppCompatDialogFragment {
     view.setOnClickListener(v -> Utils.openWebUrl(mA, getString(linkResId)));
   }
 
-  private void sendShareIntent() {
-    Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
-    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-    String text = getString(R.string.share_text, getString(R.string.play_store_url));
-    startActivity(Intent.createChooser(intent.putExtra(Intent.EXTRA_TEXT, text), null));
-  }
 
   public static void show(FragmentActivity activity) {
     new AboutDialogFragment().show(activity.getSupportFragmentManager(), "ABOUT");

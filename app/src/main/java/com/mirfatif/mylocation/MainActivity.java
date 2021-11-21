@@ -47,9 +47,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.MenuCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import com.mirfatif.mylocation.NlpAdapter.NlpClickListener;
 import com.mirfatif.mylocation.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     updateGpsUi();
     setupNetwork();
     updateNetUi();
-    setupUnifiedNlp();
     checkPerms();
 
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
@@ -203,11 +199,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (locale != null) {
           SETTINGS.setLocale(locale);
-          /*
-           Nlp backends bind to services using App context. So they must be
-           unregistered before creating new App context.
-          */
-          stopNlpBackends();
           App.updateContext();
           recreate();
         }
@@ -286,80 +277,14 @@ public class MainActivity extends AppCompatActivity {
       return;
     }
 
-    mB.netCont.map.setOnClickListener(v -> openMap(this, mNetLocation));
-    mB.netCont.copy.setOnClickListener(v -> copyLoc(mNetLocation));
-
-    mB.netCont.switchV.setOnClickListener(
-        v -> {
-          if (SETTINGS.getNetworkEnabled() != mB.netCont.switchV.isChecked()) {
-            SETTINGS.setNetworkEnabled(mB.netCont.switchV.isChecked());
-            startNetLocListener();
-            setTimer();
-          }
-        });
-
-    Utils.setTooltip(mB.netCont.map);
-    Utils.setTooltip(mB.netCont.copy);
   }
 
-  private final List<NlpBackend> mBackends = new ArrayList<>();
-  private NlpAdapter mNlpAdapter;
-
-  private void setupUnifiedNlp() {
-    Intent intent = new Intent(ACTION_LOCATION_BACKEND);
-    List<ResolveInfo> infoList = getPackageManager().queryIntentServices(intent, 0);
-    synchronized (mBackends) {
-      mBackends.clear();
-      for (ResolveInfo info : infoList) {
-        mBackends.add(new NlpBackend(info.serviceInfo));
-      }
-    }
-
-    Utils.setTooltip(mB.nlpCont.download);
-    mB.nlpCont.download.setOnClickListener(
-        v -> Utils.openWebUrl(this, "https://github.com/microg/UnifiedNlp/wiki/Backends"));
-
-    mB.nlpCont.switchV.setOnClickListener(
-        v -> {
-          if (SETTINGS.getNlpEnabled() != mB.nlpCont.switchV.isChecked()) {
-            SETTINGS.setNlpEnabled(mB.nlpCont.switchV.isChecked());
-            startNlpBackends();
-            setTimer();
-          }
-        });
-
-    mNlpAdapter =
-        new NlpAdapter(
-            new NlpClickListener() {
-              @Override
-              public void mapClicked(Location loc) {
-                openMap(MainActivity.this, loc);
-              }
-
-              @Override
-              public void copyClicked(Location loc) {
-                copyLoc(loc);
-              }
-
-              @Override
-              public void settingsClicked(NlpBackend backend) {
-                Utils.openAppSettings(MainActivity.this, backend.getPkgName());
-                backend.openInitActivity(MainActivity.this);
-              }
-            },
-            mBackends);
-    mB.nlpCont.rv.setAdapter(mNlpAdapter);
-    mB.nlpCont.rv.setLayoutManager(new LinearLayoutManager(this));
-    mB.nlpCont.rv.addItemDecoration(
-        new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-  }
 
   private final Object LOC_LISTENER_LOCK = new Object();
 
   private void startLocListeners() {
     startGpsLocListener();
     startNetLocListener();
-    startNlpBackends();
   }
 
   private LocListener mGpsLocListener;
@@ -414,21 +339,10 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private void startNlpBackends() {
-    synchronized (mBackends) {
-      stopNlpBackends();
-      if (SETTINGS.getNlpEnabled()) {
-        for (NlpBackend backend : mBackends) {
-          backend.start();
-        }
-      }
-    }
-  }
 
   private void stopLocListeners() {
     stopGpsLocListener();
     stopNetLocListener();
-    stopNlpBackends();
   }
 
   private void stopGpsLocListener() {
@@ -468,13 +382,6 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private void stopNlpBackends() {
-    synchronized (mBackends) {
-      for (NlpBackend backend : mBackends) {
-        backend.stop();
-      }
-    }
-  }
 
   //////////////////////////////////////////////////////////////////
   /////////////////////////////// UI //////////////////////////////
@@ -544,7 +451,6 @@ public class MainActivity extends AppCompatActivity {
     if (mB != null && mLicenseVerifier != null && mLicenseVerifier.isVerified()) {
       updateGpsUi();
       updateNetUi();
-      updateNlpUi();
     }
   }
 
@@ -650,32 +556,9 @@ public class MainActivity extends AppCompatActivity {
         time = DateUtils.getRelativeTimeSpanString(t).toString();
       }
     }
-    mB.netCont.map.setEnabled(locAvailable);
-    mB.netCont.copy.setEnabled(locAvailable);
-    mB.netCont.switchV.setEnabled(hasLocPerm);
-    mB.netCont.switchV.setChecked(hasLocPerm && SETTINGS.getNetworkEnabled());
-    mB.netCont.stateV.setText(state);
-    mB.netCont.latV.setText(lat);
-    mB.netCont.lngV.setText(lng);
-    mB.netCont.accV.setText(acc);
-    mB.netCont.timeV.setText(time);
+
   }
 
-  @SuppressLint("NotifyDataSetChanged")
-  private void updateNlpUi() {
-    boolean hasLocPerm = hasCoarseLocPerm();
-    mB.nlpCont.switchV.setEnabled(hasLocPerm);
-    mB.nlpCont.switchV.setChecked(hasLocPerm && SETTINGS.getNlpEnabled());
-    synchronized (mBackends) {
-      for (NlpBackend backend : mBackends) {
-        mB.nlpCont.download.setVisibility(mBackends.isEmpty() ? View.VISIBLE : View.GONE);
-        backend.refresh();
-        if (mNlpAdapter != null) {
-          mNlpAdapter.notifyDataSetChanged();
-        }
-      }
-    }
-  }
 
   private void setGrantPermButtonState() {
     if (mB != null) {

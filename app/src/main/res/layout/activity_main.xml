@@ -61,21 +61,6 @@
           android:layout_marginBottom="16dp"
           android:background="@color/accentTrans" />
 
-      <include
-          android:id="@+id/net_cont"
-          layout="@layout/net_container" />
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:layout_marginTop="16dp"
-          android:layout_marginBottom="16dp"
-          android:background="@color/accentTrans" />
-
-      <include
-          android:id="@+id/nlp_cont"
-          layout="@layout/nlp_container" />
-
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 
