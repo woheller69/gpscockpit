@@ -1,73 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:keepScreenOn="true">
-
-  <androidx.core.widget.NestedScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical">
+    android:keepScreenOn="true">
 
-    <LinearLayout
+  <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:padding="8dp"
-      android:orientation="vertical">
+      android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
 
       <Button
-        android:id="@+id/grant_perm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/grant_permission"
-        android:visibility="gone" />
+          android:id="@+id/grant_perm"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/grant_permission"
+          android:visibility="gone" />
 
-      <Button
-        android:id="@+id/clear_agps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/clear_agps_data" />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
 
-      <ToggleButton
-        android:id="@+id/lock_gps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textOff="@string/lock_gps"
-        android:textOn="@string/unlock_gps" />
+        <Button
+            android:id="@+id/clear_agps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/clear_agps_data" />
 
+        <ToggleButton
+            android:id="@+id/lock_gps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="@string/lock_gps"
+            android:textOn="@string/unlock_gps" />
+      </LinearLayout>
       <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/accentTrans" />
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="16dp"
+          android:background="@color/accentTrans" />
 
       <include
-        android:id="@+id/gps_cont"
-        layout="@layout/gps_container" />
+          android:id="@+id/gps_cont"
+          layout="@layout/gps_container" />
 
       <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/accentTrans" />
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="16dp"
+          android:background="@color/accentTrans" />
 
       <include
-        android:id="@+id/net_cont"
-        layout="@layout/net_container" />
+          android:id="@+id/net_cont"
+          layout="@layout/net_container" />
 
       <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/accentTrans" />
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="16dp"
+          android:background="@color/accentTrans" />
 
       <include
-        android:id="@+id/nlp_cont"
-        layout="@layout/nlp_container" />
+          android:id="@+id/nlp_cont"
+          layout="@layout/nlp_container" />
 
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
@@ -77,60 +84,60 @@
    the other layout may intercept the touch events and Behaviour may not work correctly.
   -->
   <com.mirfatif.mylocation.MyCoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom">
-
-    <LinearLayout
-      android:id="@+id/feedback_cont"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:visibility="gone">
+      android:layout_gravity="bottom">
 
-      <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/accentTrans" />
-
-      <LinearLayout
+    <LinearLayout
+        android:id="@+id/feedback_cont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:background="@color/dynamicBg"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:visibility="gone">
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/accentTrans" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="8dp"
+          android:paddingEnd="8dp"
+          android:background="@color/dynamicBg"
+          android:gravity="center"
+          android:orientation="horizontal">
 
         <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:layout_margin="8dp"
-          android:gravity="center_vertical"
-          android:maxLines="1"
-          android:text="@string/love_using_app"
-          android:textColor="@color/dynamicText"
-          android:textSize="16sp"
-          app:autoSizeTextType="uniform" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/love_using_app"
+            android:textColor="@color/dynamicText"
+            android:textSize="16sp"
+            app:autoSizeTextType="uniform" />
 
         <Button
-          android:id="@+id/liking_app_no_button"
-          style="@style/Widget.AppCompat.Button.Borderless"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:minWidth="72dp"
-          android:text="@string/no"
-          android:textColor="@color/accent" />
+            android:id="@+id/liking_app_no_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="72dp"
+            android:text="@string/no"
+            android:textColor="@color/accent" />
 
         <Button
-          android:id="@+id/liking_app_yes_button"
-          style="@style/Widget.AppCompat.Button.Borderless"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:minWidth="72dp"
-          android:text="@string/yes"
-          android:textColor="@color/accent" />
+            android:id="@+id/liking_app_yes_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="72dp"
+            android:text="@string/yes"
+            android:textColor="@color/accent" />
 
       </LinearLayout>
     </LinearLayout>
