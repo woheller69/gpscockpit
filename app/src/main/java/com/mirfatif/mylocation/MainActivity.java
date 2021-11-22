@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateGpsUi() {
-    String state = null, lat = "--", lng = "--", acc = "--", time = "--", alt = "--", altMSL = "--", speed = "--" ;
+    String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--", speed = "--" ;
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
     if (!mGpsProviderSupported) {
       state = getString(R.string.not_supported);
@@ -425,16 +425,17 @@ public class MainActivity extends AppCompatActivity {
           locAvailable = true;
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
-          alt = Utils.formatInt(mGpsLocation.getAltitude()) + " m";
           if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
           if (mGpsLocation.hasSpeed()) speed = Utils.formatInt(mGpsLocation.getSpeed()*3.6f)+" km/h";
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
-          long curr = System.currentTimeMillis();
-          long t = mGpsLocation.getTime();
-          t = t - Math.max(0, t - curr);
-          time = DateUtils.getRelativeTimeSpanString(t).toString();
+          long curr = System.currentTimeMillis()/1000;
+          long t = mGpsLocation.getTime()/1000;
+          t=curr-t;
+          //t = t - Math.max(0, t - curr);
+          time = t + " s ago";
+          //time = DateUtils.getRelativeTimeSpanString(t).toString();
         }
       }
     }
@@ -447,7 +448,6 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.stateV.setText(state);
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);
-    mB.gpsCont.altitude.setText(alt);
     mB.gpsCont.altitudeMSL.setText(altMSL);
     mB.gpsCont.speed.setText(speed);
     mB.gpsCont.accV.setText(acc);

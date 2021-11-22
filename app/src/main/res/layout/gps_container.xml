@@ -80,26 +80,30 @@
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="72dp"
+      android:layout_width="36dp"
       android:layout_height="wrap_content"
-      android:text="@string/latitude" />
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_latitude" />
 
     <TextView
       android:id="@+id/lat_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+        android:textSize="24dp"
       android:layout_weight="1" />
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="72dp"
+      android:layout_width="36dp"
       android:layout_height="wrap_content"
-      android:text="@string/longitude" />
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_longitude" />
 
     <TextView
       android:id="@+id/lng_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+        android:textSize="24dp"
       android:layout_weight="1" />
 
   </LinearLayout>
@@ -109,50 +113,34 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
       android:orientation="horizontal">
-
     <TextView
         android:textStyle="bold"
-        android:layout_width="72dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
-        android:text="@string/altitude" />
-
-    <TextView
-        android:id="@+id/altitude"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <TextView
-        android:textStyle="bold"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
-        android:text="@string/altitude_MSL" />
-
-    <TextView
-        android:id="@+id/altitude_MSL"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:orientation="horizontal">
-
-    <TextView
-        android:textStyle="bold"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
-        android:text="@string/speed" />
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_baseline_speed_24" />
 
     <TextView
         android:id="@+id/speed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="24dp"
         android:layout_weight="1" />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_baseline_landscape_24"/>
+
+    <TextView
+        android:id="@+id/altitude_MSL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
 
   </LinearLayout>
 
@@ -164,26 +152,30 @@
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="72dp"
+      android:layout_width="36dp"
       android:layout_height="wrap_content"
-      android:text="@string/accuracy" />
+      android:drawablePadding="10dp"
+      app:drawableStartCompat="@drawable/ic_accuracy" />
 
     <TextView
       android:id="@+id/acc_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+        android:textSize="24dp"
       android:layout_weight="1" />
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="72dp"
+      android:layout_width="36dp"
       android:layout_height="wrap_content"
-      android:text="@string/updated" />
+      android:drawablePadding="10dp"
+      app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
 
     <TextView
       android:id="@+id/time_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+        android:textSize="24dp"
       android:layout_weight="1" />
 
   </LinearLayout>

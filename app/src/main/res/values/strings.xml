@@ -26,7 +26,7 @@
 
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
-  <string name="accuracy">Accuracy</string>
+  <string name="accuracy">+/-</string>
   <string name="updated">Updated</string>
 
   <string name="total">Total</string>
@@ -140,8 +140,6 @@
     contacting us via email or Telegram so that we are able to better serve your needs.
   </string>
   <string name="thank_you" maxLength="20">Thank you</string>
-  <string name="altitude">Altitude</string>
-  <string name="altitude_MSL">Altitude (MSL)</string>
-  <string name="speed">Speed</string>
+  <string name="altitude_MSL">MSL</string>
 
 </resources>
