@@ -432,10 +432,8 @@ public class MainActivity extends AppCompatActivity {
           }
           long curr = System.currentTimeMillis()/1000;
           long t = mGpsLocation.getTime()/1000;
-          t=curr-t;
-          //t = t - Math.max(0, t - curr);
+          t=Math.max(0, curr -t);
           time = t + " s ago";
-          //time = DateUtils.getRelativeTimeSpanString(t).toString();
         }
       }
     }
