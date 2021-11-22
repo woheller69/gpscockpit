@@ -24,6 +24,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.OnNmeaMessageListener;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -225,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
             // unless Service is started with startForegroundService().
             if (SDK_INT >= VERSION_CODES.O) {
               startForegroundService(intent);
+              startActivity(new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:"+getPackageName())));
             } else {
               startService(intent);
             }
