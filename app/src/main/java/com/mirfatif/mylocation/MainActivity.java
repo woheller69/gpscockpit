@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     if (actionBar != null) {
       actionBar.setDisplayUseLogoEnabled(true);
       actionBar.setDisplayShowHomeEnabled(true);
-      actionBar.setIcon(R.drawable.action_bar_icon);
     }
 
     for (String provider : mLocManager.getAllProviders()) {
