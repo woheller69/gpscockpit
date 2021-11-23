@@ -18,7 +18,7 @@
       android:id="@+id/icon"
       android:layout_width="match_parent"
       android:layout_height="64dp"
-      android:src="@drawable/icon"
+      android:src="@drawable/ic_icon"
       tools:ignore="ContentDescription" />
 
     <TextView

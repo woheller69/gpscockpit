@@ -3,41 +3,11 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:id="@+id/action_loc_settings"
-    android:icon="@drawable/loc_settings"
-    android:title="@string/location_settings_menu_item"
-    app:showAsAction="ifRoom" />
-
-  <item
     android:id="@+id/action_dark_theme"
     android:checkable="true"
     android:icon="@drawable/dark_mode"
     android:title="@string/dark_theme_menu_item"
     app:showAsAction="never" />
-
-  <group android:id="@+id/group1">
-    <item
-      android:id="@+id/action_locale"
-      android:icon="@drawable/locale"
-      android:title="@string/language_menu_item"
-      app:showAsAction="never">
-      <menu>
-        <group
-          android:id="@+id/action_locale_group"
-          android:checkableBehavior="single">
-          <item
-            android:id="@+id/action_locale_system"
-            android:title="@string/lang_system_menu_item" />
-          <item
-            android:id="@+id/action_locale_en"
-            android:title="@string/lang_en_menu_item" />
-          <item
-            android:id="@+id/action_locale_pt_rBr"
-            android:title="@string/lang_pt_rBr_menu_item" />
-        </group>
-      </menu>
-    </item>
-  </group>
 
   <group android:id="@+id/group2">
 

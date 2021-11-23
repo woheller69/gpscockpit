@@ -150,14 +150,6 @@ public class MainActivity extends AppCompatActivity {
     if (menu instanceof MenuBuilder) {
       ((MenuBuilder) menu).setOptionalIconsVisible(true);
     }
-    String locale = SETTINGS.getLocale();
-    if (locale.equals(getString(R.string.lang_code_en))) {
-      menu.findItem(R.id.action_locale_en).setChecked(true);
-    } else if (locale.equals(getString(R.string.lang_code_pt_rBr))) {
-      menu.findItem(R.id.action_locale_pt_rBr).setChecked(true);
-    } else {
-      menu.findItem(R.id.action_locale_system).setChecked(true);
-    }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
     return true;
   }
@@ -165,32 +157,6 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
-    if (itemId == R.id.action_loc_settings) {
-      try {
-        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-      } catch (ActivityNotFoundException ignored) {
-        Utils.showToast(R.string.failed_open_loc_settings);
-      }
-      return true;
-    }
-    if (item.getGroupId() == R.id.action_locale_group) {
-      if (!item.isChecked()) {
-        String locale = null;
-        if (itemId == R.id.action_locale_system) {
-          locale = "";
-        } else if (itemId == R.id.action_locale_en) {
-          locale = getString(R.string.lang_code_en);
-        } else if (itemId == R.id.action_locale_pt_rBr) {
-          locale = getString(R.string.lang_code_pt_rBr);
-        }
-        if (locale != null) {
-          SETTINGS.setLocale(locale);
-          App.updateContext();
-          recreate();
-        }
-      }
-      return true;
-    }
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());
       setNightTheme(this);
