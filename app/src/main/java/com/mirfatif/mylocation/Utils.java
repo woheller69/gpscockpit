@@ -592,63 +592,11 @@ public class Utils {
         writer.println("=================================");
         writer.println(stackTrace);
         writer.close();
-        showCrashNotification(logFile);
       } catch (IOException ignored) {
       }
     }
   }
 
-  private static void showCrashNotification(File logFile) {
-    if (!SETTINGS.shouldAskToSendCrashReport()) {
-      return;
-    }
-
-    String authority = BuildConfig.APPLICATION_ID + ".FileProvider";
-    Uri logFileUri = FileProvider.getUriForFile(App.getCxt(), authority, logFile);
-
-    final String CHANNEL_ID = "channel_crash_report";
-    final String CHANNEL_NAME = getString(R.string.channel_crash_report);
-    final int UNIQUE_ID = getInteger(R.integer.channel_crash_report);
-
-    Intent intent = new Intent(Intent.ACTION_SEND);
-    intent
-        .setData(logFileUri)
-        .setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        .setType("text/plain")
-        .putExtra(Intent.EXTRA_EMAIL, new String[] {getString(R.string.email_address)})
-        .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " - Crash Report")
-        .putExtra(Intent.EXTRA_TEXT, "Find attachment.")
-        .putExtra(Intent.EXTRA_STREAM, logFileUri);
-
-    // Adding extra information to dismiss notification after the action is tapped
-    intent
-        .setClass(App.getCxt(), NotifDismissSvc.class)
-        .putExtra(NotifDismissSvc.EXTRA_INTENT_TYPE, NotifDismissSvc.INTENT_TYPE_ACTIVITY)
-        .putExtra(NotifDismissSvc.EXTRA_NOTIF_ID, UNIQUE_ID);
-
-    PendingIntent pi = getNotifDismissSvcPi(UNIQUE_ID, intent);
-    createNotifChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManagerCompat.IMPORTANCE_HIGH);
-
-    NotificationCompat.Builder nb =
-        new NotificationCompat.Builder(App.getCxt(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_gps_fixed_black_24dp)
-            .setContentTitle(getString(R.string.crash_report))
-            .setContentText(getString(R.string.ask_to_report_crash_small))
-            .setStyle(
-                new NotificationCompat.BigTextStyle()
-                    .bigText(getString(R.string.ask_to_report_crash)))
-            .setContentIntent(pi)
-            .addAction(0, getString(R.string.send_report), pi)
-            .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true);
-
-    NotificationManagerCompat.from(App.getCxt()).notify(UNIQUE_ID, nb.build());
-  }
-
-  private static PendingIntent getNotifDismissSvcPi(int uniqueId, Intent intent) {
-    return PendingIntent.getService(App.getCxt(), uniqueId, intent, getPiFlags());
-  }
 
   public static int getPiFlags() {
     return PendingIntent.FLAG_UPDATE_CURRENT;
