@@ -129,7 +129,7 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
         new Builder(App.getCxt(), CHANNEL_ID)
             .setSilent(true)
             .setOnlyAlertOnce(true)
-            .setSmallIcon(R.drawable.notification_icon)
+            .setSmallIcon(R.drawable.ic_gps_fixed_black_24dp)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) // For N and below
             .setContentIntent(pi)
             .setAutoCancel(false)

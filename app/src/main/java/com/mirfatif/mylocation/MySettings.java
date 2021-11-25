@@ -44,30 +44,6 @@ public enum MySettings {
     mPrefs.edit().putLong(prefKey, _long).apply();
   }
 
-  public boolean getGpsEnabled() {
-    return mPrefs.getBoolean(getString(R.string.pref_main_gps_enabled_key), true);
-  }
-
-  public void setGpsEnabled(boolean enabled) {
-    mPrefs.edit().putBoolean(getString(R.string.pref_main_gps_enabled_key), enabled).apply();
-  }
-
-  public boolean getNetworkEnabled() {
-    return mPrefs.getBoolean(getString(R.string.pref_main_network_enabled_key), true);
-  }
-
-  public void setNetworkEnabled(boolean enabled) {
-    mPrefs.edit().putBoolean(getString(R.string.pref_main_network_enabled_key), enabled).apply();
-  }
-
-  public boolean getNlpEnabled() {
-    return mPrefs.getBoolean(getString(R.string.pref_main_nlp_enabled_key), true);
-  }
-
-  public void setNlpEnabled(boolean enabled) {
-    mPrefs.edit().putBoolean(getString(R.string.pref_main_nlp_enabled_key), enabled).apply();
-  }
-
   @SuppressLint("ApplySharedPref")
   public boolean shouldAskToSendCrashReport() {
     int crashCount = getIntPref(R.string.pref_main_crash_report_count_key, 1);

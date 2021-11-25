@@ -181,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
     if (!mGpsProviderSupported) {
       return;
     }
+    startGpsLocListener();
+    setTimer();
 
     mB.clearAgps.setOnClickListener(v -> clearAGPSData());
     mB.lockGps.setOnClickListener(
@@ -202,16 +204,6 @@ public class MainActivity extends AppCompatActivity {
 
     mB.gpsCont.map.setOnClickListener(v -> openMap(this, mGpsLocation));
     mB.gpsCont.copy.setOnClickListener(v -> copyLoc(mGpsLocation));
-
-    // setOnCheckedChangeListener() doesn't work well on screen rotation.
-    mB.gpsCont.switchV.setOnClickListener(
-        v -> {
-          if (SETTINGS.getGpsEnabled() != mB.gpsCont.switchV.isChecked()) {
-            SETTINGS.setGpsEnabled(mB.gpsCont.switchV.isChecked());
-            startGpsLocListener();
-            setTimer();
-          }
-        });
 
     if (GpsSvc.mIsRunning) {
       mB.lockGps.setChecked(true);
@@ -241,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
   private void startGpsLocListener() {
     synchronized (LOC_LISTENER_LOCK) {
       stopGpsLocListener();
-      if (SETTINGS.getGpsEnabled() && mGpsProviderSupported && hasFineLocPerm()) {
+      if (mGpsProviderSupported && hasFineLocPerm()) {
         mGpsLocListener = new LocListener(true);
         mLocManager.requestLocationUpdates(GPS_PROVIDER, MIN_DELAY, 0, mGpsLocListener);
         mGpsStatusListener = new GpsStatusListener();
@@ -383,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
       } else if (!mLocManager.isProviderEnabled(GPS_PROVIDER)) {
         state = getString(R.string.turned_off);
       } else {
-        showSats = SETTINGS.getGpsEnabled() && !mSats.isEmpty();
+        showSats = !mSats.isEmpty();
         if (mGpsLocation != null
             && !isNaN(mGpsLocation.getLatitude())
             && !isNaN(mGpsLocation.getLongitude())) {
@@ -406,8 +398,6 @@ public class MainActivity extends AppCompatActivity {
     mB.lockGps.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);
     mB.gpsCont.copy.setEnabled(locAvailable);
-    mB.gpsCont.switchV.setEnabled(hasFineLocPerm);
-    mB.gpsCont.switchV.setChecked(hasFineLocPerm && SETTINGS.getGpsEnabled());
     mB.gpsCont.stateV.setText(state);
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);

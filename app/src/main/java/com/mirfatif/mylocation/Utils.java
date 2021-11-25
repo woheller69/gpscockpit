@@ -631,7 +631,7 @@ public class Utils {
 
     NotificationCompat.Builder nb =
         new NotificationCompat.Builder(App.getCxt(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.notification_icon)
+            .setSmallIcon(R.drawable.ic_gps_fixed_black_24dp)
             .setContentTitle(getString(R.string.crash_report))
             .setContentText(getString(R.string.ask_to_report_crash_small))
             .setStyle(
