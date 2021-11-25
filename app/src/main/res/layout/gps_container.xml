@@ -44,6 +44,16 @@
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/copy"
       android:src="@drawable/copy" />
+    <ImageView
+        android:id="@+id/share"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="4dp"
+        android:layout_gravity="center_vertical"
+        android:padding="2dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/share"
+        android:src="@drawable/share" />
 
   </LinearLayout>
 

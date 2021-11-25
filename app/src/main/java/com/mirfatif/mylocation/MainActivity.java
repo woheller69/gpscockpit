@@ -7,6 +7,7 @@ import static com.mirfatif.mylocation.GpsSvc.ACTION_STOP_SERVICE;
 import static com.mirfatif.mylocation.GpsSvc.MIN_DELAY;
 import static com.mirfatif.mylocation.MySettings.SETTINGS;
 import static com.mirfatif.mylocation.Utils.copyLoc;
+import static com.mirfatif.mylocation.Utils.shareLoc;
 import static com.mirfatif.mylocation.Utils.hasCoarseLocPerm;
 import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
 import static com.mirfatif.mylocation.Utils.isNaN;
@@ -204,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
     mB.gpsCont.map.setOnClickListener(v -> openMap(this, mGpsLocation));
     mB.gpsCont.copy.setOnClickListener(v -> copyLoc(mGpsLocation));
+    mB.gpsCont.share.setOnClickListener(v -> shareLoc(this, mGpsLocation));
 
     if (GpsSvc.mIsRunning) {
       mB.lockGps.setChecked(true);
@@ -213,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
     Utils.setTooltip(mB.gpsCont.map);
     Utils.setTooltip(mB.gpsCont.copy);
+    Utils.setTooltip(mB.gpsCont.share);
     Utils.setTooltip(mB.gpsCont.satDetail);
   }
 
@@ -398,6 +401,7 @@ public class MainActivity extends AppCompatActivity {
     mB.lockGps.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);
     mB.gpsCont.copy.setEnabled(locAvailable);
+    mB.gpsCont.share.setEnabled(locAvailable);
     mB.gpsCont.stateV.setText(state);
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);

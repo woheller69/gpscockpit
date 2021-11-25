@@ -114,6 +114,18 @@ public class Utils {
     }
   }
 
+  public static void shareLoc(Activity act, Location location) {
+    if (location != null) {
+      String loc = location.getLatitude() + "," + location.getLongitude();
+      String uri = "https://www.google.com/maps/search/?api=1&query=" + loc;
+      Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+      sharingIntent.setType("text/plain");
+      sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri);
+      act.startActivity(Intent.createChooser(sharingIntent, "Share in..."));
+
+    }
+  }
+
   public static void openMap(Activity act, Location location) {
     if (location != null) {
       String loc = location.getLatitude() + "," + location.getLongitude();
