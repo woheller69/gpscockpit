@@ -172,6 +172,23 @@
 
   </LinearLayout>
 
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="10dp"/>
+  
+  <com.redinput.compassview.CompassView
+      android:id="@+id/compass"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:backgroundColor="@color/dynamicBg"
+      app:showMarker="false"
+      app:markerColor="@color/primary"
+      app:lineColor="@color/dynamicFgDim"
+      app:textColor="@color/dynamicText"
+      app:textSize="15sp"
+      app:degrees="0"
+      app:rangeDegrees="180.0" />
+
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

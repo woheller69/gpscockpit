@@ -369,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
   private void updateGpsUi() {
     String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--", speed = "--" ;
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
+    float bearing = 0;
     if (!mGpsProviderSupported) {
       state = getString(R.string.not_supported);
     } else {
@@ -390,6 +391,7 @@ public class MainActivity extends AppCompatActivity {
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
+          if (mGpsLocation.hasBearing()) bearing=mGpsLocation.getBearing();
           long curr = System.currentTimeMillis()/1000;
           long t = mGpsLocation.getTime()/1000;
           t=Math.max(0, curr -t);
@@ -410,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);
+    mB.gpsCont.compass.setDegrees(bearing);
 
     int total, good = 0, used = 0;
     synchronized (mSats) {
