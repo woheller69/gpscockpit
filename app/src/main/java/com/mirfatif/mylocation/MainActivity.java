@@ -370,6 +370,7 @@ public class MainActivity extends AppCompatActivity {
     String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--", speed = "--" ;
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
     float bearing = 0;
+    float speedval = -1;
     if (!mGpsProviderSupported) {
       state = getString(R.string.not_supported);
     } else {
@@ -387,7 +388,10 @@ public class MainActivity extends AppCompatActivity {
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
           if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
-          if (mGpsLocation.hasSpeed()) speed = Utils.formatInt(mGpsLocation.getSpeed()*3.6f)+" km/h";
+          if (mGpsLocation.hasSpeed()) {
+              speed = Utils.formatInt(mGpsLocation.getSpeed() * 3.6f) + " km/h";
+              speedval = mGpsLocation.getSpeed() * 3.6f;
+          }
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
@@ -409,6 +413,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.lngV.setText(lng);
     mB.gpsCont.altitudeMSL.setText(altMSL);
     mB.gpsCont.speed.setText(speed);
+    mB.gpsCont.deluxeSpeedView.speedTo(speedval);
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);

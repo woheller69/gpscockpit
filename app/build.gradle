@@ -43,6 +43,8 @@ dependencies {
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.github.janoferenczi:CompassView:bb207e0e21'
+    implementation 'com.github.anastr:speedviewlib:1.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32"
 
     // For BottomSheetDialogFragment
     implementation 'com.google.android.material:material:1.4.0'

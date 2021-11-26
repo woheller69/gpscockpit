@@ -57,11 +57,47 @@
 
   </LinearLayout>
 
-  <LinearLayout
-    android:layout_width="match_parent"
+
+
+<com.github.anastr.speedviewlib.DeluxeSpeedView
+    android:id="@+id/deluxeSpeedView"
+    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
-    android:orientation="horizontal">
+    android:layout_width="200dp"
+    app:sv_indicator="QuarterLineIndicator"
+    app:sv_unitUnderSpeedText="true"
+    app:sv_speedTextFormat="INTEGER"
+    app:sv_speedBackgroundColor="@color/dynamicBg"
+    app:sv_centerCircleColor="#00000000"
+    app:sv_backgroundCircleColor="@color/dynamicBg"
+    app:sv_speedTextColor="@color/dynamicFgDim"
+    app:sv_unitTextColor="@color/dynamicFgDim"
+    app:sv_speedTextSize="40dp"
+    app:sv_textSize="15dp"
+    app:sv_unitSpeedInterval="10dp"/>
+
+<Space
+    android:layout_width="match_parent"
+    android:layout_height="10dp"/>
+  
+  <com.redinput.compassview.CompassView
+      android:id="@+id/compass"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:backgroundColor="@color/dynamicBg"
+      app:showMarker="false"
+      app:markerColor="@color/primary"
+      app:lineColor="@color/dynamicFgDim"
+      app:textColor="@color/dynamicText"
+      app:textSize="15sp"
+      app:degrees="0"
+      app:rangeDegrees="180.0" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:orientation="horizontal">
 
     <ImageView
         android:layout_width="36dp"
@@ -135,10 +171,10 @@
   </LinearLayout>
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:orientation="horizontal">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
 
     <ImageView
         android:layout_width="36dp"
@@ -171,23 +207,6 @@
         android:layout_weight="1" />
 
   </LinearLayout>
-
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="10dp"/>
-  
-  <com.redinput.compassview.CompassView
-      android:id="@+id/compass"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:backgroundColor="@color/dynamicBg"
-      app:showMarker="false"
-      app:markerColor="@color/primary"
-      app:lineColor="@color/dynamicFgDim"
-      app:textColor="@color/dynamicText"
-      app:textSize="15sp"
-      app:degrees="0"
-      app:rangeDegrees="180.0" />
 
   <LinearLayout
     android:layout_width="match_parent"
