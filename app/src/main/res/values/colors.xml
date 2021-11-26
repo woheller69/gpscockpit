@@ -12,6 +12,6 @@
   <color name="dynamicText">@android:color/black</color>
   <color name="dynamicFg">#ECECEC</color>
   <color name="dynamicFgDim">#404040</color>
-  <color name="dynamicBg">@android:color/white</color>
+  <color name="dynamicBg">#FAFAFA</color>
 
 </resources>

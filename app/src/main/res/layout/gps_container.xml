@@ -71,8 +71,6 @@
 
   </LinearLayout>
 
-
-
 <com.github.anastr.speedviewlib.DeluxeSpeedView
     android:id="@+id/deluxeSpeedView"
     android:layout_gravity="center_horizontal"
@@ -88,8 +86,12 @@
     app:sv_unitTextColor="@color/dynamicFgDim"
     app:sv_speedTextSize="40dp"
     app:sv_textSize="15dp"
-    app:sv_unitSpeedInterval="10dp"/>
-
+    app:sv_unitSpeedInterval="10dp"
+    app:sv_maxSpeed="180"
+    app:sv_tickNumber="10"
+    app:sv_tickPadding="10dp"
+    app:sv_speedTextPosition="CENTER"
+    app:sv_textColor="@color/dynamicText"/>
 
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"

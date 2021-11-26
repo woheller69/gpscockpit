@@ -16,7 +16,6 @@ import static com.mirfatif.mylocation.Utils.setNightTheme;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.location.GpsSatellite;
@@ -43,9 +42,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.github.anastr.speedviewlib.components.Section;
 import com.mirfatif.mylocation.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
+    mB.gpsCont.deluxeSpeedView.clearSections();
+    mB.gpsCont.deluxeSpeedView.addSections(
+              new Section(.0f, 1.0f, ContextCompat.getColor(App.getCxt(), R.color.accent),10));
     setupGps();
     updateGpsUi();
     checkPerms();
