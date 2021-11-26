@@ -9,9 +9,23 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_baseline_landscape_24"/>
+
+    <TextView
+        android:id="@+id/altitude_MSL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
     <TextView
       android:id="@+id/state_v"
@@ -76,10 +90,7 @@
     app:sv_textSize="15dp"
     app:sv_unitSpeedInterval="10dp"/>
 
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="10dp"/>
-  
+
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"
       android:layout_width="match_parent"
@@ -131,44 +142,6 @@
 
   </LinearLayout>
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:orientation="horizontal">
-
-    <ImageView
-        android:layout_width="36dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_speed_24" />
-
-    <TextView
-        android:id="@+id/speed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textSize="24dp"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:layout_width="36dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_landscape_24"/>
-
-    <TextView
-        android:id="@+id/altitude_MSL"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textSize="24dp"
-        android:layout_weight="1" />
-
-
-  </LinearLayout>
 
   <LinearLayout
       android:layout_width="match_parent"

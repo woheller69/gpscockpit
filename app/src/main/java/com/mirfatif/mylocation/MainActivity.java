@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateGpsUi() {
-    String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--", speed = "--" ;
+    String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--";
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
     float bearing = 0;
     float speedval = -1;
@@ -389,7 +389,6 @@ public class MainActivity extends AppCompatActivity {
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
           if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
           if (mGpsLocation.hasSpeed()) {
-              speed = Utils.formatInt(mGpsLocation.getSpeed() * 3.6f) + " km/h";
               speedval = mGpsLocation.getSpeed() * 3.6f;
           }
           if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
@@ -412,7 +411,6 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);
     mB.gpsCont.altitudeMSL.setText(altMSL);
-    mB.gpsCont.speed.setText(speed);
     mB.gpsCont.deluxeSpeedView.speedTo(speedval);
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
