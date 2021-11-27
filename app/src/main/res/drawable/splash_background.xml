@@ -8,16 +8,10 @@
     </shape>
   </item>
 
-  <item android:bottom="100dp">
+  <item>
     <bitmap
       android:gravity="center"
       android:src="@drawable/icon" />
-  </item>
-
-  <item android:bottom="50dp">
-    <bitmap
-      android:gravity="bottom|center_horizontal"
-      android:src="@drawable/app_name" />
   </item>
 
 </layer-list>

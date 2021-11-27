@@ -23,7 +23,7 @@
         android:id="@+id/altitude_MSL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -125,7 +125,7 @@
         android:id="@+id/lat_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -140,7 +140,7 @@
         android:id="@+id/lng_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -164,7 +164,7 @@
         android:id="@+id/acc_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -179,7 +179,7 @@
         android:id="@+id/time_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         android:textSize="24dp"
         android:layout_weight="1" />
 
