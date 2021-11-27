@@ -91,18 +91,20 @@
     app:sv_tickNumber="10"
     app:sv_tickPadding="10dp"
     app:sv_speedTextPosition="CENTER"
-    app:sv_textColor="@color/dynamicText"/>
+    app:sv_textColor="@color/dynamicText"
+    app:sv_markColor="@color/dynamicText"
+    app:sv_indicatorColor="@color/primaryTrans"/>
 
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:backgroundColor="@color/dynamicBg"
-      app:showMarker="false"
-      app:markerColor="@color/primary"
-      app:lineColor="@color/dynamicFgDim"
+      app:showMarker="true"
+      app:markerColor="@color/primaryTrans"
+      app:lineColor="@color/accent"
       app:textColor="@color/dynamicText"
-      app:textSize="15sp"
+      app:textSize="15dp"
       app:degrees="0"
       app:rangeDegrees="180.0" />
 

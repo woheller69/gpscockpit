@@ -3,6 +3,7 @@
 
   <color name="primaryDark">#365187</color>
   <color name="primary">#496EB8</color>
+  <color name="primaryTrans">#BB496EB8</color>
   <color name="accent">#56CBCD</color>
   <color name="accentTrans">#8056CACC</color>
 
