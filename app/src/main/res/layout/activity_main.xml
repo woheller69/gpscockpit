@@ -77,46 +77,6 @@
           android:layout_height="1dp"
           android:background="@color/accentTrans" />
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingStart="8dp"
-          android:paddingEnd="8dp"
-          android:background="@color/dynamicBg"
-          android:gravity="center"
-          android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:text="@string/love_using_app"
-            android:textColor="@color/dynamicText"
-            android:textSize="16sp"
-            app:autoSizeTextType="uniform" />
-
-        <Button
-            android:id="@+id/liking_app_no_button"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="72dp"
-            android:text="@string/no"
-            android:textColor="@color/accent" />
-
-        <Button
-            android:id="@+id/liking_app_yes_button"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="72dp"
-            android:text="@string/yes"
-            android:textColor="@color/accent" />
-
-      </LinearLayout>
     </LinearLayout>
 
   </com.mirfatif.mylocation.MyCoordinatorLayout>

@@ -81,28 +81,4 @@ public enum MySettings {
     mPrefs.edit().putString(getString(R.string.pref_main_locale_key), langCode).apply();
   }
 
-  public void plusAppLaunchCount() {
-    int appLaunchCountId = R.string.pref_main_app_launch_count_for_feedback_key;
-    savePref(appLaunchCountId, getIntPref(appLaunchCountId, 0) + 1);
-  }
-
-  public boolean shouldAskForFeedback() {
-    long lastTS = getLongPref(R.string.pref_main_ask_for_feedback_ts_key);
-    if (lastTS == 0) {
-      setAskForFeedbackTs(System.currentTimeMillis());
-      return false;
-    }
-    int appLaunchCountId = R.string.pref_main_app_launch_count_for_feedback_key;
-    boolean ask = getIntPref(appLaunchCountId, 0) >= 10;
-    ask = ask && (System.currentTimeMillis() - lastTS) >= TimeUnit.DAYS.toMillis(10);
-    if (ask) {
-      savePref(appLaunchCountId, 0);
-      setAskForFeedbackTs(System.currentTimeMillis());
-    }
-    return ask;
-  }
-
-  public void setAskForFeedbackTs(long ts) {
-    savePref(R.string.pref_main_ask_for_feedback_ts_key, ts);
-  }
 }

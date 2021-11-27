@@ -97,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
 
-    if (Intent.ACTION_MAIN.equals(getIntent().getAction())) {
-      SETTINGS.plusAppLaunchCount();
-    }
   }
 
   @Override
