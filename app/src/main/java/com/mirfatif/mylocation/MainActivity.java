@@ -4,7 +4,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.location.LocationManager.GPS_PROVIDER;
 import static android.os.Build.VERSION.SDK_INT;
 import static com.mirfatif.mylocation.GpsSvc.ACTION_STOP_SERVICE;
-import static com.mirfatif.mylocation.GpsSvc.MIN_DELAY;
 import static com.mirfatif.mylocation.MySettings.SETTINGS;
 import static com.mirfatif.mylocation.Utils.copyLoc;
 import static com.mirfatif.mylocation.Utils.shareLoc;
@@ -33,7 +32,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +57,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MainActivity extends AppCompatActivity {
 
   private ActivityMainBinding mB;
-
+  public static final long MIN_DELAY = 2000;
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     mB.gpsCont.deluxeSpeedView.clearSections();
     mB.gpsCont.deluxeSpeedView.addSections(
-              new Section(.0f, 1.0f, ContextCompat.getColor(App.getCxt(), R.color.accent),10));
+              new Section(.0f, 1.0f, ContextCompat.getColor(this, R.color.accent),10));
     setupGps();
     updateGpsUi();
     checkPerms();
@@ -324,12 +322,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private Timer mTimer;
-  private long mPeriod = 1000;
-  private int mTickCount;
+  private long mPeriod;
 
   private void setTimer() {
-    mPeriod = 1000;
-    mTickCount = 0;
+    mPeriod = 5000;
     startTimer();
   }
 
@@ -341,11 +337,6 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void run() {
             Utils.runUi(MainActivity.this, () -> updateUi());
-            mTickCount++;
-            if (mTickCount == 5) {
-              mPeriod = 5000;
-              startTimer();
-            }
           }
         },
         0,
@@ -359,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private Location mGpsLocation, mNetLocation;
+  private Location mGpsLocation;
   private Double mNmeaAltitude;
 
   private void updateUi() {
@@ -393,10 +384,19 @@ public class MainActivity extends AppCompatActivity {
           if (mGpsLocation.hasSpeed()) {
               speedval = mGpsLocation.getSpeed() * 3.6f;
           }
-          if (!isNaN(mGpsLocation.getAccuracy()) && mGpsLocation.getAccuracy() != 0) {
+          if (mGpsLocation.hasAccuracy()) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
           }
-          if (mGpsLocation.hasBearing()) bearing=mGpsLocation.getBearing();
+          if (mGpsLocation.hasBearing()) {
+            mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
+            mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.dynamicText));
+            mB.gpsCont.compass.setShowMarker(true);
+            bearing = mGpsLocation.getBearing();
+          } else {
+            mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.compass.setShowMarker(false);
+          }
           long curr = System.currentTimeMillis()/1000;
           long t = mGpsLocation.getTime()/1000;
           t=Math.max(0, curr -t);
@@ -533,8 +533,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLocationChanged(Location location) {
       if (mIsGps) {
         mGpsLocation = location;
-      } else {
-        mNetLocation = location;
+        updateUi();
       }
     }
 
@@ -547,8 +546,6 @@ public class MainActivity extends AppCompatActivity {
     public void onProviderDisabled(String provider) {
       if (mIsGps) {
         clearGpsData();
-      } else {
-        mNetLocation = null;
       }
       setTimer();
     }

@@ -100,10 +100,10 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:backgroundColor="@color/dynamicBg"
-      app:showMarker="true"
+      app:showMarker="false"
       app:markerColor="@color/primaryTrans"
-      app:lineColor="@color/accent"
-      app:textColor="@color/dynamicText"
+      app:lineColor="@color/disabledStateColor"
+      app:textColor="@color/disabledStateColor"
       app:textSize="15dp"
       app:degrees="0"
       app:rangeDegrees="180.0" />
@@ -125,7 +125,7 @@
         android:id="@+id/lat_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -140,7 +140,7 @@
         android:id="@+id/lng_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -164,7 +164,7 @@
         android:id="@+id/acc_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -179,7 +179,7 @@
         android:id="@+id/time_v"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:textSize="24dp"
         android:layout_weight="1" />
 
