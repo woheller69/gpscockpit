@@ -398,11 +398,7 @@ public class Utils {
     String lang = SETTINGS.getLocale();
     Locale locale;
     if (TextUtils.isEmpty(lang)) {
-      if (VERSION.SDK_INT >= VERSION_CODES.N) {
-        locale = Resources.getSystem().getConfiguration().getLocales().get(0);
-      } else {
-        locale = Resources.getSystem().getConfiguration().locale;
-      }
+       locale = Resources.getSystem().getConfiguration().getLocales().get(0);
     } else {
       String[] langSpecs = lang.split("\\|");
       if (langSpecs.length == 2) {

@@ -17,14 +17,12 @@ import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
+import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.OnNmeaMessageListener;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -52,7 +50,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -227,9 +224,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private LocListener mGpsLocListener;
-  private GpsStatus.Listener mGpsStatusListener;
+  private GnssStatus.Callback mGnssStatusCallback;
   private OnNmeaMessageListener mOnNmeaMessageListener;
-  private GpsStatus.NmeaListener mNmeaListener;
 
 
   @SuppressLint("MissingPermission")
@@ -239,10 +235,22 @@ public class MainActivity extends AppCompatActivity {
       if (mGpsProviderSupported && hasFineLocPerm()) {
         mGpsLocListener = new LocListener(true);
         mLocManager.requestLocationUpdates(GPS_PROVIDER, MIN_DELAY, 0, mGpsLocListener);
-        mGpsStatusListener = new GpsStatusListener();
-        mLocManager.addGpsStatusListener(mGpsStatusListener);
+        mGnssStatusCallback = new GnssStatus.Callback() {
+          @Override
+          public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
+            synchronized (mSats) {
+              mSats.clear();
+              for (int i = 0; i < status.getSatelliteCount(); i++) {
+                mSats.add(new Sat(status.getSvid(i), status.usedInFix(i), status.getCn0DbHz(i)));
+              }
+              Collections.sort(mSats, (s1, s2) -> Float.compare(s2.mSnr, s1.mSnr));
+            }
+            super.onSatelliteStatusChanged(status);
+          }
+        };
 
-        if (Build.VERSION.SDK_INT >= 24) {
+        mLocManager.registerGnssStatusCallback(mGnssStatusCallback,new Handler(Looper.getMainLooper()));
+
           mOnNmeaMessageListener = (message, timestamp) -> {
             Double msl = getAltitudeMeanSeaLevel(message);
             if (msl != null) {
@@ -250,15 +258,6 @@ public class MainActivity extends AppCompatActivity {
             }
           };
           mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
-        } else {
-          mNmeaListener = (timestamp, nmea) -> {
-            Double msl = getAltitudeMeanSeaLevel(nmea);
-            if (msl != null) {
-              mNmeaAltitude = msl;
-            }
-          };
-          mLocManager.addNmeaListener(mNmeaListener);
-        }
       }
     }
   }
@@ -272,16 +271,12 @@ public class MainActivity extends AppCompatActivity {
     synchronized (LOC_LISTENER_LOCK) {
       if (mGpsLocListener != null) {
         mLocManager.removeUpdates(mGpsLocListener);
-        if (Build.VERSION.SDK_INT >= 24) {
-          mLocManager.removeNmeaListener(mOnNmeaMessageListener);
-        }else{
-          mLocManager.removeNmeaListener(mNmeaListener);
-        }
+        mLocManager.removeNmeaListener(mOnNmeaMessageListener);
         mGpsLocListener = null;
       }
-      if (mGpsStatusListener != null) {
-        mLocManager.removeGpsStatusListener(mGpsStatusListener);
-        mGpsStatusListener = null;
+      if (mGnssStatusCallback != null) {
+        mLocManager.unregisterGnssStatusCallback(mGnssStatusCallback);
+        mGnssStatusCallback = null;
       }
       clearGpsData();
     }
@@ -301,25 +296,6 @@ public class MainActivity extends AppCompatActivity {
   //////////////////////////////////////////////////////////////////
 
   private final List<Sat> mSats = new ArrayList<>();
-  private final ReentrantLock UPDATE_SATS_LOCK = new ReentrantLock();
-
-  @SuppressLint("MissingPermission")
-  private void updateGpsSats() {
-    if (!UPDATE_SATS_LOCK.tryLock()) {
-      return;
-    }
-    if (hasFineLocPerm()) {
-      GpsStatus gpsStatus = mLocManager.getGpsStatus(null);
-      synchronized (mSats) {
-        mSats.clear();
-        for (GpsSatellite gpsSat : gpsStatus.getSatellites()) {
-          mSats.add(new Sat(gpsSat.getPrn(), gpsSat.usedInFix(), gpsSat.getSnr()));
-        }
-        Collections.sort(mSats, (s1, s2) -> Float.compare(s2.mSnr, s1.mSnr));
-      }
-    }
-    UPDATE_SATS_LOCK.unlock();
-  }
 
   private Timer mTimer;
   private long mPeriod;
@@ -447,8 +423,6 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-
-
   private void setGrantPermButtonState() {
     if (mB != null) {
       if (hasFineLocPerm() && hasCoarseLocPerm()) {
@@ -550,18 +524,6 @@ public class MainActivity extends AppCompatActivity {
       setTimer();
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-      setTimer();
-    }
-  }
-
-  private class GpsStatusListener implements GpsStatus.Listener {
-
-    @Override
-    public void onGpsStatusChanged(int event) {
-      Utils.runBg(MainActivity.this::updateGpsSats);
-    }
   }
 
   static class Sat {

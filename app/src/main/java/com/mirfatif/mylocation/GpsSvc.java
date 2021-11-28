@@ -13,28 +13,34 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
+import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
+
 import java.util.concurrent.Future;
 
-public class GpsSvc extends Service implements LocationListener, GpsStatus.Listener {
+public class GpsSvc extends Service implements LocationListener {
 
   public static final String ACTION_STOP_SERVICE = APPLICATION_ID + ".action.STOP_SERVICE";
 
   public static boolean mIsRunning = false;
+
+  private GnssStatus.Callback mGnssStatusCallback;
 
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
@@ -89,12 +95,6 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
     updateNotification();
   }
 
-  @Override
-  public void onStatusChanged(String provider, int status, Bundle extras) {
-    mLastUpdate = 0;
-    updateNotification();
-  }
-
   private void stop() {
     mIsRunning = false;
     stopGpsLocListener();
@@ -102,11 +102,6 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
       mFuture.cancel(true);
     }
     stopSelf();
-  }
-
-  @Override
-  public void onGpsStatusChanged(int event) {
-    updateGpsSats();
   }
 
   private WakeLock mWakeLock;
@@ -143,7 +138,6 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
       startForeground(NOTIF_ID, mNotifBuilder.build());
     }
 
-    updateGpsSats();
     mLastUpdate = 0;
     updateNotification();
   }
@@ -152,8 +146,26 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
 
   @SuppressLint("MissingPermission")
   private void startGpsLocListener() {
+    mGnssStatusCallback = new GnssStatus.Callback() {
+      @Override
+      public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
+
+        mTotalSats = mSatsStrongSig = mUsedSats = 0;
+        for (int i=0;i<status.getSatelliteCount();i++) {
+          mTotalSats++;
+          if (status.getCn0DbHz(i) != 0) {
+            mSatsStrongSig++;
+          }
+          if (status.usedInFix(i)) {
+            mUsedSats++;
+          }
+        }
+        updateNotification();
+        super.onSatelliteStatusChanged(status);
+      }
+    };
     mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_DELAY, 0, this);
-    mLocManager.addGpsStatusListener(this);
+    mLocManager.registerGnssStatusCallback(mGnssStatusCallback,new Handler(Looper.getMainLooper()));
   }
 
   private void stopGpsLocListener() {
@@ -164,33 +176,11 @@ public class GpsSvc extends Service implements LocationListener, GpsStatus.Liste
       mWakeLock = null;
     }
     mLocManager.removeUpdates(this);
-    mLocManager.removeGpsStatusListener(this);
+    mLocManager.unregisterGnssStatusCallback(mGnssStatusCallback);
   }
 
-  private final Object UPDATE_GPS_SATS_LOCK = new Object();
   private int mTotalSats, mSatsStrongSig, mUsedSats;
 
-  @SuppressLint("MissingPermission")
-  private void updateGpsSats() {
-    synchronized (UPDATE_GPS_SATS_LOCK) {
-      if (!hasFineLocPerm()) {
-        stop();
-        return;
-      }
-      GpsStatus gpsStatus = mLocManager.getGpsStatus(null);
-      mTotalSats = mSatsStrongSig = mUsedSats = 0;
-      for (GpsSatellite gpsSat : gpsStatus.getSatellites()) {
-        mTotalSats++;
-        if (gpsSat.getSnr() != 0) {
-          mSatsStrongSig++;
-        }
-        if (gpsSat.usedInFix()) {
-          mUsedSats++;
-        }
-      }
-      updateNotification();
-    }
-  }
 
   private Future<?> mFuture;
 
