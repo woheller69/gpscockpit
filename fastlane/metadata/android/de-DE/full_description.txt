@@ -1,0 +1,9 @@
+<big><b>Features:</b></big>
+
+GPS Cockpit findet ihren Standort über GPS und stellt die relevanten Daten im Cockpit-Stil dar.
+Eine Liste der sichtbaren Satelliten mit ihren Kennungen und der Signalqualität kann ebenfalls angezeigt werden.
+Die Ortskoordinaten können in die Zwischenablage kopiert werden, geteilt werden oder in einer Karten-App geöffnet werden.
+Das Löschen von A-GPS Daten wird ebenfalls unterstützt.
+
+GPS Cockpit ist <b>kostenfrei</b> and <b>Open-Source</b>. Keine Werbung, kein Tracking.
+Quellcode: https://github.com/woheller69/gpscockpit

@@ -1,0 +1,1 @@
+Zeigt GPS Daten in Cockpitdarstellung

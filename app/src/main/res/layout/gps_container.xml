@@ -222,7 +222,7 @@
 
     <TextView
         android:textStyle="bold"
-        android:layout_width="48dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:text="@string/total" />
 
@@ -234,7 +234,7 @@
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="48dp"
+      android:layout_width="64dp"
       android:layout_height="wrap_content"
       android:text="@string/good" />
 
@@ -246,7 +246,7 @@
 
     <TextView
       android:textStyle="bold"
-      android:layout_width="48dp"
+      android:layout_width="64dp"
       android:layout_height="wrap_content"
       android:text="@string/fixed" />
 

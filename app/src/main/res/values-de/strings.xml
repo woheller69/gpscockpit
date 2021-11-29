@@ -1,0 +1,45 @@
+<resources>
+
+  <string name="gps">GPS</string>
+
+  <string name="grant_permission">Berechtigung erteilen</string>
+  <string name="clear_agps_data">AGPS löschen</string>
+  <string name="lock_gps">GPS sperren</string>
+  <string name="unlock_gps">GPS entsperren</string>
+
+  <string name="not_supported">Nicht unterstützt</string>
+  <string name="perm_not_granted">Berechtigung benötigt</string>
+  <string name="turned_off">Ausgeschaltet</string>
+  <string name="failed">Fehlgeschlagen</string>
+
+  <string name="map">Karte</string>
+  <string name="copy">Kopieren</string>
+  <string name="share" maxLength="15">Teilen</string>
+  <string name="satellites">Satelliten</string>
+
+  <string name="total">Gesamt</string>
+  <string name="good">Gut</string>
+  <string name="fixed">Fix</string>
+
+  <string name="satellites_count">Satelliten Gesamt: %1$d, Gut: %2$d, Fix: %3$d</string>
+  <string name="accuracy">Genauigkeit: %1$s m</string>
+  <string name="acc_unit">%s m</string>
+
+  <string name="no_browser_installed" maxLength="20">Kein Webbrowser installiert</string>
+  <string name="no_maps_installed" maxLength="20">Keine Kartenapp installiert</string>
+  <string name="failed_open_app_settings" maxLength="20">Konnte Einstellungen nicht öffnen</string>
+  <string name="cleared" maxLength="20">Gelöscht</string>
+  <string name="copied" maxLength="20">Kopiert</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+
+  <!-- Menu -->
+  <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
+  <string name="about_menu_item"  maxLength="15">Über</string>
+
+  <!-- AboutDialog -->
+  <string name="source" maxLength="15">Quellcode</string>
+
+</resources>

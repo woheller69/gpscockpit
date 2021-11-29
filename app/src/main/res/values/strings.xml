@@ -16,22 +16,15 @@
 
   <string name="map">Map</string>
   <string name="copy">Copy</string>
+  <string name="share" maxLength="15">Share</string>
   <string name="satellites">Satellites</string>
-  <string name="download">Download</string>
-  <string name="settings">Settings</string>
-
-  <string name="latitude">Latitude</string>
-  <string name="longitude">Longitude</string>
-  <string name="altitude_MSL">MSL</string>
-  <string name="accuracy">+/-</string>
-  <string name="updated">Updated</string>
 
   <string name="total">Total</string>
   <string name="good">Good</string>
   <string name="fixed">Fixed</string>
 
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
-  <string name="location">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$s m</string>
+  <string name="accuracy">Accuracy: %1$s m</string>
   <string name="acc_unit">%s m</string>
 
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
@@ -57,6 +50,5 @@
   <!-- AboutDialog -->
   <string name="source" maxLength="15">Source</string>
   <string name="source_url" translatable="false">https://github.com/woheller69/gpscockpit</string>
-  <string name="share" maxLength="15">Share</string>
 
 </resources>
