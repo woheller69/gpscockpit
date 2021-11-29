@@ -1,20 +1,9 @@
 <big><b>Features:</b></big>
 
-<b>My Location</b> finds your device's location in the following ways:
+GPS Cockpit finds your device's location via GPS and shows most relevant data in a cockpit style.
+You can also see the list of visible satellites with their identifiers and signal quality.
+Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
+Clearing A-GPS aiding data is also supported.
 
-<b>-</b> <b>GPS</b> is usually the most accurate method. But a position fix may take some time or may not work at all due to signal loss. <b>Lock GPS</b> feature runs a persistent service to keep connected with the satellites.
-
-You can also see the list of visible satellites with their PRNs (unique identifiers) and SNR (signal quality).
-
-<b>-</b> <b>Network Location Provider</b> uses Wi-Fi or Cellular ids to estimate the location. On the devices with Google Play Services installed, NLP usually uses Google Location Service at backend.
-
-<b>-</b> <b>UnifiedNLP</b> is an open source API which has been used to develop multiple NLP backends (https://github.com/microg/UnifiedNlp/wiki/Backends).
-
-<b>Furthermore:</b>
-
-<b>-</b> Location coordinates can be copied to clipboard or opened in a maps app, if installed.
-
-<b>-</b> Clearing A-GPS aiding data is also supported.
-
-My Location is completely <b>free</b> and <b>open-source</b>. No ads, no trackers, no analytics.
-Source code: https://github.com/mirfatif/MyLocation
+GPS Cockpit is completely <b>free</b> and <b>open-source</b>. No ads, no trackers, no analytics.
+Source code: https://github.com/woheller69/gpscockpit

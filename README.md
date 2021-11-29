@@ -1,47 +1,36 @@
-# MyLocation [![Download](https://img.shields.io/github/v/release/mirfatif/MyLocation?label="Download")](https://github.com/mirfatif/MyLocation/releases/latest)
-Know your geo coordinates using on-device GPS and Network location providers
+# GPS Cockpit 
+Show your GPS data in a cockpit view
 
-<a href="https://f-droid.org/packages/com.mirfatif.mylocation"><img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="100"></a>
-<a href="https://play.google.com/store/apps/details?id=com.mirfatif.mylocation.ps"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="100"></a>
-<a href="https://apt.izzysoft.de/fdroid/index/apk/com.mirfatif.mylocation"><img alt="Get it on F-Droid" src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="100"></a>
+<a href="https://f-droid.org/packages/org.woheller69.gpscockpit"><img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="100"></a>
 
 ## Features
 
-My Location finds your device's location in the following ways:
-
-* <b>GPS</b> is usually the most accurate method. But a position fix may take some time or may not work at all due to signal loss. <b>Lock GPS</b> feature runs a persistent service to keep connected with the satellites.
-
-  You can also see the list of visible satellites with their PRNs (unique identifiers) and SNR (signal quality).
- 
-* <b>Network Location Provider</b> uses Wi-Fi or Cellular ids to estimate the location. On the devices with Google Play Services installed, NLP usually uses Google Location Service at backend.
-* <b>UnifiedNLP</b> is an open source API which has been used to develop multiple NLP backends (https://github.com/microg/UnifiedNlp/wiki/Backends).
-
-Furthermore:
-
-* Location coordinates can be copied to clipboard or opened in a maps app, if installed.
-* Clearing A-GPS aiding data is also supported.
+GPS Cockpit finds your device's location via GPS and shows most relevant data in a cockpit style.
+You can also see the list of visible satellites with their identifiers and signal quality.
+Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
+Clearing A-GPS aiding data is also supported.
 
 ## Screenshots
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg" width="250"> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg" width="250">
-
-## Translations [![Crowdin](https://badges.crowdin.net/my-location/localized.svg)](https://crowdin.com/project/my-location)
-[Crowdin](https://crowdin.com/project/my-location)
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> 
 
 ## Third-Party Resources
 
+* The program is based on https://github.com/mirfatif/MyLocation
 * https://github.com/androidx/androidx
 * https://github.com/material-components/material-components-android
 * https://github.com/microg/android_external_UnifiedNlpApi
-* https://github.com/square/leakcanary
 * https://github.com/sherter/google-java-format-gradle-plugin
 * https://github.com/saket/Better-Link-Movement-Method
+* https://github.com/anastr/SpeedView
+* https://github.com/kix2902/CompassView
+* https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings)
 
-## License [![License](https://img.shields.io/github/license/mirfatif/MyLocation?label="License")](https://github.com/mirfatif/MyLocation/blob/master/LICENSE)
+## License 
 
-You **CANNOT** use and distribute the app icon in anyway, except for **My Location** (`com.mirfatif.mylocation`) app.
+You **CANNOT** use and distribute the app icon in anyway, except for **GPS Cockpit** (`org.woheller69.gpscockpit`) app.
 
-    My Location is free software: you can redistribute it and/or modify
+    GPS Cockpit is free software: you can redistribute it and/or modify
     it under the terms of the Affero GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -54,8 +43,3 @@ You **CANNOT** use and distribute the app icon in anyway, except for **My Locati
     You should have received a copy of the Affero GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-## Contact Us
-
-**Telegram:** [https://t.me/MyLocationApp](https://t.me/MyLocationApp)  
-**XDA Thread:** [https://forum.xda-developers.com...](https://forum.xda-developers.com/t/app-5-0-my-location-know-your-geo-coordinates.4306185/)  
-**Email:** [mirfatif@gmail.com](mailto:mirfatif@gmail.com)

@@ -1,4 +1,0 @@
-Added Portuguese translation
-Added language selection menu item
-Ask for feedback
-Improve crash handling from NLP backends

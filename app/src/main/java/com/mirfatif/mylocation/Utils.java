@@ -150,7 +150,7 @@ public class Utils {
   public static boolean openWebUrl(Activity activity, String url) {
     Intent intent = new Intent(CustomTabsService.ACTION_CUSTOM_TABS_CONNECTION);
     PackageManager pm = App.getCxt().getPackageManager();
-    int flags = VERSION.SDK_INT >= VERSION_CODES.M ? PackageManager.MATCH_ALL : 0;
+    int flags = PackageManager.MATCH_ALL;
     List<ResolveInfo> infoList = pm.queryIntentServices(intent, flags);
     boolean customTabsSupported = !infoList.isEmpty();
 
