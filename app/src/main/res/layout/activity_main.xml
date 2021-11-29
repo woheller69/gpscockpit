@@ -60,7 +60,7 @@
    The only layout inside CoordinatorLayout must be the moving container. Otherwise
    the other layout may intercept the touch events and Behaviour may not work correctly.
   -->
-  <com.mirfatif.mylocation.MyCoordinatorLayout
+  <org.woheller69.gpscockpit.MyCoordinatorLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom">
@@ -79,6 +79,6 @@
 
     </LinearLayout>
 
-  </com.mirfatif.mylocation.MyCoordinatorLayout>
+  </org.woheller69.gpscockpit.MyCoordinatorLayout>
 
 </FrameLayout>

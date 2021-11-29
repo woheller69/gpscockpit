@@ -77,7 +77,6 @@
   <string name="share_text">Check out this amazing app! %s</string>
   <string name="update" maxLength="15">Update</string>
   <string name="update_summary" maxLength="20">Check for app updates</string>
-  <string name="release_url" translatable="false">https://github.com/mirfatif/MyLocation/releases</string>
 
   <string name="altitude_MSL">MSL</string>
 

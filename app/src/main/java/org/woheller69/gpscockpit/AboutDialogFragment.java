@@ -1,8 +1,7 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentActivity;
-import com.mirfatif.mylocation.databinding.AboutDialogBinding;
+import org.woheller69.gpscockpit.databinding.AboutDialogBinding;
 
 public class AboutDialogFragment extends AppCompatDialogFragment {
 

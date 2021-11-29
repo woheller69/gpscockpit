@@ -1,11 +1,11 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static android.text.style.DynamicDrawableSpan.ALIGN_BASELINE;
-import static com.mirfatif.mylocation.MySettings.SETTINGS;
+import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -53,10 +53,8 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.browser.customtabs.CustomTabsService;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationChannelCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.Lifecycle.State;
@@ -570,7 +568,7 @@ public class Utils {
 
   public static void writeCrashLog(String stackTrace) {
     synchronized (CRASH_LOG_LOCK) {
-      File logFile = new File(App.getCxt().getExternalFilesDir(null), "MyLocation_crash.log");
+      File logFile = new File(App.getCxt().getExternalFilesDir(null), "gpscockpit_crash.log");
       boolean append = true;
       if (!logFile.exists()
           || logFile.length() > 512 * 1024

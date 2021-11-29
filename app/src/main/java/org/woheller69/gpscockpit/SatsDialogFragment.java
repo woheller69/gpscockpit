@@ -1,4 +1,4 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.mirfatif.mylocation.MainActivity.Sat;
-import com.mirfatif.mylocation.databinding.RvSatsBinding;
+import org.woheller69.gpscockpit.MainActivity.Sat;
+import org.woheller69.gpscockpit.databinding.RvSatsBinding;
 import java.util.List;
 
 public class SatsDialogFragment extends AppCompatDialogFragment {

@@ -5,11 +5,11 @@ android {
     buildToolsVersion buildToolsVer
 
     defaultConfig {
-        applicationId "com.mirfatif.mylocation"
+        applicationId "org.woheller69.gpscockpit"
         minSdk minSdkVer
         targetSdk targetSdkVer
-        versionCode 104
-        versionName "v1.04"
+        versionCode 100
+        versionName "1.0"
 
         buildConfigField "boolean", "IS_PS", "false"
     }

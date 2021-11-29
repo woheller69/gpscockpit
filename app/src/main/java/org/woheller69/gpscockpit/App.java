@@ -1,4 +1,4 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import android.app.Application;
 import android.content.Context;

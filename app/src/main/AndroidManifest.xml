@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.mirfatif.mylocation">
+  package="org.woheller69.gpscockpit">
 
   <uses-feature android:name="android.hardware.location" />
 
@@ -41,7 +41,7 @@
       android:name=".NotifDismissSvc" />
 
     <provider
-      android:authorities="com.mirfatif.mylocation.FileProvider"
+      android:authorities=".FileProvider"
       android:exported="false"
       android:grantUriPermissions="true"
       android:name="androidx.core.content.FileProvider">

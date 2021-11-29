@@ -1,17 +1,17 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.location.LocationManager.GPS_PROVIDER;
 import static android.os.Build.VERSION.SDK_INT;
-import static com.mirfatif.mylocation.GpsSvc.ACTION_STOP_SERVICE;
-import static com.mirfatif.mylocation.MySettings.SETTINGS;
-import static com.mirfatif.mylocation.Utils.copyLoc;
-import static com.mirfatif.mylocation.Utils.shareLoc;
-import static com.mirfatif.mylocation.Utils.hasCoarseLocPerm;
-import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
-import static com.mirfatif.mylocation.Utils.isNaN;
-import static com.mirfatif.mylocation.Utils.openMap;
-import static com.mirfatif.mylocation.Utils.setNightTheme;
+import static org.woheller69.gpscockpit.GpsSvc.ACTION_STOP_SERVICE;
+import static org.woheller69.gpscockpit.MySettings.SETTINGS;
+import static org.woheller69.gpscockpit.Utils.copyLoc;
+import static org.woheller69.gpscockpit.Utils.shareLoc;
+import static org.woheller69.gpscockpit.Utils.hasCoarseLocPerm;
+import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
+import static org.woheller69.gpscockpit.Utils.isNaN;
+import static org.woheller69.gpscockpit.Utils.openMap;
+import static org.woheller69.gpscockpit.Utils.setNightTheme;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
@@ -44,7 +44,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.anastr.speedviewlib.components.Section;
-import com.mirfatif.mylocation.databinding.ActivityMainBinding;
+import org.woheller69.gpscockpit.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

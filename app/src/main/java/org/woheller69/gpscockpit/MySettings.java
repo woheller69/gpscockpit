@@ -1,6 +1,6 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
-import static com.mirfatif.mylocation.Utils.getString;
+import static org.woheller69.gpscockpit.Utils.getString;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;

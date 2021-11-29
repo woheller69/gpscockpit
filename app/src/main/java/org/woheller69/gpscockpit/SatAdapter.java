@@ -1,4 +1,4 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.RecyclerView;
-import com.mirfatif.mylocation.MainActivity.Sat;
-import com.mirfatif.mylocation.SatAdapter.SatViewHolder;
-import com.mirfatif.mylocation.databinding.SatItemBinding;
+import org.woheller69.gpscockpit.MainActivity.Sat;
+import org.woheller69.gpscockpit.SatAdapter.SatViewHolder;
+import org.woheller69.gpscockpit.databinding.SatItemBinding;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

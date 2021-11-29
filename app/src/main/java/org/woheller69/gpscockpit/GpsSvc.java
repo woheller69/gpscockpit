@@ -1,12 +1,12 @@
-package com.mirfatif.mylocation;
+package org.woheller69.gpscockpit;
 
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_DEFAULT;
-import static com.mirfatif.mylocation.BuildConfig.APPLICATION_ID;
-import static com.mirfatif.mylocation.Utils.formatLatLng;
-import static com.mirfatif.mylocation.Utils.formatLocAccuracy;
-import static com.mirfatif.mylocation.Utils.getPiFlags;
-import static com.mirfatif.mylocation.Utils.hasFineLocPerm;
+import static org.woheller69.gpscockpit.BuildConfig.APPLICATION_ID;
+import static org.woheller69.gpscockpit.Utils.formatLatLng;
+import static org.woheller69.gpscockpit.Utils.formatLocAccuracy;
+import static org.woheller69.gpscockpit.Utils.getPiFlags;
+import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -19,7 +19,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;

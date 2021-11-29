@@ -7,5 +7,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Location"
+rootProject.name = "GPS Cockpit"
 include ':app'
