@@ -142,7 +142,7 @@ public class GpsSvc extends Service implements LocationListener {
     updateNotification();
   }
 
-  public static final long MIN_DELAY = 5000;
+  public static final long MIN_DELAY = 10000;
 
   @SuppressLint("MissingPermission")
   private void startGpsLocListener() {
