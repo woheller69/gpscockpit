@@ -3,8 +3,6 @@ package org.woheller69.gpscockpit;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-import static android.text.style.DynamicDrawableSpan.ALIGN_BASELINE;
 import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 
 import android.annotation.SuppressLint;
@@ -20,7 +18,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -28,18 +25,10 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Parcel;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.BulletSpan;
-import android.text.style.ImageSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.URLSpan;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Window;
@@ -55,8 +44,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.security.crypto.EncryptedSharedPreferences;
@@ -80,8 +67,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -240,86 +225,6 @@ public class Utils {
     }
   }
 
-  public static Spanned htmlToString(int resId) {
-    return htmlToString(getString(resId));
-  }
-
-  private static final String IMG_SPAN_LINK = getString(R.string.img_span_link);
-
-  public static Spanned htmlToString(String str) {
-    Spanned spanned = HtmlCompat.fromHtml(str, HtmlCompat.FROM_HTML_MODE_COMPACT);
-
-    // Let's customize BulletSpans
-    SpannableStringBuilder string = new SpannableStringBuilder(spanned);
-
-    Parcel parcel = Parcel.obtain();
-    parcel.writeInt(dpToPx(4)); // gapWidth
-    parcel.writeInt(0); // wantColor
-    parcel.writeInt(0); // color
-    parcel.writeInt(dpToPx(2)); // bulletRadius
-
-    for (BulletSpan span : string.getSpans(0, string.length(), BulletSpan.class)) {
-      int start = string.getSpanStart(span);
-      int end = string.getSpanEnd(span);
-      string.removeSpan(span);
-      parcel.setDataPosition(0); // For read
-      string.setSpan(new BulletSpan(parcel), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
-
-    parcel.recycle();
-
-    Drawable d = ResourcesCompat.getDrawable(App.getRes(), R.drawable.link, null);
-    if (d != null) {
-      // DrawableCompat.setTint()
-      d.setTint(ContextCompat.getColor(App.getCxt(),R.color.accent));
-      d.setBounds(0, 0, dpToPx(12), dpToPx(12));
-    }
-
-    for (URLSpan span : string.getSpans(0, string.length(), URLSpan.class)) {
-      int start = string.getSpanStart(span);
-      int end = string.getSpanEnd(span);
-      if (!string.toString().substring(start, end).equals(IMG_SPAN_LINK)) {
-        continue;
-      }
-      string.setSpan(new ImageSpan(d, ALIGN_BASELINE), start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
-
-    breakParas(string);
-    return string;
-  }
-
-  @SuppressWarnings("UnusedReturnValue")
-  public static SpannableStringBuilder breakParas(SpannableStringBuilder string) {
-    // Remove newLine chars at end
-    while (true) {
-      int len = string.length();
-      if (string.charAt(len - 1) != '\n') {
-        break;
-      }
-      string.delete(len - 1, len);
-    }
-
-    Matcher matcher = Pattern.compile("\n").matcher(string);
-    int from = 0;
-    while (matcher.find(from)) {
-      // Replace the existing newLine char with 2 newLine chars
-      string.replace(matcher.start(), matcher.end(), "\n\n");
-      // On next iteration skip the newly added newLine char
-      from = matcher.end() + 1;
-
-      // Add span to the newly added newLine char
-      string.setSpan(
-          new RelativeSizeSpan(0.25f),
-          matcher.start() + 1,
-          matcher.end() + 1,
-          Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-      // On Android 7 Matcher is not refreshed if the string is changed
-      matcher = Pattern.compile("\n").matcher(string);
-    }
-
-    return string;
-  }
 
   //////////////////////////////////////////////////////////////////
   ////////////////////////// PERMS / PREFS /////////////////////////

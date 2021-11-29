@@ -2,8 +2,6 @@
 
   <string name="app_name" translatable="false">GPS Cockpit</string>
 
-  <string name="img_span_link" translatable="false">IMG_SPAN_LINK</string>
-
   <string name="gps">GPS</string>
 
   <string name="grant_permission">Grant Permission</string>
@@ -24,6 +22,7 @@
 
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
+  <string name="altitude_MSL">MSL</string>
   <string name="accuracy">+/-</string>
   <string name="updated">Updated</string>
 
@@ -35,10 +34,8 @@
   <string name="location">Latitude: %1$s, Longitude: %2$s, Accuracy: %3$s m</string>
   <string name="acc_unit">%s m</string>
 
-  <string name="no_email_app_installed" maxLength="20">No email app installed</string>
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
   <string name="no_maps_installed" maxLength="20">No maps app installed</string>
-  <string name="failed_open_loc_settings" maxLength="20">Failed to open location settings</string>
   <string name="failed_open_app_settings" maxLength="20">Failed to open app settings</string>
   <string name="cleared" maxLength="20">Cleared</string>
   <string name="copied" maxLength="20">Copied</string>
@@ -48,36 +45,18 @@
   <integer name="channel_gps_lock">100</integer>
 
   <!-- Preferences -->
-  <string name="pref_main_gps_enabled_key" translatable="false">pref_main_gps_enabled</string>
   <string name="pref_main_crash_report_count_key" translatable="false">pref_main_crash_report_count</string>
   <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
   <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
   <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
 
   <!-- Menu -->
-  <string name="location_settings_menu_item"  maxLength="15">Location Settings</string>
   <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
-  <string name="language_menu_item" maxLength="15">Language</string>
-  <string name="lang_system_menu_item" maxLength="15">System</string>
-  <string name="lang_en_menu_item" maxLength="15">English</string>
-  <string name="lang_pt_rBr_menu_item" maxLength="15">Portuguese, Brazilian</string>
-  <string name="lang_code_en" translatable="false">en</string>
-  <string name="lang_code_pt_rBr" translatable="false">pt|Br</string>
-  <string name="donate_menu_item"  maxLength="15">Donate</string>
   <string name="about_menu_item"  maxLength="15">About</string>
 
   <!-- AboutDialog -->
-  <string name="email" maxLength="15">Email</string>
   <string name="source" maxLength="15">Source</string>
-  <string name="source_url" translatable="false">https://github.com/woheller69/MyLocation</string>
-  <string name="translations" maxLength="20">Translations</string>
-  <string name="translations_summary">Want to see the app in your language?</string>
+  <string name="source_url" translatable="false">https://github.com/woheller69/gpscockpit</string>
   <string name="share" maxLength="15">Share</string>
-  <string name="share_summary">Share the app with others</string>
-  <string name="share_text">Check out this amazing app! %s</string>
-  <string name="update" maxLength="15">Update</string>
-  <string name="update_summary" maxLength="20">Check for app updates</string>
-
-  <string name="altitude_MSL">MSL</string>
 
 </resources>
