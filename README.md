@@ -1,4 +1,7 @@
 # GPS Cockpit 
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> 
+
 Show your GPS data in a cockpit view
 
 <a href="https://f-droid.org/packages/org.woheller69.gpscockpit"><img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="100"></a>
@@ -9,10 +12,6 @@ GPS Cockpit finds your device's location via GPS and shows most relevant data in
 You can also see the list of visible satellites with their identifiers and signal quality.
 Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
 Clearing A-GPS aiding data is also supported.
-
-## Screenshots
-
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> 
 
 ## Third-Party Resources
 
