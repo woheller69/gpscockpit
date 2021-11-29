@@ -393,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);
-    mB.gpsCont.compass.setDegrees(bearing);
+    if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing);
 
     int total, good = 0, used = 0;
     synchronized (mSats) {
