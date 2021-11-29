@@ -18,7 +18,6 @@ Clearing A-GPS aiding data is also supported.
 * The program is based on https://github.com/mirfatif/MyLocation
 * https://github.com/androidx/androidx
 * https://github.com/material-components/material-components-android
-* https://github.com/microg/android_external_UnifiedNlpApi
 * https://github.com/sherter/google-java-format-gradle-plugin
 * https://github.com/saket/Better-Link-Movement-Method
 * https://github.com/anastr/SpeedView
