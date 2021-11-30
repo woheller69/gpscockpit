@@ -5,5 +5,9 @@ Eine Liste der sichtbaren Satelliten mit ihren Kennungen und der Signalqualität
 Die Ortskoordinaten können in die Zwischenablage kopiert werden, geteilt werden oder in einer Karten-App geöffnet werden.
 Das Löschen von A-GPS Daten wird ebenfalls unterstützt.
 
+Nötige Berechtigungen:
+ - GPS zur Positionsbestimmung
+ - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE um GPS auf Wunsch des Nutzers ("GPS SPERREN") auch im Hintergrund aktiv halten zu können
+
 GPS Cockpit ist <b>kostenfrei</b> and <b>Open-Source</b>. Keine Werbung, kein Tracking.
 Quellcode: https://github.com/woheller69/gpscockpit

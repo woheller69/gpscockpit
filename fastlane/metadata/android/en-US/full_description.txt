@@ -5,5 +5,9 @@ You can also see the list of visible satellites with their identifiers and signa
 Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
 Clearing A-GPS aiding data is also supported.
 
+Required permissions:
+ - GPS to access location
+ - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE for keeping GPS active in background if requested by user ("LOCK GPS")
+
 GPS Cockpit is completely <b>free</b> and <b>open-source</b>. No ads, no trackers, no analytics.
 Source code: https://github.com/woheller69/gpscockpit
