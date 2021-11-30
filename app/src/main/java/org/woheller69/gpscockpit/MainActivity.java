@@ -376,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
           long curr = System.currentTimeMillis()/1000;
           long t = mGpsLocation.getTime()/1000;
           t=Math.max(0, curr -t);
-          time = t + " s ago";
+          time = getString(R.string.last_update,t);
         }
       }
     }

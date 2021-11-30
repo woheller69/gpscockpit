@@ -26,6 +26,7 @@
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
   <string name="accuracy">Accuracy: %1$s m</string>
   <string name="acc_unit">%s m</string>
+  <string name="last_update">%1$d s ago</string>
 
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
   <string name="no_maps_installed" maxLength="20">No maps app installed</string>

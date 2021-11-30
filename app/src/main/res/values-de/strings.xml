@@ -24,6 +24,7 @@
   <string name="satellites_count">Satelliten Gesamt: %1$d, Gut: %2$d, Fix: %3$d</string>
   <string name="accuracy">Genauigkeit: %1$s m</string>
   <string name="acc_unit">%s m</string>
+  <string name="last_update">vor %1$d s</string>
 
   <string name="no_browser_installed" maxLength="20">Kein Webbrowser installiert</string>
   <string name="no_maps_installed" maxLength="20">Keine Kartenapp installiert</string>
