@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk compileSdkVer
-    buildToolsVersion buildToolsVer
+    compileSdk 30
 
     defaultConfig {
         applicationId "org.woheller69.gpscockpit"
-        minSdk minSdkVer
-        targetSdk targetSdkVer
+        minSdk 24
+        targetSdk 30
         versionCode 100
         versionName "1.0"
 
