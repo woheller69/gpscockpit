@@ -15,14 +15,14 @@ Clearing A-GPS aiding data is also supported.
 
 ## Third-Party Resources
 
-* The program is based on https://github.com/mirfatif/MyLocation
-* https://github.com/androidx/androidx
-* https://github.com/material-components/material-components-android
-* https://github.com/sherter/google-java-format-gradle-plugin
-* https://github.com/saket/Better-Link-Movement-Method
-* https://github.com/anastr/SpeedView
-* https://github.com/kix2902/CompassView
-* https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings)
+* The program is based on https://github.com/mirfatif/MyLocation published under AGPL 3.0 or later
+* https://github.com/androidx/androidx published under Apache License 2.0
+* https://github.com/material-components/material-components-android published under Apache License 2.0
+* https://github.com/sherter/google-java-format-gradle-plugin published under MIT License
+* https://github.com/saket/Better-Link-Movement-Method published under Apache License 2.0
+* https://github.com/anastr/SpeedView published under Apache License 2.0
+* https://github.com/kix2902/CompassView published under Apache License 2.0
+* https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings) published under Apache License 2.0
 
 ## License 
 
