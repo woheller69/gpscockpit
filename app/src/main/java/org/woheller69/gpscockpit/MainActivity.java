@@ -359,9 +359,17 @@ public class MainActivity extends AppCompatActivity {
           if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
           if (mGpsLocation.hasSpeed()) {
               speedval = mGpsLocation.getSpeed() * 3.6f;
+            mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+          }else{
+            mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasAccuracy()) {
             acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
+          }
+          if (mGpsLocation.hasAltitude()) {
+            mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+          } else {
+            mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasBearing()) {
             mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
@@ -393,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.accV.setText(acc);
     mB.gpsCont.timeV.setText(time);
     mB.gpsCont.satDetail.setEnabled(showSats);
-    if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing);
+    if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
 
     int total, good = 0, used = 0;
     synchronized (mSats) {

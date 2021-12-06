@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:textSize="24dp"
+        android:textColor="@color/disabledStateColor"
         android:layout_weight="1" />
 
     <TextView
@@ -78,11 +79,12 @@
     android:layout_width="200dp"
     app:sv_indicator="QuarterLineIndicator"
     app:sv_unitUnderSpeedText="true"
+    app:sv_withTremble="false"
     app:sv_speedTextFormat="INTEGER"
     app:sv_speedBackgroundColor="@color/dynamicBg"
     app:sv_centerCircleColor="#00000000"
     app:sv_backgroundCircleColor="@color/dynamicBg"
-    app:sv_speedTextColor="@color/dynamicFgDim"
+    app:sv_speedTextColor="@color/disabledStateColor"
     app:sv_unitTextColor="@color/dynamicFgDim"
     app:sv_speedTextSize="40dp"
     app:sv_textSize="15dp"
@@ -91,8 +93,8 @@
     app:sv_tickNumber="10"
     app:sv_tickPadding="10dp"
     app:sv_speedTextPosition="CENTER"
-    app:sv_textColor="@color/dynamicText"
-    app:sv_markColor="@color/dynamicText"
+    app:sv_textColor="@color/dynamicFgDim"
+    app:sv_markColor="@color/dynamicFgDim"
     app:sv_indicatorColor="@color/primaryTrans"/>
 
   <com.redinput.compassview.CompassView
@@ -126,6 +128,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -141,6 +144,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -165,6 +169,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
 
@@ -180,6 +185,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
 

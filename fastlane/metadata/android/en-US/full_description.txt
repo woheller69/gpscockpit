@@ -9,5 +9,4 @@ Required permissions:
  - GPS to access location
  - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE for keeping GPS active in background if requested by user ("LOCK GPS")
 
-GPS Cockpit is completely <b>free</b> and <b>open-source</b>. No ads, no trackers, no analytics.
-Source code: https://github.com/woheller69/gpscockpit
+No ads, no trackers.
