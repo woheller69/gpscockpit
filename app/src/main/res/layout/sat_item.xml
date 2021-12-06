@@ -51,8 +51,9 @@
     android:gravity="end"
     android:maxLines="1"
     android:textAlignment="textEnd"
-    android:textColor="@color/dynamicText"
+    android:textColor="@color/dynamicFgDim"
     android:textSize="12sp"
+    android:textStyle="bold"
     app:autoSizeTextType="uniform" />
 
 </LinearLayout>

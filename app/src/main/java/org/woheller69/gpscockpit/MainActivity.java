@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
           }
           if (mGpsLocation.hasBearing()) {
             mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
-            mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.dynamicText));
+            mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
             mB.gpsCont.compass.setShowMarker(true);
             bearing = mGpsLocation.getBearing();
           } else {

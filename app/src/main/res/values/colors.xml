@@ -10,8 +10,6 @@
   <color name="error">@android:color/holo_red_dark</color>
   <color name="disabledStateColor">#BFBFBF</color>
 
-  <color name="dynamicText">@android:color/black</color>
-  <color name="dynamicFg">#ECECEC</color>
   <color name="dynamicFgDim">#757575</color>
   <color name="dynamicBg">#FAFAFA</color>
 
