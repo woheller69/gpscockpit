@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
     }
     if (itemId == R.id.action_imperial_units) {
       SETTINGS.setImperialUnits(!item.isChecked());
+      updateGpsUi();
       invalidateOptionsMenu();
       return true;
     }
@@ -370,13 +371,6 @@ public class MainActivity extends AppCompatActivity {
               altMSL = getString(R.string.dist_unit_imperial, Utils.formatInt(mNmeaAltitude*3.28084f)); //convert to feet
             }
           }
-          if (!SETTINGS.getImperialUnits()){
-            mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
-            mB.gpsCont.deluxeSpeedView.setMaxSpeed(180);
-          }else{
-            mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
-            mB.gpsCont.deluxeSpeedView.setMaxSpeed(135);
-          }
           if (mGpsLocation.hasSpeed()) {
             if (!SETTINGS.getImperialUnits()){
               speedval = mGpsLocation.getSpeed() * 3.6f; //convert to km/h
@@ -415,6 +409,13 @@ public class MainActivity extends AppCompatActivity {
           time = getString(R.string.last_update,t);
         }
       }
+    }
+    if (!SETTINGS.getImperialUnits()){
+      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
+      mB.gpsCont.deluxeSpeedView.setMaxSpeed(180);
+    }else{
+      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
+      mB.gpsCont.deluxeSpeedView.setMaxSpeed(135);
     }
     mB.clearAgps.setEnabled(hasFineLocPerm);
     mB.lockGps.setEnabled(hasFineLocPerm);
