@@ -22,8 +22,11 @@
   <string name="fixed">Fix</string>
 
   <string name="satellites_count">Satelliten Gesamt: %1$d, Gut: %2$d, Fix: %3$d</string>
-  <string name="accuracy">Genauigkeit: %1$s m</string>
-  <string name="acc_unit">%s m</string>
+  <string name="accuracy">Genauigkeit:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit_imperial">%s ft</string>
+  <string name="speed_unit">km/h</string>
+  <string name="speed_unit_imperial">mph</string>
   <string name="last_update">vor %1$d s</string>
 
   <string name="no_browser_installed" maxLength="20">Kein Webbrowser installiert</string>
@@ -42,5 +45,6 @@
 
   <!-- AboutDialog -->
   <string name="source" maxLength="15">Quellcode</string>
+    <string name="imperial_units_menu_item">Imperiale Einheiten</string>
 
 </resources>

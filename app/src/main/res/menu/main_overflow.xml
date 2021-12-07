@@ -9,6 +9,13 @@
     android:title="@string/dark_theme_menu_item"
     app:showAsAction="never" />
 
+  <item
+    android:id="@+id/action_imperial_units"
+    android:checkable="true"
+    android:icon="@drawable/ic_straighten_black_24dp"
+    android:title="@string/imperial_units_menu_item"
+    app:showAsAction="never" />
+
   <group android:id="@+id/group2">
 
     <item

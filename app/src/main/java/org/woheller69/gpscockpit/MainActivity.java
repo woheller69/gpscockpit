@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
       ((MenuBuilder) menu).setOptionalIconsVisible(true);
     }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
+    menu.findItem(R.id.action_imperial_units).setChecked(SETTINGS.getImperialUnits());
     return true;
   }
 
@@ -157,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());
       setNightTheme(this);
+      invalidateOptionsMenu();
+      return true;
+    }
+    if (itemId == R.id.action_imperial_units) {
+      SETTINGS.setImperialUnits(!item.isChecked());
+      invalidateOptionsMenu();
       return true;
     }
     if (itemId == R.id.action_about) {
@@ -356,15 +363,36 @@ public class MainActivity extends AppCompatActivity {
           locAvailable = true;
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
-          if (mNmeaAltitude!=null) altMSL = Utils.formatInt(mNmeaAltitude )+ " m";
+          if (mNmeaAltitude!=null) {
+            if (!SETTINGS.getImperialUnits()){
+              altMSL = getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude ));
+            }else{
+              altMSL = getString(R.string.dist_unit_imperial, Utils.formatInt(mNmeaAltitude*3.28084f)); //convert to feet
+            }
+          }
+          if (!SETTINGS.getImperialUnits()){
+            mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
+            mB.gpsCont.deluxeSpeedView.setMaxSpeed(180);
+          }else{
+            mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
+            mB.gpsCont.deluxeSpeedView.setMaxSpeed(135);
+          }
           if (mGpsLocation.hasSpeed()) {
-              speedval = mGpsLocation.getSpeed() * 3.6f;
+            if (!SETTINGS.getImperialUnits()){
+              speedval = mGpsLocation.getSpeed() * 3.6f; //convert to km/h
+            }else{
+              speedval = mGpsLocation.getSpeed() * 2.236936f; //convert to mph
+            }
             mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           }else{
             mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasAccuracy()) {
-            acc = getString(R.string.acc_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
+            if (!SETTINGS.getImperialUnits()){
+              acc = getString(R.string.dist_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
+            } else {
+              acc = getString(R.string.dist_unit_imperial, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()*3.28084f));
+            }
           }
           if (mGpsLocation.hasAltitude()) {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));

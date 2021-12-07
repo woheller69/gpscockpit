@@ -24,8 +24,11 @@
   <string name="fixed">Fixed</string>
 
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
-  <string name="accuracy">Accuracy: %1$s m</string>
-  <string name="acc_unit">%s m</string>
+  <string name="accuracy">Accuracy:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit_imperial">%s ft</string>
+  <string name="speed_unit">km/h</string>
+  <string name="speed_unit_imperial">mph</string>
   <string name="last_update">%1$d s ago</string>
 
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
@@ -43,6 +46,8 @@
   <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
   <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
   <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
+  <string name="pref_imperial_units_key" translatable="false">pref_imperial_units</string>
+
 
   <!-- Menu -->
   <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
@@ -51,5 +56,6 @@
   <!-- AboutDialog -->
   <string name="source" maxLength="15">Source</string>
   <string name="source_url" translatable="false">https://github.com/woheller69/gpscockpit</string>
+    <string name="imperial_units_menu_item">Imperial Units</string>
 
 </resources>

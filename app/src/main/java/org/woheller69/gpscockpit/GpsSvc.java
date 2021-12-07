@@ -4,6 +4,7 @@ import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_DEFAULT;
 import static org.woheller69.gpscockpit.BuildConfig.APPLICATION_ID;
 import static org.woheller69.gpscockpit.Utils.formatLocAccuracy;
+import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 import static org.woheller69.gpscockpit.Utils.getPiFlags;
 import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
 
@@ -214,8 +215,11 @@ public class GpsSvc extends Service implements LocationListener {
         if (mGpsLoc != null
             && (lat = mGpsLoc.getLatitude()) != 0
             && (lng = mGpsLoc.getLongitude()) != 0) {
-          sText =
-              getString(R.string.accuracy, formatLocAccuracy(mGpsLoc.getAccuracy()));
+          if (!SETTINGS.getImperialUnits()){
+            sText = getString(R.string.accuracy) + getString(R.string.dist_unit, formatLocAccuracy(mGpsLoc.getAccuracy()));
+          } else {
+            sText = getString(R.string.accuracy) + getString(R.string.dist_unit_imperial, formatLocAccuracy(mGpsLoc.getAccuracy()*3.28084f));
+          }
           bText += "\n" + sText;
         }
         if (mGpsLoc != null && mGpsLoc.getTime() != 0) {
