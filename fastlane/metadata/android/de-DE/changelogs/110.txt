@@ -1,0 +1,2 @@
+Animation für den Kompass
+Option für Imperiale Einheiten

@@ -1,0 +1,2 @@
+Animation for compass
+Option for imperial units
