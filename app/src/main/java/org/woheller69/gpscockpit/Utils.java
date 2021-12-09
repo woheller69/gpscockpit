@@ -99,8 +99,7 @@ public class Utils {
 
   public static void shareLoc(Activity act, Location location) {
     if (location != null) {
-      String loc = location.getLatitude() + "," + location.getLongitude();
-      String uri = "https://www.google.com/maps/search/?api=1&query=" + loc;
+      String uri = "https://www.openstreetmap.org/?mlat="+location.getLatitude()+"&mlon="+location.getLongitude()+"#map=16/"+location.getLatitude()+"/"+location.getLongitude();
       Intent sharingIntent = new Intent(Intent.ACTION_SEND);
       sharingIntent.setType("text/plain");
       sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri);
