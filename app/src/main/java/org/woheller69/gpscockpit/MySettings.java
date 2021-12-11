@@ -22,6 +22,11 @@ public enum MySettings {
     return mPrefs.getInt(prefKey, defValue);
   }
 
+  public float getFloatPref(int keyResId, int defValue) {
+    String prefKey = getString(keyResId);
+    return mPrefs.getFloat(prefKey, defValue);
+  }
+
   @SuppressWarnings("SameParameterValue")
   private long getLongPref(int keyResId) {
     String prefKey = getString(keyResId);
@@ -36,6 +41,11 @@ public enum MySettings {
   public void savePref(int key, int integer) {
     String prefKey = getString(key);
     mPrefs.edit().putInt(prefKey, integer).apply();
+  }
+
+  public void savePref(int key, float value) {
+    String prefKey = getString(key);
+    mPrefs.edit().putFloat(prefKey, value).apply();
   }
 
   @SuppressWarnings("SameParameterValue")
@@ -77,8 +87,8 @@ public enum MySettings {
     return getBoolPref(R.string.pref_imperial_units_key, false);
   }
 
-  public void setImperialUnits(boolean force) {
-    savePref(R.string.pref_imperial_units_key, force);
+  public void setImperialUnits(boolean imperial) {
+    savePref(R.string.pref_imperial_units_key, imperial);
   }
 
   public String getLocale() {

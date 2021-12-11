@@ -1,0 +1,10 @@
+<resources>
+<!-- Preferences -->
+    <string name="pref_main_crash_report_count_key" translatable="false">pref_main_crash_report_count</string>
+    <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
+    <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
+    <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
+    <string name="pref_imperial_units_key" translatable="false">pref_imperial_units</string>
+    <string name="pref_max_speed_key" translatable="false">pref_max_speed</string>
+
+</resources>

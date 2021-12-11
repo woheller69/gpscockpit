@@ -84,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     mB.gpsCont.deluxeSpeedView.clearSections();
+
+    mB.gpsCont.deluxeSpeedView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        float maxSpeed = mB.gpsCont.deluxeSpeedView.getMaxSpeed();
+        maxSpeed = maxSpeed + 45;
+        if (maxSpeed > 180) maxSpeed = 45;
+        mB.gpsCont.deluxeSpeedView.setMaxSpeed(maxSpeed);
+        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
+      }
+    });
     mB.gpsCont.deluxeSpeedView.addSections(
               new Section(.0f, 1.0f, ContextCompat.getColor(this, R.color.accent),10));
     setupGps();
@@ -156,13 +167,20 @@ public class MainActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     int itemId = item.getItemId();
     if (itemId == R.id.action_dark_theme) {
-      SETTINGS.setForceDarkMode(!item.isChecked());
+      SETTINGS.setForceDarkMode(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
       setNightTheme(this);
       invalidateOptionsMenu();
       return true;
     }
     if (itemId == R.id.action_imperial_units) {
-      SETTINGS.setImperialUnits(!item.isChecked());
+      SETTINGS.setImperialUnits(!item.isChecked());   // item.isChecked always previous value until invalidated, so value has to be inverted
+      if (SETTINGS.getImperialUnits()) {
+        float maxSpeed = 135;
+        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
+      } else {
+        float maxSpeed = 180;
+        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
+      }
       updateGpsUi();
       invalidateOptionsMenu();
       return true;
@@ -412,11 +430,10 @@ public class MainActivity extends AppCompatActivity {
     }
     if (!SETTINGS.getImperialUnits()){
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
-      mB.gpsCont.deluxeSpeedView.setMaxSpeed(180);
     }else{
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
-      mB.gpsCont.deluxeSpeedView.setMaxSpeed(135);
     }
+    mB.gpsCont.deluxeSpeedView.setMaxSpeed(SETTINGS.getFloatPref(R.string.pref_max_speed_key,180));
     mB.clearAgps.setEnabled(hasFineLocPerm);
     mB.lockGps.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);
