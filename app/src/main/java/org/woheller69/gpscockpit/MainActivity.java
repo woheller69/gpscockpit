@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
   private boolean mGpsProviderSupported = false;
   private final float[] speedList = {27,45,90,135,180,270};
+  private final int defaultSpeedIndex = 4;
+  private final int defaultSpeedIndexImperial = 3;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +91,10 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.deluxeSpeedView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        float maxSpeed = mB.gpsCont.deluxeSpeedView.getMaxSpeed();
-        for (int i=0; i<speedList.length;i++){
-          if (maxSpeed==speedList[i]) {
-            i=(i+1)%speedList.length;
-              maxSpeed=speedList[i];
-            break;
-          }
-        }
-        mB.gpsCont.deluxeSpeedView.setMaxSpeed(maxSpeed);
-        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
+        int maxSpeedIndex = SETTINGS.getIntPref(R.string.pref_max_speed_index_key, SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
+        maxSpeedIndex = (maxSpeedIndex+1)%speedList.length;
+        mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[maxSpeedIndex]);
+        SETTINGS.savePref(R.string.pref_max_speed_index_key,maxSpeedIndex);
       }
     });
     mB.gpsCont.deluxeSpeedView.addSections(
@@ -180,13 +176,7 @@ public class MainActivity extends AppCompatActivity {
     }
     if (itemId == R.id.action_imperial_units) {
       SETTINGS.setImperialUnits(!item.isChecked());   // item.isChecked always previous value until invalidated, so value has to be inverted
-      if (SETTINGS.getImperialUnits()) {
-        float maxSpeed = speedList[3];
-        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
-      } else {
-        float maxSpeed = speedList[4];
-        SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
-      }
+      SETTINGS.savePref(R.string.pref_max_speed_index_key,SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
       updateGpsUi();
       invalidateOptionsMenu();
       return true;
@@ -439,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
     }else{
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
     }
-    mB.gpsCont.deluxeSpeedView.setMaxSpeed(SETTINGS.getFloatPref(R.string.pref_max_speed_key,speedList[4]));
+    mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[SETTINGS.getIntPref(R.string.pref_max_speed_index_key,SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex)]);
     mB.clearAgps.setEnabled(hasFineLocPerm);
     mB.lockGps.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);

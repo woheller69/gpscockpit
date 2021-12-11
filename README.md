@@ -9,6 +9,7 @@ Show your GPS data in a cockpit view
 ## Features
 
 GPS Cockpit finds your device's location via GPS and shows most relevant data in a cockpit style.
+Speed range can be selected by clicking on the speedometer.
 You can also see the list of visible satellites with their identifiers and signal quality.
 Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
 Clearing A-GPS aiding data is also supported.
