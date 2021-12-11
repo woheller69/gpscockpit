@@ -22,7 +22,7 @@ public enum MySettings {
     return mPrefs.getInt(prefKey, defValue);
   }
 
-  public float getFloatPref(int keyResId, int defValue) {
+  public float getFloatPref(int keyResId, float defValue) {
     String prefKey = getString(keyResId);
     return mPrefs.getFloat(prefKey, defValue);
   }

@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
   private boolean mGpsProviderSupported = false;
+  private final float[] speedList = {27,45,90,135,180,270};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +90,13 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         float maxSpeed = mB.gpsCont.deluxeSpeedView.getMaxSpeed();
-        maxSpeed = maxSpeed + 45;
-        if (maxSpeed > 180) maxSpeed = 45;
+        for (int i=0; i<speedList.length;i++){
+          if (maxSpeed==speedList[i]) {
+            i=(i+1)%speedList.length;
+              maxSpeed=speedList[i];
+            break;
+          }
+        }
         mB.gpsCont.deluxeSpeedView.setMaxSpeed(maxSpeed);
         SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
       }
@@ -175,10 +181,10 @@ public class MainActivity extends AppCompatActivity {
     if (itemId == R.id.action_imperial_units) {
       SETTINGS.setImperialUnits(!item.isChecked());   // item.isChecked always previous value until invalidated, so value has to be inverted
       if (SETTINGS.getImperialUnits()) {
-        float maxSpeed = 135;
+        float maxSpeed = speedList[3];
         SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
       } else {
-        float maxSpeed = 180;
+        float maxSpeed = speedList[4];
         SETTINGS.savePref(R.string.pref_max_speed_key,maxSpeed);
       }
       updateGpsUi();
@@ -433,7 +439,7 @@ public class MainActivity extends AppCompatActivity {
     }else{
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
     }
-    mB.gpsCont.deluxeSpeedView.setMaxSpeed(SETTINGS.getFloatPref(R.string.pref_max_speed_key,180));
+    mB.gpsCont.deluxeSpeedView.setMaxSpeed(SETTINGS.getFloatPref(R.string.pref_max_speed_key,speedList[4]));
     mB.clearAgps.setEnabled(hasFineLocPerm);
     mB.lockGps.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);

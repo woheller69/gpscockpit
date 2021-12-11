@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.browser:browser:1.3.0'
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
-    implementation 'com.github.woheller69:CompassView:c02d342f7a'
+    implementation 'com.github.woheller69:CompassView:b597a1c62b'
     implementation 'com.github.anastr:speedviewlib:1.6.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32"
 
