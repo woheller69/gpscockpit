@@ -16,6 +16,23 @@
     android:title="@string/imperial_units_menu_item"
     app:showAsAction="never" />
 
+  <item
+      android:id="@+id/action_satview"
+      android:icon="@drawable/satellite"
+      android:title="@string/satellites"
+      app:showAsAction="ifRoom" />
+
+  <item
+      android:id="@+id/action_lock_gps"
+      android:checkable="true"
+      android:icon="@drawable/lock"
+      android:title="@string/lock_gps" />
+
+  <item
+      android:id="@+id/action_clear_agps"
+      android:icon="@drawable/ic_delete_outline_black_24dp"
+      android:title="@string/clear_agps_data" />
+
   <group android:id="@+id/group2">
 
     <item

@@ -192,75 +192,44 @@
   </LinearLayout>
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:orientation="horizontal"
-    tools:ignore="UseCompoundDrawables">
-
-    <TextView
-      android:textStyle="bold"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:layout_gravity="center_vertical"
-      android:text="@string/satellites"
-      android:textAllCaps="true" />
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
 
     <ImageView
-      android:id="@+id/sat_detail"
-      android:layout_width="28dp"
-      android:layout_height="28dp"
-      android:layout_marginStart="4dp"
-      android:layout_gravity="center_vertical"
-      android:padding="2dp"
-      android:background="?android:attr/selectableItemBackgroundBorderless"
-      android:contentDescription="@string/satellites"
-      android:src="@drawable/satellite" />
-
-  </LinearLayout>
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:orientation="horizontal">
-
-    <TextView
-        android:textStyle="bold"
-        android:layout_width="64dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
-        android:text="@string/total" />
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_straighten_black_24dp" />
 
     <TextView
-        android:id="@+id/total_sat_v"
+        android:id="@+id/dist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
     <TextView
-      android:textStyle="bold"
-      android:layout_width="64dp"
-      android:layout_height="wrap_content"
-      android:text="@string/good" />
+        android:id="@+id/dist_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
     <TextView
-      android:id="@+id/good_sat_v"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1" />
-
-    <TextView
-      android:textStyle="bold"
-      android:layout_width="64dp"
-      android:layout_height="wrap_content"
-      android:text="@string/fixed" />
-
-    <TextView
-      android:id="@+id/used_sat_v"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1" />
+        android:id="@+id/dist_down"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
   </LinearLayout>
 

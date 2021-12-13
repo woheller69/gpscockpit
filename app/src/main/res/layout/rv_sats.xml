@@ -8,6 +8,52 @@
   android:paddingEnd="4dp"
   android:orientation="vertical">
 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:paddingStart="20dp"
+      android:paddingEnd="20dp"
+      android:orientation="horizontal">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="@string/total" />
+
+    <TextView
+        android:id="@+id/total_sat_v"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="@string/good" />
+
+    <TextView
+        android:id="@+id/good_sat_v"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="@string/fixed" />
+
+    <TextView
+        android:id="@+id/used_sat_v"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+  </LinearLayout>
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv"
     android:layout_width="match_parent"
