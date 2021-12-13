@@ -1,0 +1,2 @@
+Replaced Google maps link with OpenStreetMap
+A click on the speedometer changes speed range

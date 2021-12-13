@@ -1,0 +1,2 @@
+Google Maps link durch OpenStreetMap ersetzt
+Klick auf Tachometer ändert Geschwindigkeitsbereich

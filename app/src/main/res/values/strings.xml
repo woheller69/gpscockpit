@@ -48,6 +48,12 @@
   <!-- AboutDialog -->
   <string name="source" maxLength="15">Source</string>
   <string name="source_url" translatable="false">https://github.com/woheller69/gpscockpit</string>
-    <string name="imperial_units_menu_item">Imperial Units</string>
+  <string name="imperial_units_menu_item">Imperial Units</string>
+
+  <!-- StarDialog -->
+  <string name="dialog_OK_button">OK</string>
+  <string name="dialog_NO_button">No</string>
+  <string name="dialog_Later_button">Maybe later</string>
+  <string name="dialog_StarOnGitHub">Do you like this app? Please star it on GitHub.</string>
 
 </resources>

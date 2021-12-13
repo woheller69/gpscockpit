@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
 
+    if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
 
   @Override
