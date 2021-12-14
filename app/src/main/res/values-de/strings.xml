@@ -28,6 +28,8 @@
   <string name="speed_unit">km/h</string>
   <string name="speed_unit_imperial">mph</string>
   <string name="last_update">vor %1$d s</string>
+  <string name="record">Aufnahme</string>
+  <string name="stop">Stop</string>
 
   <string name="no_browser_installed" maxLength="20">Kein Webbrowser installiert</string>
   <string name="no_maps_installed" maxLength="20">Keine Kartenapp installiert</string>

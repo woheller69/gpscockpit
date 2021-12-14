@@ -43,15 +43,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/clear_agps_data" />
+            android:text="@string/reset" />
 
         <ToggleButton
-            android:id="@+id/lock_gps"
+            android:id="@+id/record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textOff="@string/lock_gps"
-            android:textOn="@string/unlock_gps" />
+            android:textOff="@string/record"
+            android:textOn="@string/stop" />
       </LinearLayout>
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>

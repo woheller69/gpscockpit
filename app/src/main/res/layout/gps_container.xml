@@ -101,6 +101,7 @@
       android:id="@+id/compass"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="-15dp"
       app:backgroundColor="@color/dynamicBg"
       app:showMarker="false"
       app:markerColor="@color/primaryTrans"
@@ -213,6 +214,23 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_baseline_landscape_24" />
+
+
     <TextView
         android:id="@+id/dist_up"
         android:layout_width="0dp"
@@ -221,6 +239,13 @@
         android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_baseline_landscape_24" />
 
     <TextView
         android:id="@+id/dist_down"
