@@ -117,6 +117,8 @@ public class GpsSvc extends Service implements LocationListener {
     Utils.createNotifChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE_DEFAULT);
 
     Intent intent = new Intent(App.getCxt(), MainActivity.class);
+    intent.setAction(Intent.ACTION_MAIN);
+    intent.addCategory(Intent.CATEGORY_LAUNCHER);
     PendingIntent pi = PendingIntent.getActivity(App.getCxt(), NOTIF_ID, intent, getPiFlags());
 
     mNotifBuilder =
