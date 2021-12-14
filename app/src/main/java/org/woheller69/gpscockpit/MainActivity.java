@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
   private Double mAltDown=0d;
   private Double mNmeaOldAltitude;
   private Double mNmeaAltitude;
+  private long mStartTime = System.currentTimeMillis()/1000;
+  private long mEndTime = System.currentTimeMillis()/1000;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -251,9 +254,11 @@ public class MainActivity extends AppCompatActivity {
     mB.clearAgps.setOnClickListener(v -> resetDistances());
     mB.record.setOnClickListener(v -> {
       recording=mB.record.isChecked();
+      lockGPS(mB.record.isChecked());
       if (mB.record.isChecked()){
         mOldGpsLocation=null;  //reset old position when recording is started so counting continues from current position / altitude
         mNmeaOldAltitude=null;
+        mStartTime=System.currentTimeMillis()/1000-(mEndTime-mStartTime);
       }
       invalidateOptionsMenu();
       });
@@ -466,10 +471,6 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
             mB.gpsCont.compass.setShowMarker(false);
           }
-          long curr = System.currentTimeMillis()/1000;
-          long t = mGpsLocation.getTime()/1000;
-          t=Math.max(0, curr -t);
-          time = getString(R.string.last_update,t);
         }
       }
     }
@@ -490,7 +491,9 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.altitudeMSL.setText(altMSL);
     mB.gpsCont.deluxeSpeedView.speedTo(speedval);
     mB.gpsCont.accV.setText(acc);
-    mB.gpsCont.timeV.setText(time);
+    if (recording) mEndTime = System.currentTimeMillis()/1000;
+    String dateFormat = DateUtils.formatElapsedTime(mEndTime-mStartTime);
+    mB.gpsCont.timeV.setText(dateFormat);
     mB.gpsCont.dist.setText(dist);
     mB.gpsCont.distUp.setText(up+"\u2191");
     mB.gpsCont.distDown.setText(down+"\u2193");
@@ -692,6 +695,8 @@ public class MainActivity extends AppCompatActivity {
     mTravelDistance=0;
     mAltUp=0d;
     mAltDown=0d;
+    mStartTime=System.currentTimeMillis()/1000;
+    mEndTime=System.currentTimeMillis()/1000;
   }
 
   private void updateDistance() {
@@ -720,7 +725,7 @@ public class MainActivity extends AppCompatActivity {
             if ((mNmeaAltitude - mNmeaOldAltitude) > 3 * mGpsLocation.getAccuracy()) {
               mAltUp = mAltUp + mNmeaAltitude - mNmeaOldAltitude;
               mNmeaOldAltitude = mNmeaAltitude;
-            } else if ((mNmeaAltitude - mNmeaOldAltitude) < -3 * mGpsLocation.getAccuracy()) {
+            } else if ((mNmeaOldAltitude - mNmeaAltitude) > 3 * mGpsLocation.getAccuracy()) {
               mAltDown = mAltDown + mNmeaOldAltitude - mNmeaAltitude;
               mNmeaOldAltitude = mNmeaAltitude;
             }
