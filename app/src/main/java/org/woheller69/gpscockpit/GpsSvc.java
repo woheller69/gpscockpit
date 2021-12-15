@@ -197,7 +197,7 @@ public class GpsSvc extends Service implements LocationListener {
 
   private void updateNotifBg() {
     synchronized (NOTIF_UPDATE_LOCK) {
-      long sleep = 5000 + mLastUpdate - System.currentTimeMillis();
+      long sleep = MIN_DELAY + mLastUpdate - System.currentTimeMillis();
       if (sleep > 0) {
         try {
           NOTIF_UPDATE_LOCK.wait(sleep);

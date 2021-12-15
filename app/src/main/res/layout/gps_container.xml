@@ -214,6 +214,15 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
 
   </LinearLayout>
 

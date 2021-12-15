@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean mGpsProviderSupported = false;
   private boolean recording = false;
   private boolean gpsLocked = false;
+  private long mDebugCounter =0;
   private final float[] speedList = {27,45,90,135,180,270};
   private final int defaultSpeedIndex = 4;
   private final int defaultSpeedIndexImperial = 3;
@@ -159,11 +160,16 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    if (VERSION.SDK_INT == VERSION_CODES.Q) {
-      // Bug: https://issuetracker.google.com/issues/139738913
-      finishAfterTransition();
-    } else {
-      super.onBackPressed();
+    if (gpsLocked) {
+      moveTaskToBack(true);
+    }
+    else{
+      if (VERSION.SDK_INT == VERSION_CODES.Q) {
+         // Bug: https://issuetracker.google.com/issues/139738913
+        finishAfterTransition();
+      } else {
+        super.onBackPressed();
+      }
     }
   }
 
@@ -268,7 +274,8 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.share.setOnClickListener(v -> shareLoc(this, mGpsLocation));
 
     if (GpsSvc.mIsRunning) {
-      mB.record.setChecked(true);
+      gpsLocked=true;
+      invalidateOptionsMenu();
     }
 
     Utils.setTooltip(mB.gpsCont.map);
@@ -343,8 +350,11 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void clearGpsData() {
-    mGpsLocation = null;
-    mNmeaAltitude = null;
+    if (!recording) {
+      mGpsLocation = null;
+      mNmeaAltitude = null;
+    }
+
     synchronized (mSats) {
       mSats.clear();
     }
@@ -387,6 +397,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateUi() {
+    if (gpsLocked!=GpsSvc.mIsRunning){
+      gpsLocked=GpsSvc.mIsRunning;
+      invalidateOptionsMenu();
+    }
     if (mB != null) {
       updateGpsUi();
     }
@@ -498,6 +512,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.distUp.setText(up+"\u2191");
     mB.gpsCont.distDown.setText(down+"\u2193");
     if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
+    mB.gpsCont.counter.setText(Long.toString(mDebugCounter));
 
     synchronized (SATS_DIALOG_TAG) {
       if (mSatsDialog != null) {
@@ -594,6 +609,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLocationChanged(Location location) {
       if (mIsGps) {
         mGpsLocation = location;
+        if (recording) mDebugCounter++;
         updateUi();
       }
     }
@@ -697,6 +713,7 @@ public class MainActivity extends AppCompatActivity {
     mAltDown=0d;
     mStartTime=System.currentTimeMillis()/1000;
     mEndTime=System.currentTimeMillis()/1000;
+    mDebugCounter=0;
   }
 
   private void updateDistance() {
