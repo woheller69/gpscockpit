@@ -112,7 +112,7 @@ public class GpsSvc extends Service implements LocationListener {
 
   private void showNotif() {
     mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
-    mWakeLock.acquire(30 * 60 * 1000L);
+    mWakeLock.acquire();
 
     Utils.createNotifChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE_DEFAULT);
 

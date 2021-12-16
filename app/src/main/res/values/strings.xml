@@ -31,7 +31,7 @@
   <string name="speed_unit_imperial">mph</string>
   <string name="last_update">%1$d s ago</string>
   <string name="reset" translatable="false">0.0</string>
-  <string name="record">Record</string>
+  <string name="record">Start</string>
   <string name="stop">Stop</string>
 
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>

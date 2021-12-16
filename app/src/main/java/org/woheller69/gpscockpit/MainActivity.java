@@ -15,6 +15,7 @@ import static org.woheller69.gpscockpit.Utils.setNightTheme;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.location.GnssStatus;
@@ -229,10 +230,10 @@ public class MainActivity extends AppCompatActivity {
       // If startForeground() in Service is called on UI thread, it won't show notification
       // unless Service is started with startForegroundService().
       if (SDK_INT >= VERSION_CODES.O) {
-        startForegroundService(intent);
+        if (!GpsSvc.mIsRunning) startForegroundService(intent);
         startActivity(new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:"+getPackageName())));
       } else {
-        startService(intent);
+        if (!GpsSvc.mIsRunning) startService(intent);
         startActivity(new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:"+getPackageName())));
       }
     } else {
@@ -282,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
     Utils.setTooltip(mB.gpsCont.copy);
     Utils.setTooltip(mB.gpsCont.share);
   }
-
 
   private final Object LOC_LISTENER_LOCK = new Object();
 
