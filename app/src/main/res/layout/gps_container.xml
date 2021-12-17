@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical"
   android:layout_width="match_parent"
@@ -72,30 +71,30 @@
 
   </LinearLayout>
 
-<com.github.anastr.speedviewlib.DeluxeSpeedView
-    android:id="@+id/deluxeSpeedView"
-    android:layout_gravity="center_horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="200dp"
-    app:sv_indicator="QuarterLineIndicator"
-    app:sv_unitUnderSpeedText="true"
-    app:sv_withTremble="false"
-    app:sv_speedTextFormat="INTEGER"
-    app:sv_speedBackgroundColor="@color/dynamicBg"
-    app:sv_centerCircleColor="#00000000"
-    app:sv_backgroundCircleColor="@color/dynamicBg"
-    app:sv_speedTextColor="@color/disabledStateColor"
-    app:sv_unitTextColor="@color/dynamicFgDim"
-    app:sv_speedTextSize="40dp"
-    app:sv_textSize="15dp"
-    app:sv_unitSpeedInterval="10dp"
-    app:sv_maxSpeed="180"
-    app:sv_tickNumber="10"
-    app:sv_tickPadding="10dp"
-    app:sv_speedTextPosition="CENTER"
-    app:sv_textColor="@color/dynamicFgDim"
-    app:sv_markColor="@color/dynamicFgDim"
-    app:sv_indicatorColor="@color/primaryTrans"/>
+  <com.github.anastr.speedviewlib.DeluxeSpeedView
+      android:id="@+id/deluxeSpeedView"
+      android:layout_gravity="center_horizontal"
+      android:layout_height="wrap_content"
+      android:layout_width="200dp"
+      app:sv_indicator="QuarterLineIndicator"
+      app:sv_unitUnderSpeedText="true"
+      app:sv_withTremble="false"
+      app:sv_speedTextFormat="INTEGER"
+      app:sv_speedBackgroundColor="@color/dynamicBg"
+      app:sv_centerCircleColor="#00000000"
+      app:sv_backgroundCircleColor="@color/dynamicBg"
+      app:sv_speedTextColor="@color/disabledStateColor"
+      app:sv_unitTextColor="@color/dynamicFgDim"
+      app:sv_speedTextSize="40dp"
+      app:sv_textSize="15dp"
+      app:sv_unitSpeedInterval="10dp"
+      app:sv_maxSpeed="180"
+      app:sv_tickNumber="10"
+      app:sv_tickPadding="10dp"
+      app:sv_speedTextPosition="CENTER"
+      app:sv_textColor="@color/dynamicFgDim"
+      app:sv_markColor="@color/dynamicFgDim"
+      app:sv_indicatorColor="@color/primaryTrans"/>
 
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"
