@@ -26,7 +26,9 @@
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
   <string name="accuracy">Accuracy:\u0020</string>
   <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
   <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
   <string name="speed_unit">km/h</string>
   <string name="speed_unit_imperial">mph</string>
   <string name="last_update">%1$d s ago</string>

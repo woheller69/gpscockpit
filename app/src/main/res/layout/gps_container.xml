@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/dynamicFgDim"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:layout_weight="1" />
 
     <TextView

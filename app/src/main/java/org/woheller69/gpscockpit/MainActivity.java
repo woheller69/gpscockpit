@@ -496,9 +496,9 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.timeV.setText(dateFormat);
 
     if (!SETTINGS.getImperialUnits()){
-      dist = getString(R.string.dist_unit, Utils.formatInt(mTravelDistance));
+      dist = getString(R.string.dist_unit2, Utils.formatFloat(mTravelDistance/1000f));
     }else{
-      dist = getString(R.string.dist_unit_imperial, Utils.formatInt(mTravelDistance*3.28084f)); //convert to feet
+      dist = getString(R.string.dist_unit_imperial2, Utils.formatFloat(mTravelDistance/1000/1.609344f)); //convert to miles
     }
 
     if (!SETTINGS.getImperialUnits()){
