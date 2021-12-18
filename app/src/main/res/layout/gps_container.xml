@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_landscape_24"/>
+        android:src="@drawable/ic_mountain"/>
 
     <TextView
         android:id="@+id/altitude_MSL"
@@ -25,6 +25,14 @@
         android:layout_gravity="bottom"
         android:textSize="24dp"
         android:textColor="@color/disabledStateColor"
+        android:layout_weight="2" />
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
         android:layout_weight="1" />
 
     <TextView
@@ -113,7 +121,7 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="12dp"
+      android:layout_marginTop="8dp"
       android:orientation="horizontal">
 
     <ImageView
@@ -150,13 +158,11 @@
 
   </LinearLayout>
 
-
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
       android:orientation="horizontal">
-
     <ImageView
         android:layout_width="36dp"
         android:layout_height="wrap_content"
@@ -172,6 +178,22 @@
         android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginTop="4dp"
+      android:layout_marginBottom="5dp"
+      android:background="@color/accentTrans" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
 
     <ImageView
         android:layout_width="36dp"
@@ -189,20 +211,12 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:orientation="horizontal">
-
     <ImageView
         android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:src="@drawable/ic_straighten_black_24dp" />
+        android:src="@drawable/ic_distance" />
 
     <TextView
         android:id="@+id/dist"
@@ -213,8 +227,25 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_speed_av" />
+
+
     <TextView
-        android:id="@+id/counter"
+        android:id="@+id/speed_av"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -222,6 +253,21 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_speed_max" />
+
+    <TextView
+        android:id="@+id/speed_max"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
   </LinearLayout>
 
@@ -236,8 +282,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_landscape_24" />
-
+        android:src="@drawable/ic_mountain" />
 
     <TextView
         android:id="@+id/dist_up"
@@ -253,7 +298,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_landscape_24" />
+        android:src="@drawable/ic_mountain" />
 
     <TextView
         android:id="@+id/dist_down"

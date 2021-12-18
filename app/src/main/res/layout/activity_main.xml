@@ -27,12 +27,7 @@
           android:id="@+id/gps_cont"
           layout="@layout/gps_container" />
 
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:layout_marginTop="16dp"
-          android:layout_marginBottom="16dp"
-          android:background="@color/accentTrans" />
+
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

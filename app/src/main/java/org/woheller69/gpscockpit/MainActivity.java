@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
   private Double mAltDown=0d;
   private Double mNmeaOldAltitude;
   private Double mNmeaAltitude;
+  private Float mMaxSpeed=0f;
   private long mStartTime = System.currentTimeMillis()/1000;
   private long mEndTime = System.currentTimeMillis()/1000;
 
@@ -407,10 +408,11 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateGpsUi() {
-    String state = null, lat = "--", lng = "--", acc = "--", time = "--", altMSL = "--", dist = "--", up = "--", down = "--";
+    String state = null, lat = "--", lng = "--", acc = "--", altMSL = "--", dist = "--", up = "--", down = "--", speed_av = "--", speed_max = "--";
     boolean hasFineLocPerm = false, showSats = false, locAvailable = false;
     float bearing = 0;
     float speedval = -1;
+    float speedAverage=0;
     if (!mGpsProviderSupported) {
       state = getString(R.string.not_supported);
     } else {
@@ -426,23 +428,6 @@ public class MainActivity extends AppCompatActivity {
             && !isNaN(mGpsLocation.getLongitude())) {
           locAvailable = true;
           updateDistance();
-          if (!SETTINGS.getImperialUnits()){
-            dist = getString(R.string.dist_unit, Utils.formatInt(mTravelDistance));
-          }else{
-            dist = getString(R.string.dist_unit_imperial, Utils.formatInt(mTravelDistance*3.28084f)); //convert to feet
-          }
-
-          if (!SETTINGS.getImperialUnits()){
-            up = getString(R.string.dist_unit, Utils.formatInt(mAltUp));
-          }else{
-            up = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltUp*3.28084f)); //convert to feet
-          }
-
-          if (!SETTINGS.getImperialUnits()){
-            down = getString(R.string.dist_unit, Utils.formatInt(mAltDown));
-          }else{
-            down = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltDown*3.28084f)); //convert to feet
-          }
 
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
@@ -454,6 +439,7 @@ public class MainActivity extends AppCompatActivity {
             }
           }
           if (mGpsLocation.hasSpeed()) {
+            if (mGpsLocation.getSpeed()>mMaxSpeed) mMaxSpeed=mGpsLocation.getSpeed();
             if (!SETTINGS.getImperialUnits()){
               speedval = mGpsLocation.getSpeed() * 3.6f; //convert to km/h
             }else{
@@ -508,9 +494,46 @@ public class MainActivity extends AppCompatActivity {
     if (recording) mEndTime = System.currentTimeMillis()/1000;
     String dateFormat = DateUtils.formatElapsedTime(mEndTime-mStartTime);
     mB.gpsCont.timeV.setText(dateFormat);
+
+    if (!SETTINGS.getImperialUnits()){
+      dist = getString(R.string.dist_unit, Utils.formatInt(mTravelDistance));
+    }else{
+      dist = getString(R.string.dist_unit_imperial, Utils.formatInt(mTravelDistance*3.28084f)); //convert to feet
+    }
+
+    if (!SETTINGS.getImperialUnits()){
+      up = getString(R.string.dist_unit, Utils.formatInt(mAltUp));
+    }else{
+      up = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltUp*3.28084f)); //convert to feet
+    }
+
+    if (!SETTINGS.getImperialUnits()){
+      down = getString(R.string.dist_unit, Utils.formatInt(mAltDown));
+    }else{
+      down = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltDown*3.28084f)); //convert to feet
+    }
+
     mB.gpsCont.dist.setText(dist);
-    mB.gpsCont.distUp.setText(up+"\u2191");
-    mB.gpsCont.distDown.setText(down+"\u2193");
+    mB.gpsCont.distUp.setText(up + "\u2191");
+    mB.gpsCont.distDown.setText(down + "\u2193" );
+
+    if ((mEndTime-mStartTime)>0) {
+      speedAverage = mTravelDistance / (mEndTime - mStartTime);  // im m/s
+    }
+    if (!SETTINGS.getImperialUnits()){
+       speed_av = Utils.formatInt(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
+    }else{
+       speed_av = Utils.formatInt(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+    }
+    mB.gpsCont.speedAv.setText(speed_av);
+
+    if (!SETTINGS.getImperialUnits()){
+      speed_max = Utils.formatInt(mMaxSpeed * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
+    }else{
+      speed_max = Utils.formatInt(mMaxSpeed * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+    }
+    mB.gpsCont.speedMax.setText(speed_max);
+
     if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
     mB.gpsCont.counter.setText(Long.toString(mDebugCounter));
 
@@ -711,6 +734,7 @@ public class MainActivity extends AppCompatActivity {
     mTravelDistance=0;
     mAltUp=0d;
     mAltDown=0d;
+    mMaxSpeed=0f;
     mStartTime=System.currentTimeMillis()/1000;
     mEndTime=System.currentTimeMillis()/1000;
     mDebugCounter=0;
