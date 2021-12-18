@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean mGpsProviderSupported = false;
   private boolean recording = false;
   private boolean gpsLocked = false;
+  private boolean gpsLockedBeforeStart = false;
   private long mDebugCounter =0;
   private final float[] speedList = {27,45,90,135,180,270};
   private final int defaultSpeedIndex = 4;
@@ -262,7 +263,14 @@ public class MainActivity extends AppCompatActivity {
     mB.clearAgps.setOnClickListener(v -> resetDistances());
     mB.record.setOnClickListener(v -> {
       recording=mB.record.isChecked();
-      lockGPS(mB.record.isChecked());
+      if (mB.record.isChecked()){
+        if (gpsLocked) gpsLockedBeforeStart = true; //register if GPS was locked before "Start" already
+        lockGPS(true);
+      } else {
+        if (!gpsLockedBeforeStart) lockGPS(false); //switch off GPS Service only if it was not locked before "Start"
+        gpsLockedBeforeStart=false; //Reset to false when "Stop" is pressed
+      }
+
       if (mB.record.isChecked()){
         mOldGpsLocation=null;  //reset old position when recording is started so counting continues from current position / altitude
         mNmeaOldAltitude=null;
@@ -439,7 +447,6 @@ public class MainActivity extends AppCompatActivity {
             }
           }
           if (mGpsLocation.hasSpeed()) {
-            if (mGpsLocation.getSpeed()>mMaxSpeed) mMaxSpeed=mGpsLocation.getSpeed();
             if (!SETTINGS.getImperialUnits()){
               speedval = mGpsLocation.getSpeed() * 3.6f; //convert to km/h
             }else{
@@ -771,6 +778,7 @@ public class MainActivity extends AppCompatActivity {
               mNmeaOldAltitude = mNmeaAltitude;
             }
           }
+        if (mGpsLocation.hasSpeed() && mGpsLocation.getSpeed()>mMaxSpeed) mMaxSpeed=mGpsLocation.getSpeed();
       }
     }
   }
