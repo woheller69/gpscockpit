@@ -275,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
         mOldGpsLocation=null;  //reset old position when recording is started so counting continues from current position / altitude
         mNmeaOldAltitude=null;
         mStartTime=System.currentTimeMillis()/1000-(mEndTime-mStartTime);
+        mEndTime=System.currentTimeMillis()/1000;
       }
       invalidateOptionsMenu();
       });
