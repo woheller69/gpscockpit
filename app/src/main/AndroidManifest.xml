@@ -24,7 +24,7 @@
 
     <activity
       android:exported="true"
-      android:configChanges="orientation|screenSize|screenLayout"
+      android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
       android:name=".MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
