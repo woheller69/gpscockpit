@@ -60,5 +60,6 @@
   <string name="dialog_NO_button">No</string>
   <string name="dialog_Later_button">Maybe later</string>
   <string name="dialog_StarOnGitHub">Do you like this app? Please star it on GitHub.</string>
+  <string name="debug_menu_item">Debug</string>
 
 </resources>

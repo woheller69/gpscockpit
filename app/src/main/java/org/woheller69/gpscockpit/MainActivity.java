@@ -15,7 +15,6 @@ import static org.woheller69.gpscockpit.Utils.setNightTheme;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.location.GnssStatus;
@@ -187,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
     menu.findItem(R.id.action_imperial_units).setChecked(SETTINGS.getImperialUnits());
     menu.findItem(R.id.action_lock_gps).setChecked(gpsLocked);
+    menu.findItem(R.id.action_debug).setChecked(SETTINGS.getBoolPref(R.string.debug_menu_item,false));
     return true;
   }
 
@@ -216,6 +216,12 @@ public class MainActivity extends AppCompatActivity {
     }
     if (itemId == R.id.action_lock_gps) {
       lockGPS(!item.isChecked());
+      invalidateOptionsMenu();
+      return true;
+    }
+    if (itemId == R.id.action_debug) {
+      SETTINGS.savePref(R.string.debug_menu_item, !item.isChecked());
+      updateGpsUi();
       invalidateOptionsMenu();
       return true;
     }
@@ -440,6 +446,8 @@ public class MainActivity extends AppCompatActivity {
 
           lat = Utils.formatLatLng(mGpsLocation.getLatitude());
           lng = Utils.formatLatLng(mGpsLocation.getLongitude());
+          mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+          mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           if (mNmeaAltitude!=null) {
             if (!SETTINGS.getImperialUnits()){
               altMSL = getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude ));
@@ -458,6 +466,7 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasAccuracy()) {
+            mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
             if (!SETTINGS.getImperialUnits()){
               acc = getString(R.string.dist_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
             } else {
@@ -481,6 +490,11 @@ public class MainActivity extends AppCompatActivity {
           }
         }
       }
+    }
+    if (SETTINGS.getBoolPref(R.string.debug_menu_item,false)) {
+      mB.gpsCont.debugCounter.setVisibility(View.VISIBLE);
+    }    else {
+      mB.gpsCont.debugCounter.setVisibility(View.GONE);
     }
     if (!SETTINGS.getImperialUnits()){
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
@@ -543,7 +557,15 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.speedMax.setText(speed_max);
 
     if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
-    mB.gpsCont.counter.setText(Long.toString(mDebugCounter));
+    mB.gpsCont.debugCounter.setText(Long.toString(mDebugCounter));
+
+    if (mGpsLocation==null || (System.currentTimeMillis()-mGpsLocation.getTime())> 3*MIN_DELAY){
+      mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+    }
 
     synchronized (SATS_DIALOG_TAG) {
       if (mSatsDialog != null) {
