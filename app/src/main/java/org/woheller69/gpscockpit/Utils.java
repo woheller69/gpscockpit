@@ -177,6 +177,7 @@ public class Utils {
 
   private static final DecimalFormat sLatLngFormat = new DecimalFormat();
   private static final DecimalFormat intFormat = new DecimalFormat("0");
+  private static final DecimalFormat floatFormat = new DecimalFormat("0.00");
 
   static {
     sLatLngFormat.setMaximumFractionDigits(5);
@@ -185,6 +186,11 @@ public class Utils {
   public static String formatInt(double value) {
     intFormat.setRoundingMode(RoundingMode.HALF_UP);
     return intFormat.format(value).replaceAll("^-(?=0(\\.0*)?$)", "");  //remove the minus sign if it's followed by 0-n characters of "0.00000..."
+  }
+
+  public static String formatFloat(double value) {
+    floatFormat.setRoundingMode(RoundingMode.HALF_UP);
+    return floatFormat.format(value).replaceAll("^-(?=0(\\.0*)?$)", "");  //remove the minus sign if it's followed by 0-n characters of "0.00000..."
   }
 
   public static String formatLatLng(double coordinate) {

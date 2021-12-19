@@ -26,10 +26,15 @@
   <string name="satellites_count">Satellites Total: %1$d, Good: %2$d, Fixed: %3$d</string>
   <string name="accuracy">Accuracy:\u0020</string>
   <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
   <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
   <string name="speed_unit">km/h</string>
   <string name="speed_unit_imperial">mph</string>
   <string name="last_update">%1$d s ago</string>
+  <string name="reset" translatable="false">0.0</string>
+  <string name="record">Start</string>
+  <string name="stop">Stop</string>
 
   <string name="no_browser_installed" maxLength="20">No web browser app installed</string>
   <string name="no_maps_installed" maxLength="20">No maps app installed</string>
@@ -55,5 +60,6 @@
   <string name="dialog_NO_button">No</string>
   <string name="dialog_Later_button">Maybe later</string>
   <string name="dialog_StarOnGitHub">Do you like this app? Please star it on GitHub.</string>
+  <string name="debug_menu_item">Debug</string>
 
 </resources>

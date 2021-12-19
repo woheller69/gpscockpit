@@ -1,0 +1,3 @@
+Aufzeichnung von Fahrtstrecke (horizontal und auf/ab),
+Durchschnittsgeschwindigkeit und Höchstgeschwindigkeit.
+Fehlerbehebung

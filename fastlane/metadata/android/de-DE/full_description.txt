@@ -1,10 +1,13 @@
 <big><b>Features:</b></big>
 
 GPS Cockpit findet ihren Standort über GPS und stellt die relevanten Daten im Cockpit-Stil dar.
-Der Geschwindigkeitsbereich kann durch Klick auf den Tachometer geändert werden.
 Eine Liste der sichtbaren Satelliten mit ihren Kennungen und der Signalqualität kann ebenfalls angezeigt werden.
 Die Ortskoordinaten können in die Zwischenablage kopiert werden, geteilt werden oder in einer Karten-App geöffnet werden.
 Das Löschen von A-GPS Daten wird ebenfalls unterstützt.
+Der Geschwindigkeitsbereich kann durch Klick auf den Tachometer geändert werden.
+Beim Drücken der START-Taste wird die Fahrstrecke aufgezeichnet (horizontale Bewegung und auch kumulierte Auf- und Abbewegungen).
+Eine Änderung wird nur erkannt und zur Distanz addiert, wenn sich die Position um mehr als 2x GPS-Genauigkeit für horizontale Bewegung ändert
+und 3x GPS-Genauigkeit für vertikale Bewegungen und nur bei einer Genauigkeit von mindestens 15 m.
 
 Nötige Berechtigungen:
  - GPS zur Positionsbestimmung

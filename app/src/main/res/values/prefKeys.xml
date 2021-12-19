@@ -6,5 +6,6 @@
     <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
     <string name="pref_imperial_units_key" translatable="false">pref_imperial_units</string>
     <string name="pref_max_speed_index_key" translatable="false">pref_max_speed_index</string>
+    <string name="pref_debug_key" translatable="false">pref_debug</string>
 
 </resources>

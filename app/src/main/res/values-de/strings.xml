@@ -24,10 +24,14 @@
   <string name="satellites_count">Satelliten Gesamt: %1$d, Gut: %2$d, Fix: %3$d</string>
   <string name="accuracy">Genauigkeit:\u0020</string>
   <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
   <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
   <string name="speed_unit">km/h</string>
   <string name="speed_unit_imperial">mph</string>
   <string name="last_update">vor %1$d s</string>
+  <string name="record">Start</string>
+  <string name="stop">Stop</string>
 
   <string name="no_browser_installed" maxLength="20">Kein Webbrowser installiert</string>
   <string name="no_maps_installed" maxLength="20">Keine Kartenapp installiert</string>
@@ -52,5 +56,6 @@
   <string name="dialog_NO_button">Nein</string>
   <string name="dialog_Later_button">Vielleicht später</string>
   <string name="dialog_StarOnGitHub">Mögen Sie diese App? Bitte vergeben Sie einen Stern auf GitHub.</string>
+  <string name="debug_menu_item">Debug</string>
 
 </resources>

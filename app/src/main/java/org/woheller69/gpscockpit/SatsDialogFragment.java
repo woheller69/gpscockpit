@@ -20,6 +20,7 @@ public class SatsDialogFragment extends AppCompatDialogFragment {
   public SatsDialogFragment() {}
 
   private MainActivity mA;
+  private RvSatsBinding b;
 
   @Override
   public void onAttach(@NonNull Context context) {
@@ -31,12 +32,25 @@ public class SatsDialogFragment extends AppCompatDialogFragment {
 
   synchronized void submitList(List<Sat> satList) {
     mAdapter.submitList(satList);
+    int total, good = 0, used = 0;
+    total = satList.size();
+    for (Sat sat : satList) {
+      if (sat.mSnr != 0) {
+        good++;
+      }
+      if (sat.mUsed) {
+        used++;
+      }
+    }
+    b.totalSatV.setText(String.valueOf(total));
+    b.goodSatV.setText(String.valueOf(good));
+    b.usedSatV.setText(String.valueOf(used));
   }
 
   @NonNull
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    RvSatsBinding b = RvSatsBinding.inflate(mA.getLayoutInflater());
+    b = RvSatsBinding.inflate(mA.getLayoutInflater());
 
     mAdapter = new SatAdapter();
     b.rv.setAdapter(mAdapter);

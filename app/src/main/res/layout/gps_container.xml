@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical"
   android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:src="@drawable/ic_baseline_landscape_24"/>
+        android:src="@drawable/ic_mountain"/>
 
     <TextView
         android:id="@+id/altitude_MSL"
@@ -26,6 +25,15 @@
         android:layout_gravity="bottom"
         android:textSize="24dp"
         android:textColor="@color/disabledStateColor"
+        android:layout_weight="2" />
+    <TextView
+        android:id="@+id/debug_counter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="16dp"
         android:layout_weight="1" />
 
     <TextView
@@ -72,35 +80,36 @@
 
   </LinearLayout>
 
-<com.github.anastr.speedviewlib.DeluxeSpeedView
-    android:id="@+id/deluxeSpeedView"
-    android:layout_gravity="center_horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="200dp"
-    app:sv_indicator="QuarterLineIndicator"
-    app:sv_unitUnderSpeedText="true"
-    app:sv_withTremble="false"
-    app:sv_speedTextFormat="INTEGER"
-    app:sv_speedBackgroundColor="@color/dynamicBg"
-    app:sv_centerCircleColor="#00000000"
-    app:sv_backgroundCircleColor="@color/dynamicBg"
-    app:sv_speedTextColor="@color/disabledStateColor"
-    app:sv_unitTextColor="@color/dynamicFgDim"
-    app:sv_speedTextSize="40dp"
-    app:sv_textSize="15dp"
-    app:sv_unitSpeedInterval="10dp"
-    app:sv_maxSpeed="180"
-    app:sv_tickNumber="10"
-    app:sv_tickPadding="10dp"
-    app:sv_speedTextPosition="CENTER"
-    app:sv_textColor="@color/dynamicFgDim"
-    app:sv_markColor="@color/dynamicFgDim"
-    app:sv_indicatorColor="@color/primaryTrans"/>
+  <com.github.anastr.speedviewlib.DeluxeSpeedView
+      android:id="@+id/deluxeSpeedView"
+      android:layout_gravity="center_horizontal"
+      android:layout_height="wrap_content"
+      android:layout_width="200dp"
+      app:sv_indicator="QuarterLineIndicator"
+      app:sv_unitUnderSpeedText="true"
+      app:sv_withTremble="false"
+      app:sv_speedTextFormat="INTEGER"
+      app:sv_speedBackgroundColor="@color/dynamicBg"
+      app:sv_centerCircleColor="#00000000"
+      app:sv_backgroundCircleColor="@color/dynamicBg"
+      app:sv_speedTextColor="@color/disabledStateColor"
+      app:sv_unitTextColor="@color/dynamicFgDim"
+      app:sv_speedTextSize="40dp"
+      app:sv_textSize="15dp"
+      app:sv_unitSpeedInterval="10dp"
+      app:sv_maxSpeed="180"
+      app:sv_tickNumber="10"
+      app:sv_tickPadding="10dp"
+      app:sv_speedTextPosition="CENTER"
+      app:sv_textColor="@color/dynamicFgDim"
+      app:sv_markColor="@color/dynamicFgDim"
+      app:sv_indicatorColor="@color/primaryTrans"/>
 
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="-15dp"
       app:backgroundColor="@color/dynamicBg"
       app:showMarker="false"
       app:markerColor="@color/primaryTrans"
@@ -113,7 +122,7 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="12dp"
+      android:layout_marginTop="8dp"
       android:orientation="horizontal">
 
     <ImageView
@@ -150,13 +159,11 @@
 
   </LinearLayout>
 
-
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
       android:orientation="horizontal">
-
     <ImageView
         android:layout_width="36dp"
         android:layout_height="wrap_content"
@@ -172,6 +179,22 @@
         android:textColor="@color/dynamicFgDim"
         android:textSize="24dp"
         android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginTop="4dp"
+      android:layout_marginBottom="5dp"
+      android:background="@color/accentTrans" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
 
     <ImageView
         android:layout_width="36dp"
@@ -189,78 +212,103 @@
         android:textSize="24dp"
         android:layout_weight="1" />
 
-  </LinearLayout>
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:orientation="horizontal"
-    tools:ignore="UseCompoundDrawables">
-
-    <TextView
-      android:textStyle="bold"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:layout_gravity="center_vertical"
-      android:text="@string/satellites"
-      android:textAllCaps="true" />
-
     <ImageView
-      android:id="@+id/sat_detail"
-      android:layout_width="28dp"
-      android:layout_height="28dp"
-      android:layout_marginStart="4dp"
-      android:layout_gravity="center_vertical"
-      android:padding="2dp"
-      android:background="?android:attr/selectableItemBackgroundBorderless"
-      android:contentDescription="@string/satellites"
-      android:src="@drawable/satellite" />
-
-  </LinearLayout>
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:orientation="horizontal">
-
-    <TextView
-        android:textStyle="bold"
-        android:layout_width="64dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
-        android:text="@string/total" />
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_distance" />
 
     <TextView
-        android:id="@+id/total_sat_v"
+        android:id="@+id/dist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_speed_av" />
+
 
     <TextView
-      android:textStyle="bold"
-      android:layout_width="64dp"
-      android:layout_height="wrap_content"
-      android:text="@string/good" />
+        android:id="@+id/speed_av"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_speed_max" />
 
     <TextView
-      android:id="@+id/good_sat_v"
-      android:layout_width="0dp"
+        android:id="@+id/speed_max"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_weight="1" />
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_mountain" />
 
     <TextView
-      android:textStyle="bold"
-      android:layout_width="64dp"
-      android:layout_height="wrap_content"
-      android:text="@string/fixed" />
+        android:id="@+id/dist_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:src="@drawable/ic_mountain" />
 
     <TextView
-      android:id="@+id/used_sat_v"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1" />
+        android:id="@+id/dist_down"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dynamicFgDim"
+        android:textSize="24dp"
+        android:layout_weight="1" />
 
   </LinearLayout>
 

@@ -112,11 +112,13 @@ public class GpsSvc extends Service implements LocationListener {
 
   private void showNotif() {
     mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
-    mWakeLock.acquire(30 * 60 * 1000L);
+    mWakeLock.acquire();
 
     Utils.createNotifChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE_DEFAULT);
 
     Intent intent = new Intent(App.getCxt(), MainActivity.class);
+    intent.setAction(Intent.ACTION_MAIN);
+    intent.addCategory(Intent.CATEGORY_LAUNCHER);
     PendingIntent pi = PendingIntent.getActivity(App.getCxt(), NOTIF_ID, intent, getPiFlags());
 
     mNotifBuilder =
@@ -195,7 +197,7 @@ public class GpsSvc extends Service implements LocationListener {
 
   private void updateNotifBg() {
     synchronized (NOTIF_UPDATE_LOCK) {
-      long sleep = 5000 + mLastUpdate - System.currentTimeMillis();
+      long sleep = MIN_DELAY + mLastUpdate - System.currentTimeMillis();
       if (sleep > 0) {
         try {
           NOTIF_UPDATE_LOCK.wait(sleep);

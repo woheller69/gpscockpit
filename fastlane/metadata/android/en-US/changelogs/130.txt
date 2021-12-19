@@ -1,0 +1,3 @@
+Recording of travel distance (horizontal and up/down),
+average speed, and max speed.
+Bugfixes
