@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
+  private Bundle mOutState;
   private boolean mGpsProviderSupported = false;
   private boolean recording = false;
   private boolean gpsLocked = false;
@@ -80,22 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    if (savedInstanceState != null) {
-      mStartTime = savedInstanceState.getLong("mStartTime");
-      mEndTime = savedInstanceState.getLong("mEndTime");
-      recording = savedInstanceState.getBoolean("recording");
-      gpsLocked = savedInstanceState.getBoolean("gpsLocked");
-      gpsLockedBeforeStart = savedInstanceState.getBoolean("gpsLockedBeforeStart");
-      mDebugCounter = savedInstanceState.getLong("mDebugCounter");
-      mTravelDistance = savedInstanceState.getFloat("mTravelDistance");
-      mAltUp = savedInstanceState.getDouble("mAltUp");
-      mAltDown = savedInstanceState.getDouble("mAltDown");
-      mMaxSpeed = savedInstanceState.getFloat("mMaxSpeed");
-      mOldGpsLocation = savedInstanceState.getParcelable("mOldGpsLocation");
-      mNmeaOldAltitude = savedInstanceState.getDouble("mNmeaOldAltitude");
-    }
-
-
+    restoreInstance(savedInstanceState);
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
     if (setNightTheme(this)) {
@@ -174,18 +160,42 @@ public class MainActivity extends AppCompatActivity {
       fm.beginTransaction().remove(frag).commitNowAllowingStateLoss();
     }
     super.onSaveInstanceState(outState);
-    outState.putLong("mStartTime",mStartTime);
-    outState.putLong("mEndTime",mEndTime);
-    outState.putBoolean("recording",recording);
-    outState.putBoolean("gpsLocked",gpsLocked);
-    outState.putBoolean("gpsLockedBeforeStart",gpsLockedBeforeStart);
-    outState.putLong("mDebugCounter",mDebugCounter);
-    outState.putFloat("mTravelDistance",mTravelDistance);
-    outState.putDouble("mAltUp",mAltUp);
-    outState.putDouble("mAltDown",mAltDown);
-    outState.putFloat("mMaxSpeed",mMaxSpeed);
-    if (mOldGpsLocation!=null) outState.putParcelable("mOldGpsLocation",mOldGpsLocation);
-    if (mNmeaOldAltitude!=null) outState.putDouble("mNmeaOldAltitude",mNmeaOldAltitude);
+    mOutState=outState;
+    saveInstance();
+  }
+
+  private void saveInstance(){
+    if (mOutState!=null){
+      mOutState.putLong("mStartTime",mStartTime);
+      mOutState.putLong("mEndTime",mEndTime);
+      mOutState.putBoolean("recording",recording);
+      mOutState.putBoolean("gpsLocked",gpsLocked);
+      mOutState.putBoolean("gpsLockedBeforeStart",gpsLockedBeforeStart);
+      mOutState.putLong("mDebugCounter",mDebugCounter);
+      mOutState.putFloat("mTravelDistance",mTravelDistance);
+      mOutState.putDouble("mAltUp",mAltUp);
+      mOutState.putDouble("mAltDown",mAltDown);
+      mOutState.putFloat("mMaxSpeed",mMaxSpeed);
+      if (mOldGpsLocation!=null) mOutState.putParcelable("mOldGpsLocation",mOldGpsLocation);
+      if (mNmeaOldAltitude!=null) mOutState.putDouble("mNmeaOldAltitude",mNmeaOldAltitude);
+    }
+  }
+
+  private void restoreInstance(Bundle savedInstanceState){
+    if (savedInstanceState != null) {
+      mStartTime = savedInstanceState.getLong("mStartTime");
+      mEndTime = savedInstanceState.getLong("mEndTime");
+      recording = savedInstanceState.getBoolean("recording");
+      gpsLocked = savedInstanceState.getBoolean("gpsLocked");
+      gpsLockedBeforeStart = savedInstanceState.getBoolean("gpsLockedBeforeStart");
+      mDebugCounter = savedInstanceState.getLong("mDebugCounter");
+      mTravelDistance = savedInstanceState.getFloat("mTravelDistance");
+      mAltUp = savedInstanceState.getDouble("mAltUp");
+      mAltDown = savedInstanceState.getDouble("mAltDown");
+      mMaxSpeed = savedInstanceState.getFloat("mMaxSpeed");
+      mOldGpsLocation = savedInstanceState.getParcelable("mOldGpsLocation");
+      mNmeaOldAltitude = savedInstanceState.getDouble("mNmeaOldAltitude");
+    }
   }
 
   @Override
@@ -516,6 +526,7 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
             mB.gpsCont.compass.setShowMarker(false);
           }
+          saveInstance();  //update saved instance state also while app is running in background. This must be done after updating all parameters.
         }
       }
     }
