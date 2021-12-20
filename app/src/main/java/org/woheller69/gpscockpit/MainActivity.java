@@ -63,23 +63,39 @@ public class MainActivity extends AppCompatActivity {
   private boolean recording = false;
   private boolean gpsLocked = false;
   private boolean gpsLockedBeforeStart = false;
-  private long mDebugCounter =0;
+  private long mDebugCounter = 0;
   private final float[] speedList = {27,45,90,135,180,270};
   private final int defaultSpeedIndex = 4;
   private final int defaultSpeedIndexImperial = 3;
   private Location mGpsLocation;
   private Location mOldGpsLocation;
-  private float mTravelDistance=0;
-  private Double mAltUp=0d;
-  private Double mAltDown=0d;
+  private float mTravelDistance = 0;
+  private Double mAltUp = 0d;
+  private Double mAltDown = 0d;
   private Double mNmeaOldAltitude;
   private Double mNmeaAltitude;
-  private Float mMaxSpeed=0f;
+  private Float mMaxSpeed = 0f;
   private long mStartTime = System.currentTimeMillis()/1000;
   private long mEndTime = System.currentTimeMillis()/1000;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    if (savedInstanceState != null) {
+      mStartTime = savedInstanceState.getLong("mStartTime");
+      mEndTime = savedInstanceState.getLong("mEndTime");
+      recording = savedInstanceState.getBoolean("recording");
+      gpsLocked = savedInstanceState.getBoolean("gpsLocked");
+      gpsLockedBeforeStart = savedInstanceState.getBoolean("gpsLockedBeforeStart");
+      mDebugCounter = savedInstanceState.getLong("mDebugCounter");
+      mTravelDistance = savedInstanceState.getFloat("mTravelDistance");
+      mAltUp = savedInstanceState.getDouble("mAltUp");
+      mAltDown = savedInstanceState.getDouble("mAltDown");
+      mMaxSpeed = savedInstanceState.getFloat("mMaxSpeed");
+      mOldGpsLocation = savedInstanceState.getParcelable("mOldGpsLocation");
+      mNmeaOldAltitude = savedInstanceState.getDouble("mNmeaOldAltitude");
+    }
+
+
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
     if (setNightTheme(this)) {
@@ -158,6 +174,18 @@ public class MainActivity extends AppCompatActivity {
       fm.beginTransaction().remove(frag).commitNowAllowingStateLoss();
     }
     super.onSaveInstanceState(outState);
+    outState.putLong("mStartTime",mStartTime);
+    outState.putLong("mEndTime",mEndTime);
+    outState.putBoolean("recording",recording);
+    outState.putBoolean("gpsLocked",gpsLocked);
+    outState.putBoolean("gpsLockedBeforeStart",gpsLockedBeforeStart);
+    outState.putLong("mDebugCounter",mDebugCounter);
+    outState.putFloat("mTravelDistance",mTravelDistance);
+    outState.putDouble("mAltUp",mAltUp);
+    outState.putDouble("mAltDown",mAltDown);
+    outState.putFloat("mMaxSpeed",mMaxSpeed);
+    if (mOldGpsLocation!=null) outState.putParcelable("mOldGpsLocation",mOldGpsLocation);
+    if (mNmeaOldAltitude!=null) outState.putDouble("mNmeaOldAltitude",mNmeaOldAltitude);
   }
 
   @Override
