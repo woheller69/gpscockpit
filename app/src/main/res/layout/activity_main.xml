@@ -36,7 +36,7 @@
           android:orientation="horizontal">
 
         <Button
-            android:id="@+id/clear_agps"
+            android:id="@+id/reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

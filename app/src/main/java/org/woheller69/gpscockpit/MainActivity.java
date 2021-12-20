@@ -17,6 +17,7 @@ import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationListener;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
-  private Bundle mOutState;
   private boolean mGpsProviderSupported = false;
   private boolean recording = false;
   private boolean gpsLocked = false;
@@ -80,8 +80,18 @@ public class MainActivity extends AppCompatActivity {
   private long mEndTime = System.currentTimeMillis()/1000;
 
   @Override
+  public void onConfigurationChanged(Configuration newConfig){
+    super.onConfigurationChanged(newConfig);
+    mB = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(mB.getRoot());
+    setupSpeedView();
+    mB.record.setChecked(recording);
+    setupGps();
+    updateGpsUi();
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
-    restoreInstance(savedInstanceState);
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
     if (setNightTheme(this)) {
@@ -103,19 +113,7 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
-    mB.gpsCont.deluxeSpeedView.clearSections();
-
-    mB.gpsCont.deluxeSpeedView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        int maxSpeedIndex = SETTINGS.getIntPref(R.string.pref_max_speed_index_key, SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
-        maxSpeedIndex = (maxSpeedIndex+1)%speedList.length;
-        mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[maxSpeedIndex]);
-        SETTINGS.savePref(R.string.pref_max_speed_index_key,maxSpeedIndex);
-      }
-    });
-    mB.gpsCont.deluxeSpeedView.addSections(
-              new Section(.0f, 1.0f, ContextCompat.getColor(this, R.color.accent),10));
+    setupSpeedView();
     setupGps();
     updateGpsUi();
     checkPerms();
@@ -160,42 +158,22 @@ public class MainActivity extends AppCompatActivity {
       fm.beginTransaction().remove(frag).commitNowAllowingStateLoss();
     }
     super.onSaveInstanceState(outState);
-    mOutState=outState;
-    saveInstance();
   }
 
-  private void saveInstance(){
-    if (mOutState!=null){
-      mOutState.putLong("mStartTime",mStartTime);
-      mOutState.putLong("mEndTime",mEndTime);
-      mOutState.putBoolean("recording",recording);
-      mOutState.putBoolean("gpsLocked",gpsLocked);
-      mOutState.putBoolean("gpsLockedBeforeStart",gpsLockedBeforeStart);
-      mOutState.putLong("mDebugCounter",mDebugCounter);
-      mOutState.putFloat("mTravelDistance",mTravelDistance);
-      mOutState.putDouble("mAltUp",mAltUp);
-      mOutState.putDouble("mAltDown",mAltDown);
-      mOutState.putFloat("mMaxSpeed",mMaxSpeed);
-      if (mOldGpsLocation!=null) mOutState.putParcelable("mOldGpsLocation",mOldGpsLocation);
-      if (mNmeaOldAltitude!=null) mOutState.putDouble("mNmeaOldAltitude",mNmeaOldAltitude);
-    }
-  }
+  private void setupSpeedView(){
+    mB.gpsCont.deluxeSpeedView.clearSections();
 
-  private void restoreInstance(Bundle savedInstanceState){
-    if (savedInstanceState != null) {
-      mStartTime = savedInstanceState.getLong("mStartTime");
-      mEndTime = savedInstanceState.getLong("mEndTime");
-      recording = savedInstanceState.getBoolean("recording");
-      gpsLocked = savedInstanceState.getBoolean("gpsLocked");
-      gpsLockedBeforeStart = savedInstanceState.getBoolean("gpsLockedBeforeStart");
-      mDebugCounter = savedInstanceState.getLong("mDebugCounter");
-      mTravelDistance = savedInstanceState.getFloat("mTravelDistance");
-      mAltUp = savedInstanceState.getDouble("mAltUp");
-      mAltDown = savedInstanceState.getDouble("mAltDown");
-      mMaxSpeed = savedInstanceState.getFloat("mMaxSpeed");
-      mOldGpsLocation = savedInstanceState.getParcelable("mOldGpsLocation");
-      mNmeaOldAltitude = savedInstanceState.getDouble("mNmeaOldAltitude");
-    }
+    mB.gpsCont.deluxeSpeedView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        int maxSpeedIndex = SETTINGS.getIntPref(R.string.pref_max_speed_index_key, SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
+        maxSpeedIndex = (maxSpeedIndex+1)%speedList.length;
+        mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[maxSpeedIndex]);
+        SETTINGS.savePref(R.string.pref_max_speed_index_key,maxSpeedIndex);
+      }
+    });
+    mB.gpsCont.deluxeSpeedView.addSections(
+            new Section(.0f, 1.0f, ContextCompat.getColor(this, R.color.accent),10));
   }
 
   @Override
@@ -304,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
     startGpsLocListener();
     setTimer();
 
-    mB.clearAgps.setOnClickListener(v -> resetDistances());
+    mB.reset.setOnClickListener(v -> resetDistances());
     mB.record.setOnClickListener(v -> {
       recording=mB.record.isChecked();
       if (mB.record.isChecked()){
@@ -526,7 +504,6 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
             mB.gpsCont.compass.setShowMarker(false);
           }
-          saveInstance();  //update saved instance state also while app is running in background. This must be done after updating all parameters.
         }
       }
     }
@@ -541,7 +518,7 @@ public class MainActivity extends AppCompatActivity {
       mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
     }
     mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[SETTINGS.getIntPref(R.string.pref_max_speed_index_key,SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex)]);
-    mB.clearAgps.setEnabled(hasFineLocPerm);
+    mB.reset.setEnabled(hasFineLocPerm);
     mB.record.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);
     mB.gpsCont.copy.setEnabled(locAvailable);
