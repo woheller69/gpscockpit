@@ -1,6 +1,6 @@
 <vector android:height="24dp" android:viewportHeight="1309"
     android:viewportWidth="1308" android:width="23.981665dp"
-    android:tint="@color/dynamicFgDim"
+    android:tint="?attr/colorControlNormal"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#00000000" android:fillType="evenOdd"
         android:pathData="M54,1200C95,1004 205,673 405,626 604,578 790,104 790,104L790,104"

@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
   public void onConfigurationChanged(Configuration newConfig){
     super.onConfigurationChanged(newConfig);
     mB = ActivityMainBinding.inflate(getLayoutInflater());
+    mB.getRoot().setBackgroundColor(getColor(R.color.dynamicBg));
     setContentView(mB.getRoot());
     setupSpeedView();
     mB.record.setChecked(recording);
@@ -94,9 +95,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
-    if (setNightTheme(this)) {
-      return;
-    }
+    setNightTheme(this);
     mB = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(mB.getRoot());
 
