@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
   public void onConfigurationChanged(Configuration newConfig){
     super.onConfigurationChanged(newConfig);
     mB = ActivityMainBinding.inflate(getLayoutInflater());
-    mB.getRoot().setBackgroundColor(getColor(R.color.dynamicBg));
     setContentView(mB.getRoot());
     setupSpeedView();
     mB.record.setChecked(recording);
