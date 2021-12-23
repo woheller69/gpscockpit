@@ -1,3 +1,4 @@
 Recording of travel distance (horizontal and up/down),
-average speed, and max speed.
+average speed, and max speed
+New landscape layout
 Bugfixes

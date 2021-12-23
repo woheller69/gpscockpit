@@ -1,3 +1,4 @@
 Aufzeichnung von Fahrtstrecke (horizontal und auf/ab),
-Durchschnittsgeschwindigkeit und Höchstgeschwindigkeit.
+Durchschnittsgeschwindigkeit und Höchstgeschwindigkeit
+Neues Layout für Querformat
 Fehlerbehebung
