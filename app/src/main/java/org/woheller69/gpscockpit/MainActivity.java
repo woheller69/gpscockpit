@@ -36,7 +36,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.app.ActivityCompat;
@@ -55,6 +54,10 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+  public static final int METRIC = 0;
+  private static final int IMPERIAL = 1;
+  private static final int NAUTICAL = 2;
+  private final int[]defaultSpeedIndexList = {4, 3, 2};  //Metric, Imperial, Nautical
   private ActivityMainBinding mB;
   public static final long MIN_DELAY = 2000;
   private final LocationManager mLocManager =
@@ -66,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
   private boolean gpsLockedBeforeStart = false;
   private long mDebugCounter = 0;
   private final float[] speedList = {27,45,90,135,180,270};
-  private final int defaultSpeedIndex = 4;
-  private final int defaultSpeedIndexImperial = 3;
   private Location mGpsLocation;
   private Location mOldGpsLocation;
   private float mTravelDistance = 0;
@@ -97,12 +98,6 @@ public class MainActivity extends AppCompatActivity {
     setNightTheme(this);
     mB = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(mB.getRoot());
-
-    ActionBar actionBar = getSupportActionBar();
-    if (actionBar != null) {
-      actionBar.setDisplayUseLogoEnabled(true);
-      actionBar.setDisplayShowHomeEnabled(true);
-    }
 
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
@@ -164,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.deluxeSpeedView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        int maxSpeedIndex = SETTINGS.getIntPref(R.string.pref_max_speed_index_key, SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
+        int maxSpeedIndex = SETTINGS.getIntPref(R.string.pref_max_speed_index_key, defaultSpeedIndexList[SETTINGS.getIntPref(R.string.pref_units_key,METRIC)]);
         maxSpeedIndex = (maxSpeedIndex+1)%speedList.length;
         mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[maxSpeedIndex]);
         SETTINGS.savePref(R.string.pref_max_speed_index_key,maxSpeedIndex);
@@ -198,9 +193,19 @@ public class MainActivity extends AppCompatActivity {
       ((MenuBuilder) menu).setOptionalIconsVisible(true);
     }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
-    menu.findItem(R.id.action_imperial_units).setChecked(SETTINGS.getImperialUnits());
+
+    int units = SETTINGS.getIntPref(R.string.pref_units_key,METRIC);
+    if (units == METRIC){
+      menu.findItem(R.id.action_units_metric).setChecked(true);
+    } else if (units == IMPERIAL){
+      menu.findItem(R.id.action_units_imperial).setChecked(true);
+    } else if (units == NAUTICAL){
+      menu.findItem(R.id.action_units_nautical).setChecked(true);
+    }
+
     menu.findItem(R.id.action_lock_gps).setChecked(gpsLocked);
-    menu.findItem(R.id.action_debug).setChecked(SETTINGS.getBoolPref(R.string.debug_menu_item,false));
+    menu.findItem(R.id.action_debug).setChecked(SETTINGS.getBoolPref(R.string.pref_debug_key,false));
+    menu.findItem(R.id.action_compass_degrees).setChecked(SETTINGS.getBoolPref(R.string.pref_compass_key,false));
     return true;
   }
 
@@ -213,9 +218,22 @@ public class MainActivity extends AppCompatActivity {
       invalidateOptionsMenu();
       return true;
     }
-    if (itemId == R.id.action_imperial_units) {
-      SETTINGS.setImperialUnits(!item.isChecked());   // item.isChecked always previous value until invalidated, so value has to be inverted
-      SETTINGS.savePref(R.string.pref_max_speed_index_key,SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex);
+
+    if (item.getGroupId() == R.id.action_units_group){
+      if (itemId == R.id.action_units_header) return true;
+      if (!item.isChecked()){
+        if (itemId == R.id.action_units_metric) SETTINGS.savePref(R.string.pref_units_key, METRIC);
+        else if (itemId == R.id.action_units_imperial) SETTINGS.savePref(R.string.pref_units_key, IMPERIAL);
+        else if (itemId == R.id.action_units_nautical) SETTINGS.savePref(R.string.pref_units_key, NAUTICAL);
+      }
+      SETTINGS.savePref(R.string.pref_max_speed_index_key, defaultSpeedIndexList[SETTINGS.getIntPref(R.string.pref_units_key,METRIC)]);
+      updateGpsUi();
+      invalidateOptionsMenu();
+      return true;
+    }
+
+    if (itemId == R.id.action_compass_degrees) {
+      SETTINGS.savePref(R.string.pref_compass_key, !item.isChecked());
       updateGpsUi();
       invalidateOptionsMenu();
       return true;
@@ -234,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
       return true;
     }
     if (itemId == R.id.action_debug) {
-      SETTINGS.savePref(R.string.debug_menu_item, !item.isChecked());
+      SETTINGS.savePref(R.string.pref_debug_key, !item.isChecked());
       updateGpsUi();
       invalidateOptionsMenu();
       return true;
@@ -463,17 +481,19 @@ public class MainActivity extends AppCompatActivity {
           mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           if (mNmeaAltitude!=null) {
-            if (!SETTINGS.getImperialUnits()){
+            if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               altMSL = getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude ));
             }else{
               altMSL = getString(R.string.dist_unit_imperial, Utils.formatInt(mNmeaAltitude*3.28084f)); //convert to feet
             }
           }
           if (mGpsLocation.hasSpeed()) {
-            if (!SETTINGS.getImperialUnits()){
+            if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               speedval = mGpsLocation.getSpeed() * 3.6f; //convert to km/h
-            }else{
+            }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
               speedval = mGpsLocation.getSpeed() * 2.236936f; //convert to mph
+            }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+              speedval = mGpsLocation.getSpeed() * 1.943844f; //convert to kn
             }
             mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           }else{
@@ -481,7 +501,7 @@ public class MainActivity extends AppCompatActivity {
           }
           if (mGpsLocation.hasAccuracy()) {
             mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
-            if (!SETTINGS.getImperialUnits()){
+            if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               acc = getString(R.string.dist_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
             } else {
               acc = getString(R.string.dist_unit_imperial, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()*3.28084f));
@@ -505,17 +525,24 @@ public class MainActivity extends AppCompatActivity {
         }
       }
     }
-    if (SETTINGS.getBoolPref(R.string.debug_menu_item,false)) {
+    if (SETTINGS.getBoolPref(R.string.pref_debug_key,false)) {
       mB.gpsCont.debugCounter.setVisibility(View.VISIBLE);
     }    else {
       mB.gpsCont.debugCounter.setVisibility(View.GONE);
     }
-    if (!SETTINGS.getImperialUnits()){
-      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
-    }else{
-      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
+    if (SETTINGS.getBoolPref(R.string.pref_compass_key,false)) {
+      mB.gpsCont.compass.setRangeDegrees(50);  //show numbers
+    }    else {
+      mB.gpsCont.compass.setRangeDegrees(180);  //show N - NW - W ...
     }
-    mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[SETTINGS.getIntPref(R.string.pref_max_speed_index_key,SETTINGS.getImperialUnits() ? defaultSpeedIndexImperial : defaultSpeedIndex)]);
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
+      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit));
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
+      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_imperial));
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+      mB.gpsCont.deluxeSpeedView.setUnit(getString(R.string.speed_unit_nautical));
+    }
+    mB.gpsCont.deluxeSpeedView.setMaxSpeed(speedList[SETTINGS.getIntPref(R.string.pref_max_speed_index_key,defaultSpeedIndexList[SETTINGS.getIntPref(R.string.pref_units_key,METRIC)])]);
     mB.reset.setEnabled(hasFineLocPerm);
     mB.record.setEnabled(hasFineLocPerm);
     mB.gpsCont.map.setEnabled(locAvailable);
@@ -531,19 +558,21 @@ public class MainActivity extends AppCompatActivity {
     String dateFormat = DateUtils.formatElapsedTime(mEndTime-mStartTime);
     mB.gpsCont.timeV.setText(dateFormat);
 
-    if (!SETTINGS.getImperialUnits()){
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
       dist = getString(R.string.dist_unit2, Utils.formatFloat(mTravelDistance/1000f));
-    }else{
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
       dist = getString(R.string.dist_unit_imperial2, Utils.formatFloat(mTravelDistance/1000/1.609344f)); //convert to miles
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+      dist = getString(R.string.dist_unit_nautical2, Utils.formatFloat(mTravelDistance/1852f)); //convert to nautical miles
     }
 
-    if (!SETTINGS.getImperialUnits()){
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
       up = getString(R.string.dist_unit, Utils.formatInt(mAltUp));
     }else{
       up = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltUp*3.28084f)); //convert to feet
     }
 
-    if (!SETTINGS.getImperialUnits()){
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
       down = getString(R.string.dist_unit, Utils.formatInt(mAltDown));
     }else{
       down = getString(R.string.dist_unit_imperial, Utils.formatInt(mAltDown*3.28084f)); //convert to feet
@@ -556,17 +585,21 @@ public class MainActivity extends AppCompatActivity {
     if ((mEndTime-mStartTime)>0) {
       speedAverage = mTravelDistance / (mEndTime - mStartTime);  // im m/s
     }
-    if (!SETTINGS.getImperialUnits()){
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
        speed_av = Utils.formatInt(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
-    }else{
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
        speed_av = Utils.formatInt(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+      speed_av = Utils.formatInt(speedAverage * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
     }
     mB.gpsCont.speedAv.setText(speed_av);
 
-    if (!SETTINGS.getImperialUnits()){
+    if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
       speed_max = Utils.formatInt(mMaxSpeed * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
-    }else{
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
       speed_max = Utils.formatInt(mMaxSpeed * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+    }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+      speed_max = Utils.formatInt(mMaxSpeed * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
     }
     mB.gpsCont.speedMax.setText(speed_max);
 

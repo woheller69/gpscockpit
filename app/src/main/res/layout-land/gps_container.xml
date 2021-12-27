@@ -257,8 +257,7 @@
           app:lineColor="@color/disabledStateColor"
           app:textColor="@color/disabledStateColor"
           app:textSize="15dp"
-          app:degrees="0"
-          app:rangeDegrees="180.0" />
+          app:degrees="0" />
     </LinearLayout>
 
   </LinearLayout>

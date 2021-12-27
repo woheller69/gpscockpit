@@ -9,12 +9,35 @@
     android:title="@string/dark_theme_menu_item"
     app:showAsAction="never" />
 
+  <group
+      android:id="@+id/action_units_group"
+      android:checkableBehavior="single">
+    <item
+        android:id="@+id/action_units_header"
+        android:icon="@drawable/ic_straighten_black_24dp"
+        android:title="@string/units_menu_item"
+        android:checkable="false">
+    </item>
+    <item
+        android:id="@+id/action_units_metric"
+        android:title="@string/units_metric_menu_item" />
+    <item
+        android:id="@+id/action_units_imperial"
+        android:title="@string/units_imperial_menu_item" />
+    <item
+        android:id="@+id/action_units_nautical"
+        android:title="@string/units_nautical_menu_item" />
+  </group>
+
+
+
+
   <item
-    android:id="@+id/action_imperial_units"
-    android:checkable="true"
-    android:icon="@drawable/ic_straighten_black_24dp"
-    android:title="@string/imperial_units_menu_item"
-    app:showAsAction="never" />
+      android:id="@+id/action_compass_degrees"
+      android:checkable="true"
+      android:icon="@drawable/ic_explore_black_24dp"
+      android:title="@string/compass_degrees_menu_item"
+      app:showAsAction="never" />
 
   <item
       android:id="@+id/action_satview"

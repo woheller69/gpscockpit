@@ -217,7 +217,7 @@ public class GpsSvc extends Service implements LocationListener {
         if (mGpsLoc != null
             && (lat = mGpsLoc.getLatitude()) != 0
             && (lng = mGpsLoc.getLongitude()) != 0) {
-          if (!SETTINGS.getImperialUnits()){
+          if (SETTINGS.getIntPref(R.string.pref_units_key, MainActivity.METRIC) == MainActivity.METRIC){
             sText = getString(R.string.accuracy) + getString(R.string.dist_unit, formatLocAccuracy(mGpsLoc.getAccuracy()));
           } else {
             sText = getString(R.string.accuracy) + getString(R.string.dist_unit_imperial, formatLocAccuracy(mGpsLoc.getAccuracy()*3.28084f));

@@ -27,8 +27,10 @@
   <string name="dist_unit2">%s km</string>
   <string name="dist_unit_imperial">%s ft</string>
   <string name="dist_unit_imperial2">%s mi</string>
+  <string name="dist_unit_nautical2">%s sm</string>
   <string name="speed_unit">km/h</string>
   <string name="speed_unit_imperial">mph</string>
+  <string name="speed_unit_nautical">kn</string>
   <string name="last_update">vor %1$d s</string>
   <string name="record">Start</string>
   <string name="stop">Stop</string>
@@ -46,16 +48,22 @@
   <!-- Menu -->
   <string name="dark_theme_menu_item" maxLength="15">Dark Theme</string>
   <string name="about_menu_item"  maxLength="15">Über</string>
+  <string name="debug_menu_item">Debug</string>
+  <string name="compass_degrees_menu_item">Kompass: Gradanzeige</string>
+  <string name="units_menu_item">Einheiten</string>
+  <string name="units_metric_menu_item">Metrisch</string>
+  <string name="units_imperial_menu_item">Imperial</string>
+  <string name="units_nautical_menu_item">Nautisch</string>
 
   <!-- AboutDialog -->
   <string name="source" maxLength="15">Quellcode</string>
-  <string name="imperial_units_menu_item">Imperiale Einheiten</string>
 
   <!-- StarDialog -->
   <string name="dialog_OK_button">OK</string>
   <string name="dialog_NO_button">Nein</string>
   <string name="dialog_Later_button">Vielleicht später</string>
   <string name="dialog_StarOnGitHub">Mögen Sie diese App? Bitte vergeben Sie einen Stern auf GitHub.</string>
-  <string name="debug_menu_item">Debug</string>
+
+
 
 </resources>

@@ -82,15 +82,7 @@ public enum MySettings {
   public void setForceDarkMode(boolean force) {
     savePref(R.string.pref_main_dark_theme_key, force);
   }
-
-  public boolean getImperialUnits() {
-    return getBoolPref(R.string.pref_imperial_units_key, false);
-  }
-
-  public void setImperialUnits(boolean imperial) {
-    savePref(R.string.pref_imperial_units_key, imperial);
-  }
-
+  
   public String getLocale() {
     return mPrefs.getString(getString(R.string.pref_main_locale_key), "");
   }
