@@ -54,6 +54,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+  private Menu mMenu;
   public static final int METRIC = 0;
   private static final int IMPERIAL = 1;
   private static final int NAUTICAL = 2;
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
   @SuppressLint("RestrictedApi")
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
+    mMenu = menu;
     getMenuInflater().inflate(R.menu.main_overflow, menu);
     MenuCompat.setGroupDividerEnabled(menu, true);
     if (menu instanceof MenuBuilder) {
@@ -220,7 +222,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     if (item.getGroupId() == R.id.action_units_group){
-      if (itemId == R.id.action_units_header) return true;
+      if (itemId == R.id.action_units_header) {
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW); //https://stackoverflow.com/questions/52176838/how-to-hold-the-overflow-menu-after-i-click-it/52177919#52177919
+        item.setActionView(new View(this));
+        item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+          @Override
+          public boolean onMenuItemActionExpand(MenuItem item) {
+            mMenu.findItem(R.id.action_units_metric).setVisible(!mMenu.findItem(R.id.action_units_metric).isVisible());
+            mMenu.findItem(R.id.action_units_imperial).setVisible(!mMenu.findItem(R.id.action_units_imperial).isVisible());
+            mMenu.findItem(R.id.action_units_nautical).setVisible(!mMenu.findItem(R.id.action_units_nautical).isVisible());
+            return false;
+          }
+          @Override
+          public boolean onMenuItemActionCollapse(MenuItem item) {
+            return false;
+          }
+        });
+        return false;
+      }
       if (!item.isChecked()){
         if (itemId == R.id.action_units_metric) SETTINGS.savePref(R.string.pref_units_key, METRIC);
         else if (itemId == R.id.action_units_imperial) SETTINGS.savePref(R.string.pref_units_key, IMPERIAL);

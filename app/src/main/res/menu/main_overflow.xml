@@ -20,17 +20,17 @@
     </item>
     <item
         android:id="@+id/action_units_metric"
+        android:visible="false"
         android:title="@string/units_metric_menu_item" />
     <item
         android:id="@+id/action_units_imperial"
+        android:visible="false"
         android:title="@string/units_imperial_menu_item" />
     <item
         android:id="@+id/action_units_nautical"
+        android:visible="false"
         android:title="@string/units_nautical_menu_item" />
   </group>
-
-
-
 
   <item
       android:id="@+id/action_compass_degrees"
@@ -45,6 +45,7 @@
       android:title="@string/satellites"
       app:showAsAction="ifRoom" />
 
+  <group android:id="@+id/groupGPS">
   <item
       android:id="@+id/action_lock_gps"
       android:checkable="true"
@@ -55,9 +56,9 @@
       android:id="@+id/action_clear_agps"
       android:icon="@drawable/ic_delete_outline_black_24dp"
       android:title="@string/clear_agps_data" />
+  </group>
 
-  <group android:id="@+id/group1">
-
+  <group android:id="@+id/groupDebug">
   <item
       android:id="@+id/action_debug"
       android:checkable="true"
@@ -66,8 +67,7 @@
       app:showAsAction="never" />
   </group>
 
-  <group android:id="@+id/group2">
-
+  <group android:id="@+id/groupAbout">
     <item
       android:id="@+id/action_about"
       android:icon="@drawable/info"
