@@ -1,0 +1,3 @@
+Added option for nautical units
+Added option for compass in degrees
+Bugfixes

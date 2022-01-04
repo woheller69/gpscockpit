@@ -1,0 +1,3 @@
+Option für nautische Einheiten hinzugefügt
+Option für Kompassanzeige in Grad hinzugefügt
+Fehlerbehebung
