@@ -724,6 +724,11 @@ public class MainActivity extends AppCompatActivity {
       mIsGps = isGps;
     }
 
+    @Deprecated
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras){
+    }
+
     @Override
     public void onLocationChanged(Location location) {
       if (mIsGps) {

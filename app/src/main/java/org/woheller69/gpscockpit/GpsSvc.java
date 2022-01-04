@@ -19,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -49,6 +50,11 @@ public class GpsSvc extends Service implements LocationListener {
 
   private final NotificationManagerCompat mNotifManager =
       NotificationManagerCompat.from(App.getCxt());
+
+  @Deprecated
+  @Override
+  public void onStatusChanged(String provider, int status, Bundle extras){
+  }
 
   @Override
   public IBinder onBind(Intent intent) {
