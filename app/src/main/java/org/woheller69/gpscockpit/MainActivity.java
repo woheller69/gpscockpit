@@ -502,8 +502,10 @@ public class MainActivity extends AppCompatActivity {
           if (mNmeaAltitude!=null) {
             if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               altMSL = getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude ));
+              mB.gpsCont.simpleClock.setAltitude(mNmeaAltitude);
             }else{
               altMSL = getString(R.string.dist_unit_imperial, Utils.formatInt(mNmeaAltitude*3.28084f)); //convert to feet
+              mB.gpsCont.simpleClock.setAltitude(mNmeaAltitude*3.28084f);
             }
           }
           if (mGpsLocation.hasSpeed()) {
@@ -528,8 +530,16 @@ public class MainActivity extends AppCompatActivity {
           }
           if (mGpsLocation.hasAltitude()) {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+            mB.gpsCont.simpleClock.setBackTint(ContextCompat.getColor(this,R.color.accent));
+            mB.gpsCont.simpleClock.setHourTint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.simpleClock.setMinuteTint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.simpleClock.setSecondTint(ContextCompat.getColor(this,R.color.primaryTrans));
           } else {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.simpleClock.setBackTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.simpleClock.setHourTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.simpleClock.setMinuteTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.simpleClock.setSecondTint(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasBearing()) {
             mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
@@ -630,6 +640,10 @@ public class MainActivity extends AppCompatActivity {
       mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.simpleClock.setBackTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.simpleClock.setHourTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.simpleClock.setMinuteTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.simpleClock.setSecondTint(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
     }
 

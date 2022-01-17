@@ -80,30 +80,51 @@
 
   </LinearLayout>
 
-  <com.github.anastr.speedviewlib.DeluxeSpeedView
-      android:id="@+id/deluxeSpeedView"
-      android:layout_gravity="center_horizontal"
-      android:layout_height="wrap_content"
-      android:layout_width="200dp"
-      app:sv_indicator="QuarterLineIndicator"
-      app:sv_unitUnderSpeedText="true"
-      app:sv_withTremble="false"
-      app:sv_speedTextFormat="INTEGER"
-      app:sv_speedBackgroundColor="@color/dynamicBg"
-      app:sv_centerCircleColor="#00000000"
-      app:sv_backgroundCircleColor="@color/dynamicBg"
-      app:sv_speedTextColor="@color/disabledStateColor"
-      app:sv_unitTextColor="@color/dynamicFgDim"
-      app:sv_speedTextSize="40dp"
-      app:sv_textSize="15dp"
-      app:sv_unitSpeedInterval="10dp"
-      app:sv_maxSpeed="180"
-      app:sv_tickNumber="10"
-      app:sv_tickPadding="10dp"
-      app:sv_speedTextPosition="CENTER"
-      app:sv_textColor="@color/dynamicFgDim"
-      app:sv_markColor="@color/dynamicFgDim"
-      app:sv_indicatorColor="@color/primaryTrans"/>
+  <org.woheller69.gpscockpit.StaticViewPager
+      android:layout_width="210dp"
+      android:layout_height="210dp"
+      android:layout_gravity="center_horizontal">
+
+    <com.github.anastr.speedviewlib.DeluxeSpeedView
+        android:id="@+id/deluxeSpeedView"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        app:sv_indicator="QuarterLineIndicator"
+        app:sv_unitUnderSpeedText="true"
+        app:sv_withTremble="false"
+        app:sv_speedTextFormat="INTEGER"
+        app:sv_speedBackgroundColor="@color/dynamicBg"
+        app:sv_centerCircleColor="#00000000"
+        app:sv_backgroundCircleColor="@color/dynamicBg"
+        app:sv_speedTextColor="@color/disabledStateColor"
+        app:sv_unitTextColor="@color/dynamicFgDim"
+        app:sv_speedTextSize="40dp"
+        app:sv_textSize="15dp"
+        app:sv_unitSpeedInterval="10dp"
+        app:sv_maxSpeed="180"
+        app:sv_tickNumber="10"
+        app:sv_tickPadding="10dp"
+        app:sv_speedTextPosition="CENTER"
+        app:sv_textColor="@color/dynamicFgDim"
+        app:sv_markColor="@color/dynamicFgDim"
+        app:sv_indicatorColor="@color/primaryTrans"/>
+
+    <org.woheller69.altimeterview.AltimeterView
+          android:layout_width="210dp"
+          android:layout_height="210dp"
+          android:layout_gravity="center_horizontal"
+          android:id="@+id/simpleClock"
+          android:layout_margin="16dp"
+          android:paddingBottom="20dp"
+          app:backTint="@color/disabledStateColor"
+          app:faceTint="@color/dynamicFgDim"
+          app:dialTint="@color/dynamicFgDim"
+          app:hourTint="@color/disabledStateColor"
+          app:minuteTint="@color/disabledStateColor"
+          app:secondTint="@color/disabledStateColor" />
+
+  </org.woheller69.gpscockpit.StaticViewPager>
 
   <com.redinput.compassview.CompassView
       android:id="@+id/compass"
