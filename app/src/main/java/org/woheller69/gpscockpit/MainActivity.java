@@ -530,14 +530,14 @@ public class MainActivity extends AppCompatActivity {
           }
           if (mGpsLocation.hasAltitude() && mNmeaAltitude!=null) {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
-            mB.gpsCont.altimeterView.setHourTint(ContextCompat.getColor(this,R.color.primaryTrans));
-            mB.gpsCont.altimeterView.setMinuteTint(ContextCompat.getColor(this,R.color.primaryTrans));
-            mB.gpsCont.altimeterView.setSecondTint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.altimeterView.setHand10kTint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.altimeterView.setHand1kTint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.altimeterView.setHand100Tint(ContextCompat.getColor(this,R.color.primaryTrans));
           } else {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
-            mB.gpsCont.altimeterView.setHourTint(ContextCompat.getColor(this,R.color.disabledStateColor));
-            mB.gpsCont.altimeterView.setMinuteTint(ContextCompat.getColor(this,R.color.disabledStateColor));
-            mB.gpsCont.altimeterView.setSecondTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.altimeterView.setHand10kTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.altimeterView.setHand1kTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+            mB.gpsCont.altimeterView.setHand100Tint(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasBearing()) {
             mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
@@ -638,9 +638,9 @@ public class MainActivity extends AppCompatActivity {
       mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
-      mB.gpsCont.altimeterView.setHourTint(ContextCompat.getColor(this,R.color.disabledStateColor));
-      mB.gpsCont.altimeterView.setMinuteTint(ContextCompat.getColor(this,R.color.disabledStateColor));
-      mB.gpsCont.altimeterView.setSecondTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.altimeterView.setHand10kTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.altimeterView.setHand1kTint(ContextCompat.getColor(this,R.color.disabledStateColor));
+      mB.gpsCont.altimeterView.setHand100Tint(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
     }
 

@@ -122,11 +122,11 @@
             android:layout_margin="16dp"
             android:paddingBottom="20dp"
             app:backTint="@color/accent"
-            app:faceTint="@color/dynamicFgDim"
-            app:dialTint="@color/dynamicFgDim"
-            app:hourTint="@color/disabledStateColor"
-            app:minuteTint="@color/disabledStateColor"
-            app:secondTint="@color/disabledStateColor" />
+            app:ticksTint="@color/dynamicFgDim"
+            app:numbersTint="@color/dynamicFgDim"
+            app:hand10kTint="@color/disabledStateColor"
+            app:hand1kTint="@color/disabledStateColor"
+            app:hand100Tint="@color/disabledStateColor" />
 
     </org.woheller69.gpscockpit.StaticViewPager>
     <Space

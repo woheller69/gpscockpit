@@ -13,7 +13,8 @@ You can also see the list of visible satellites with their identifiers and signa
 Location coordinates can be copied to clipboard, shared, or opened in a maps app, if installed.
 Clearing A-GPS aiding data is also supported.
 
-Speed range can be selected by clicking on the speedometer.
+Speed range can be selected by clicking on the speedometer. 
+A left swipe on the speedometer will show an altimeter instead.
 When the START button is pressed travel distance is recorded (horizontal movement and also
 accumulated up and down movements). A change is only recognized and added to the distance if
 the position changes by more than 2x GPS accuracy for horizontal movement and 3x GPS accuracy for
@@ -36,6 +37,7 @@ See https://dontkillmyapp.com/
 * https://github.com/anastr/SpeedView published under Apache License 2.0
 * https://github.com/kix2902/CompassView published under Apache License 2.0
 * https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings) published under Apache License 2.0
+* https://github.com/woheller69/AltimeterView (forked from https://github.com/leondzn/simple-analog-clock ) published under Apache License 2.0
 
 ## License 
 

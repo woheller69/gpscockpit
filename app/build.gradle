@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.github.woheller69:CompassView:3f9a9a38fe'
     implementation 'com.github.anastr:speedviewlib:1.6.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32"
-    implementation 'com.github.woheller69:AltimeterView:96bfbc2310'
+    implementation 'com.github.woheller69:AltimeterView:f448e00632'
     // For BottomSheetDialogFragment
     implementation 'com.google.android.material:material:1.4.0'
 
