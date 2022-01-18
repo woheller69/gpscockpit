@@ -67,7 +67,9 @@ public class StaticViewPager extends ViewPager {
                 return childrenCount;
             }
 
+            @Override
+            public void destroyItem(final ViewGroup container, final int position, final Object object) {}
+
         });
     }
-
 }
