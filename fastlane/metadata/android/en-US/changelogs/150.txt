@@ -1,0 +1,2 @@
+Added altimeter view
+(swipe left on speedometer)

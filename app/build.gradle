@@ -7,8 +7,8 @@ android {
         applicationId "org.woheller69.gpscockpit"
         minSdk 24
         targetSdk 30
-        versionCode 140
-        versionName "1.4"
+        versionCode 150
+        versionName "1.5"
     }
 
     buildTypes {
