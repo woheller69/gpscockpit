@@ -4,8 +4,6 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static org.woheller69.gpscockpit.MySettings.SETTINGS;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -14,20 +12,15 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -37,26 +30,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.TooltipCompat;
-import androidx.browser.customtabs.CustomTabColorSchemeParams;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.browser.customtabs.CustomTabsService;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.security.crypto.EncryptedSharedPreferences;
-import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme;
-import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme;
-import androidx.security.crypto.MasterKey;
-import androidx.security.crypto.MasterKey.KeyScheme;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.RoundingMode;
-import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -127,48 +111,6 @@ public class Utils {
     } catch (ActivityNotFoundException ignored) {
       Utils.showToast(R.string.failed_open_app_settings);
     }
-  }
-
-  public static boolean openWebUrl(Activity activity, String url) {
-    Intent intent = new Intent(CustomTabsService.ACTION_CUSTOM_TABS_CONNECTION);
-    PackageManager pm = App.getCxt().getPackageManager();
-    int flags = PackageManager.MATCH_ALL;
-    List<ResolveInfo> infoList = pm.queryIntentServices(intent, flags);
-    boolean customTabsSupported = !infoList.isEmpty();
-
-    if (customTabsSupported) {
-      CustomTabColorSchemeParams colorSchemeParams =
-          new CustomTabColorSchemeParams.Builder()
-              .setToolbarColor(ContextCompat.getColor(App.getCxt(),R.color.primary))
-              .build();
-      CustomTabsIntent customTabsIntent =
-          new CustomTabsIntent.Builder()
-              .setShareState(CustomTabsIntent.SHARE_STATE_ON)
-              .setDefaultColorSchemeParams(colorSchemeParams)
-              .build();
-      customTabsIntent.launchUrl(activity, Uri.parse(url));
-      return true;
-    }
-
-    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    intent.addCategory(Intent.CATEGORY_BROWSABLE).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    try {
-      activity.startActivity(intent);
-      return true;
-    } catch (ActivityNotFoundException ignored) {
-    }
-
-    if (VERSION.SDK_INT >= VERSION_CODES.R) {
-      intent.setFlags(Intent.FLAG_ACTIVITY_REQUIRE_NON_BROWSER);
-      try {
-        activity.startActivity(intent);
-        return true;
-      } catch (ActivityNotFoundException ignored) {
-      }
-    }
-
-    showToast(R.string.no_browser_installed);
-    return true;
   }
 
   //////////////////////////////////////////////////////////////////
@@ -249,57 +191,6 @@ public class Utils {
 
   public static SharedPreferences getDefPrefs() {
     return App.getCxt().getSharedPreferences("def_prefs", Context.MODE_PRIVATE);
-  }
-
-  private static SharedPreferences sEncPrefs;
-  private static final Object ENC_PREFS_LOCK = new Object();
-
-  @SuppressWarnings("UnusedReturnValue")
-  public static SharedPreferences getEncPrefs() {
-    synchronized (ENC_PREFS_LOCK) {
-      if (sEncPrefs != null) {
-        return sEncPrefs;
-      }
-
-      for (int i = 0; i < 10; i++) {
-        try {
-          sEncPrefs =
-              EncryptedSharedPreferences.create(
-                  App.getCxt(),
-                  BuildConfig.APPLICATION_ID + "_nb_prefs",
-                  new MasterKey.Builder(App.getCxt()).setKeyScheme(KeyScheme.AES256_GCM).build(),
-                  PrefKeyEncryptionScheme.AES256_SIV,
-                  PrefValueEncryptionScheme.AES256_GCM);
-          return sEncPrefs;
-        } catch (Exception e) {
-          if (i == 9) {
-            e.printStackTrace();
-          } else {
-            Log.e(TAG, "getEncPrefs: " + e.toString());
-          }
-          SystemClock.sleep(100);
-        }
-      }
-
-      // Temp fix for https://github.com/google/tink/issues/413
-      return sEncPrefs = getEncPrefsInternal();
-    }
-  }
-
-  @SuppressLint("HardwareIds")
-  @SuppressWarnings("deprecation")
-  private static SharedPreferences getEncPrefsInternal() {
-    try {
-      return EncryptedSharedPreferences.create(
-          BuildConfig.APPLICATION_ID + "_nb_prefs2",
-          Secure.getString(App.getCxt().getContentResolver(), Secure.ANDROID_ID),
-          App.getCxt(),
-          PrefKeyEncryptionScheme.AES256_SIV,
-          PrefValueEncryptionScheme.AES256_GCM);
-    } catch (GeneralSecurityException | IOException e) {
-      e.printStackTrace();
-      throw new Error(e);
-    }
   }
 
   public static Context setLocale(Context context) {

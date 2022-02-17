@@ -33,8 +33,6 @@ public class App extends Application {
 
           defaultExceptionHandler.uncaughtException(t, e);
         });
-
-    Utils.runBg(this::getEncPrefs);
   }
 
   public static void updateContext() {
@@ -49,8 +47,4 @@ public class App extends Application {
     return mAppContext.getResources();
   }
 
-  // To avoid delays later
-  private void getEncPrefs() {
-    Utils.getEncPrefs();
-  }
 }

@@ -2,6 +2,8 @@ package org.woheller69.gpscockpit;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -28,16 +30,16 @@ public class AboutDialogFragment extends AppCompatDialogFragment {
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     AboutDialogBinding b = AboutDialogBinding.inflate(mA.getLayoutInflater());
     b.version.setText(BuildConfig.VERSION_NAME);
-    openWebUrl(b.sourceCode, R.string.source_url);
+    b.sourceCode.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        mA.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.source_url))));
+      }
+    });
 
     AlertDialog dialog = new Builder(mA).setView(b.getRoot()).create();
     return Utils.setDialogBg(dialog);
   }
-
-  private void openWebUrl(View view, int linkResId) {
-    view.setOnClickListener(v -> Utils.openWebUrl(mA, getString(linkResId)));
-  }
-
 
   public static void show(FragmentActivity activity) {
     new AboutDialogFragment().show(activity.getSupportFragmentManager(), "ABOUT");
