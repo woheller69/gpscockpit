@@ -1,0 +1,2 @@
+Change indicator color in dark mode
+Code improvement

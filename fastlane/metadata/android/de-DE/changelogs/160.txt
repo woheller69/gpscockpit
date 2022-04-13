@@ -1,0 +1,2 @@
+Zeigerfarbe im Dark Mode geändert
+Codeverbesserungen
