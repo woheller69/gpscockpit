@@ -56,3 +56,8 @@ You **CANNOT** use and distribute the app icon in anyway, except for **GPS Cockp
     You should have received a copy of the Affero GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+## Try my other apps
+
+| RadarWeather | Gas Prices | Smart Eggtimer | Level | hEARtest | GPS Cockpit |
+| ------- | --- | --- |--- | --- | --- |
+| [<img src="https://github.com/woheller69/weather/blob/main/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.weather/)| [<img src="https://github.com/woheller69/spritpreise/blob/main/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.spritpreise/) | [<img src="https://github.com/woheller69/eggtimer/blob/main/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.eggtimer/) | [<img src="https://github.com/woheller69/Level/blob/master/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.level/) | [<img src="https://github.com/woheller69/audiometry/blob/new/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.audiometry/) | [<img src="https://github.com/woheller69/gpscockpit/blob/master/fastlane/metadata/android/en-US/images/icon.png" height="80">](https://f-droid.org/packages/org.woheller69.gpscockpit/) |
