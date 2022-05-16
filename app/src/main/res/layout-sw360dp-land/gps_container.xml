@@ -12,8 +12,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
         android:src="@drawable/ic_mountain"/>
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:textSize="18dp"
+        android:textSize="24dp"
         android:textColor="@color/disabledStateColor"
         android:layout_weight="2" />
     <TextView
@@ -48,8 +48,8 @@
 
     <ImageView
       android:id="@+id/map"
-      android:layout_width="24dp"
-      android:layout_height="24dp"
+      android:layout_width="28dp"
+      android:layout_height="28dp"
       android:layout_marginStart="4dp"
       android:layout_gravity="center_vertical"
       android:padding="2dp"
@@ -59,8 +59,8 @@
 
     <ImageView
       android:id="@+id/copy"
-      android:layout_width="24dp"
-      android:layout_height="24dp"
+      android:layout_width="28dp"
+      android:layout_height="28dp"
       android:layout_marginStart="4dp"
       android:layout_gravity="center_vertical"
       android:padding="2dp"
@@ -69,8 +69,8 @@
       android:src="@drawable/copy" />
     <ImageView
         android:id="@+id/share"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginStart="4dp"
         android:layout_gravity="center_vertical"
         android:padding="2dp"
@@ -83,15 +83,16 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
       android:orientation="horizontal">
     <org.woheller69.gpscockpit.StaticViewPager
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="190dp"
         android:layout_gravity="center_horizontal">
       <com.github.anastr.speedviewlib.DeluxeSpeedView
           android:id="@+id/deluxeSpeedView"
           android:layout_gravity="top"
-          android:layout_height="150dp"
+          android:layout_height="190dp"
           android:layout_width="wrap_content"
           android:layout_marginStart="40dp"
           app:sv_indicator="QuarterLineIndicator"
@@ -103,7 +104,7 @@
           app:sv_backgroundCircleColor="@color/dynamicBg"
           app:sv_speedTextColor="@color/disabledStateColor"
           app:sv_unitTextColor="@color/dynamicFgDim"
-          app:sv_speedTextSize="30dp"
+          app:sv_speedTextSize="40dp"
           app:sv_textSize="15dp"
           app:sv_unitSpeedInterval="10dp"
           app:sv_maxSpeed="180"
@@ -115,8 +116,8 @@
           app:sv_indicatorColor="@color/primaryTrans"/>
 
       <org.woheller69.altimeterview.AltimeterView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/altimeterView"
             android:layout_margin="16dp"
@@ -148,11 +149,10 @@
           android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="24dp"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_baseline_access_time_24" />
 
         <TextView
@@ -161,15 +161,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="24dp"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_distance" />
 
         <TextView
@@ -178,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
       </LinearLayout>
@@ -190,11 +189,10 @@
           android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="24dp"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_speed_av" />
 
         <TextView
@@ -203,15 +201,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="24dp"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_speed_max" />
 
         <TextView
@@ -220,7 +217,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
       </LinearLayout>
@@ -232,11 +229,10 @@
           android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_mountain" />
 
         <TextView
@@ -245,15 +241,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ic_mountain" />
 
         <TextView
@@ -262,13 +257,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/dynamicFgDim"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:layout_weight="1" />
 
       </LinearLayout>
       <Space
           android:layout_width="wrap_content"
-          android:layout_height="10dp">
+          android:layout_height="20dp">
 
       </Space>
       <com.redinput.compassview.CompassView
@@ -280,7 +275,7 @@
           app:markerColor="@color/primaryTrans"
           app:lineColor="@color/disabledStateColor"
           app:textColor="@color/disabledStateColor"
-          app:textSize="10dp"
+          app:textSize="15dp"
           app:degrees="0" />
     </LinearLayout>
 
@@ -293,11 +288,10 @@
       android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="24dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:paddingEnd="5dp"
         android:src="@drawable/ic_latitude" />
 
     <TextView
@@ -306,15 +300,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/dynamicFgDim"
-        android:textSize="18dp"
+        android:textSize="24dp"
         android:layout_weight="2" />
 
     <ImageView
-        android:layout_width="24dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:paddingEnd="5dp"
         android:src="@drawable/ic_longitude" />
 
     <TextView
@@ -323,15 +316,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/dynamicFgDim"
-        android:textSize="18dp"
+        android:textSize="24dp"
         android:layout_weight="2" />
 
     <ImageView
-        android:layout_width="24dp"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingTop="5dp"
-        android:paddingEnd="5dp"
         android:src="@drawable/ic_accuracy" />
 
     <TextView
@@ -340,7 +332,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textColor="@color/dynamicFgDim"
-        android:textSize="18dp"
+        android:textSize="24dp"
         android:layout_weight="1" />
 
   </LinearLayout>

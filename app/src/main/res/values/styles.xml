@@ -11,6 +11,8 @@
   </style>
 
   <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <item name="android:actionBarSize">36dp</item>
+    <item name="actionBarSize">36dp</item>
     <item name="colorPrimary">@color/primary</item> //App bar color
     <item name="colorPrimaryDark">@color/primaryDark</item>  //Status bar color
     <item name="colorAccent">@color/accent</item>

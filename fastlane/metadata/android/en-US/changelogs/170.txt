@@ -1,0 +1,1 @@
+Compact layout for devices with small screens
