@@ -1,0 +1,67 @@
+<resources>
+
+  <string name="gps">GPS</string>
+
+  <string name="grant_permission">Conceda a permissão</string>
+  <string name="clear_agps_data">Limpar dados AGPS</string>
+  <string name="lock_gps">Fixar GPS</string>
+  <string name="unlock_gps">Soltar GPS</string>
+
+  <string name="not_supported">Não suportado</string>
+  <string name="perm_not_granted">Permissão necessária</string>
+  <string name="turned_off">Desligado</string>
+  <string name="failed">Falhou</string>
+
+  <string name="map">Mapa</string>
+  <string name="copy">Copiar</string>
+  <string name="share" maxLength="15">Compartilhar</string>
+  <string name="satellites">Satélites</string>
+
+  <string name="total">Total</string>
+  <string name="good">Bons</string>
+  <string name="fixed">Fixado(s)</string>
+
+  <string name="satellites_count">Total de satélites: %1$d, Bons: %2$d, Fixado(s): %3$d</string>
+  <string name="accuracy">Precisão:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
+  <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
+  <string name="dist_unit_nautical2">%s nmi</string>
+  <string name="speed_unit">km/h</string>
+  <string name="speed_unit_imperial">mph</string>
+  <string name="speed_unit_nautical">kn</string>
+  <string name="last_update">%1$d s atrás</string>
+  <string name="record">Ligar</string>
+  <string name="stop">Desligar</string>
+
+  <string name="no_browser_installed" maxLength="20">Nenhum navegador instalado</string>
+  <string name="no_maps_installed" maxLength="20">Nenhum app de mapas</string>
+  <string name="failed_open_app_settings" maxLength="20">Confgs do app indisp</string>
+  <string name="cleared" maxLength="20">Removido</string>
+  <string name="copied" maxLength="20">Copiado</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+
+  <!-- Menu -->
+  <string name="dark_theme_menu_item" maxLength="15">Tema escuro</string>
+  <string name="about_menu_item"  maxLength="15">Sobre</string>
+  <string name="debug_menu_item">Depurar</string>
+  <string name="compass_degrees_menu_item">Bússola: Mostrar graus</string>
+  <string name="units_menu_item">Unidades</string>
+  <string name="units_metric_menu_item">Métrica</string>
+  <string name="units_imperial_menu_item">Imperial</string>
+  <string name="units_nautical_menu_item">Náutica</string>
+
+  <!-- AboutDialog -->
+  <string name="source" maxLength="15">Fonte</string>
+
+  <!-- StarDialog -->
+  <string name="dialog_OK_button">OK</string>
+  <string name="dialog_NO_button">Não</string>
+  <string name="dialog_Later_button">Outro hora</string>
+  <string name="dialog_StarOnGitHub">Você gosta do app? Por favor, clique na estrela no GitHub.</string>
+
+</resources>
