@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean gpsLocked = false;
   private boolean gpsLockedBeforeStart = false;
   private long mDebugCounter = 0;
-  private final float[] speedList = {27,45,90,135,180,270};
+  private final float[] speedList = {27,45,90,135,180,270,1350};
   private Location mGpsLocation;
   private Location mOldGpsLocation;
   private float mTravelDistance = 0;
