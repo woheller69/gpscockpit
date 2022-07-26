@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
-    setNightTheme(this);
     mB = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(mB.getRoot());
 
@@ -137,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
+    setNightTheme(this);
   }
 
   @Override
