@@ -167,6 +167,7 @@ public class GpsSvc extends Service implements LocationListener {
             mUsedSats++;
           }
         }
+        if (mUsedSats<4) mGpsLoc=null;  //delete last location if less then 4 sats are in use -> fix lost
         updateNotification();
         super.onSatelliteStatusChanged(status);
       }
