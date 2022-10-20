@@ -81,10 +81,12 @@ public class GpsSvc extends Service implements LocationListener {
   }
 
   private Location mGpsLoc;
+  private long mGpsLocTime;
 
   @Override
   public void onLocationChanged(Location location) {
     mGpsLoc = location;
+    mGpsLocTime = System.currentTimeMillis();  // because location.getTime() gives wrong time
     updateNotification();
   }
 
@@ -167,7 +169,7 @@ public class GpsSvc extends Service implements LocationListener {
             mUsedSats++;
           }
         }
-        if ((mUsedSats<4) || (mGpsLoc!=null && System.currentTimeMillis()-mGpsLoc.getTime() > 2*MIN_DELAY)) mGpsLoc=null;  //delete last location if less then 4 sats are in use or last update time longer than 2*MIN_DELAY-> fix lost
+        if ((mUsedSats<4) || (mGpsLoc!=null && System.currentTimeMillis()-mGpsLocTime > 2*MIN_DELAY)) mGpsLoc=null;  //delete last location if less then 4 sats are in use or last update time longer than 2*MIN_DELAY-> fix lost
         updateNotification();
         super.onSatelliteStatusChanged(status);
       }

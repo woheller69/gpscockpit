@@ -35,6 +35,8 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
   private long mDebugCounter = 0;
   private final float[] speedList = {27,45,90,135,180,270,1350};
   private Location mGpsLocation;
+  private long mGpsLocationTime;
   private Location mOldGpsLocation;
   private float mTravelDistance = 0;
   private Double mAltUp = 0d;
@@ -633,7 +636,7 @@ public class MainActivity extends AppCompatActivity {
     if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
     mB.gpsCont.debugCounter.setText(Long.toString(mDebugCounter));
 
-    if (mGpsLocation==null || (System.currentTimeMillis()-mGpsLocation.getTime())> 3*MIN_DELAY){
+    if (mGpsLocation==null || (System.currentTimeMillis()-mGpsLocationTime)> 3*MIN_DELAY){
       mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
       mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
@@ -744,6 +747,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLocationChanged(Location location) {
       if (mIsGps) {
         mGpsLocation = location;
+        mGpsLocationTime=System.currentTimeMillis(); // because location.getTime() gives wrong time
         if (recording) mDebugCounter++;
         updateUi();
       }
