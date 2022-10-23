@@ -320,31 +320,14 @@ public class Utils {
     TooltipCompat.setTooltipText(v, v.getContentDescription());
   }
 
-  public static boolean isNightMode(Activity activity) {
-    int uiMode = activity.getResources().getConfiguration().uiMode;
-    return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
-  }
 
-  public static boolean setNightTheme(Activity activity) {
+  public static void setNightTheme() {
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);  //first reset night mode. Otherwise problems on some devices
     if (!SETTINGS.getForceDarkMode()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-      return false;
+    } else {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
-
-    // Dark Mode applied on whole device
-    if (isNightMode(activity)) {
-      return false;
-    }
-
-    // Dark Mode already applied in app
-    int defMode = AppCompatDelegate.getDefaultNightMode();
-    if (defMode == AppCompatDelegate.MODE_NIGHT_YES) {
-      return false;
-    }
-
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-    return true;
   }
 
   public static AlertDialog setDialogBg(AlertDialog dialog) {

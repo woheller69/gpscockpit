@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    setNightTheme(this);
+    setNightTheme();
   }
 
   private void initView() {
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     int itemId = item.getItemId();
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
-      setNightTheme(this);
+      setNightTheme();
       invalidateOptionsMenu();
       return true;
     }
