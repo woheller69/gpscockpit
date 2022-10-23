@@ -35,7 +35,6 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,35 +86,21 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public void onConfigurationChanged(Configuration newConfig){
     super.onConfigurationChanged(newConfig);
-    mB = ActivityMainBinding.inflate(getLayoutInflater());
-    setContentView(mB.getRoot());
-    setupSpeedView();
-    mB.record.setChecked(recording);
-    setupGps();
-    updateGpsUi();
+    initView();
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
-    mB = ActivityMainBinding.inflate(getLayoutInflater());
-    setContentView(mB.getRoot());
-
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
         mGpsProviderSupported = true;
         break;
       }
     }
-
-    setupSpeedView();
-    setupGps();
-    updateGpsUi();
+    initView();
     checkPerms();
-
-    mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
-
     if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
 
@@ -124,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
     super.onStart();
     startLocListeners();
     setTimer();
-    setGrantPermButtonState();
   }
 
   @Override
@@ -140,6 +124,17 @@ public class MainActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     setNightTheme(this);
+  }
+
+  private void initView() {
+    mB = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(mB.getRoot());
+    mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
+    setGrantPermButtonState();
+    setupSpeedView();
+    mB.record.setChecked(recording);
+    setupGps();
+    updateGpsUi();
   }
 
   @Override

@@ -326,6 +326,7 @@ public class Utils {
   }
 
   public static boolean setNightTheme(Activity activity) {
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);  //first reset night mode. Otherwise problems on some devices
     if (!SETTINGS.getForceDarkMode()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
       return false;
