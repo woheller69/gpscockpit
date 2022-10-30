@@ -66,22 +66,22 @@ public class MainActivity extends AppCompatActivity {
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
 
   private boolean mGpsProviderSupported = false;
-  private boolean recording = false;
+  private static boolean recording = false;
   private boolean gpsLocked = false;
   private boolean gpsLockedBeforeStart = false;
-  private long mDebugCounter = 0;
+  private static long mDebugCounter = 0;
   private final float[] speedList = {27,45,90,135,180,270,1350};
   private Location mGpsLocation;
   private long mGpsLocationTime;
   private Location mOldGpsLocation;
-  private float mTravelDistance = 0;
-  private Double mAltUp = 0d;
-  private Double mAltDown = 0d;
+  private static float mTravelDistance = 0;
+  private static Double mAltUp = 0d;
+  private static Double mAltDown = 0d;
   private Double mNmeaOldAltitude;
   private Double mNmeaAltitude;
-  private Float mMaxSpeed = 0f;
-  private long mStartTime = System.currentTimeMillis()/1000;
-  private long mEndTime = System.currentTimeMillis()/1000;
+  private static Float mMaxSpeed = 0f;
+  private static long mStartTime = System.currentTimeMillis()/1000;
+  private static long mEndTime = System.currentTimeMillis()/1000;
 
   @Override
   public void onConfigurationChanged(Configuration newConfig){
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onDestroy() {
+    stopLocListeners();
     super.onDestroy();
   }
 
