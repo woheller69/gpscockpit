@@ -1,0 +1,3 @@
+Upgrade to Android 12 SDK
+New feature: Head-Up Display
+Bugfixes
