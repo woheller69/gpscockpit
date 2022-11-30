@@ -3,6 +3,13 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
+      android:id="@+id/action_HUD"
+      android:title="@string/headup_display"
+      android:icon="@drawable/ic_flip_24dp"
+      app:showAsAction="never"
+    />
+
+  <item
     android:id="@+id/action_dark_theme"
     android:checkable="true"
     android:icon="@drawable/dark_mode"

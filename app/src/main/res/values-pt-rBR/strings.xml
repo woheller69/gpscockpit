@@ -63,5 +63,5 @@
   <string name="dialog_NO_button">Não</string>
   <string name="dialog_Later_button">Outro hora</string>
   <string name="dialog_StarOnGitHub">Você gosta do app? Por favor, clique na estrela no GitHub.</string>
-
+  <string name="headup_display">Head-Up Display</string>
 </resources>

@@ -5,9 +5,10 @@ Você também pode ver uma lista de satélites disponíveis com qualidade de sin
 As coordenadas de localização podem ser copiadas ao clipboard, compartilhadas ou abertas em um app de mapas externo.
 Também é suportada a limpeza de dados auxiliares do A-GPS.
 A faixa de variação de velocidade pode ser selecionada tocando no velocímetro.
-
+Um deslizar para a esquerda no velocímetro mostrará um altímetro.
 Ao clicar no botão LIGAR você começa a registrar a distância de percurso (movimento horizontal e também movimentos acumulados para cima e para baixo).
 Uma diferença é reconhecida e acrescentada à distância, se a posição alterar mais que 2x em precisão do GPS para movimento horizontal e 3x em precisão do GPS para movimentos verticais e somente quando a precisão for de pelo menos 15m.
+Uma visualização invertida para uso como head-up display também está disponível.
 
 Permissões necessárias:
  - GPS para acessar a localização

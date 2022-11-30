@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
   private static Float mMaxSpeed = 0f;
   private static long mStartTime = System.currentTimeMillis()/1000;
   private static long mEndTime = System.currentTimeMillis()/1000;
+  private static long mDestroyCounter = 0;
+  private static boolean modeHUD = false;
 
   @Override
   public void onConfigurationChanged(Configuration newConfig){
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     stopLocListeners();
+    mDestroyCounter++;
     super.onDestroy();
   }
 
@@ -216,6 +219,13 @@ public class MainActivity extends AppCompatActivity {
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
       setNightTheme();
+      invalidateOptionsMenu();
+      return true;
+    }
+
+    if (itemId == R.id.action_HUD) {
+      modeHUD = !modeHUD;
+      updateGpsUi();
       invalidateOptionsMenu();
       return true;
     }
@@ -469,6 +479,10 @@ public class MainActivity extends AppCompatActivity {
     }
     if (mB != null) {
       updateGpsUi();
+
+      mB.gpsCont.getRoot().setScaleY(modeHUD ? -1 : 1);
+      mB.buttonLayout.setScaleY(modeHUD ? -1 : 1);
+
     }
   }
 
@@ -630,7 +644,7 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.speedMax.setText(speed_max);
 
     if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
-    mB.gpsCont.debugCounter.setText(Long.toString(mDebugCounter));
+    mB.gpsCont.debugCounter.setText(Long.toString(mDebugCounter)+" - "+Long.toString(mDestroyCounter));
 
     if (mGpsLocation==null || (System.currentTimeMillis()-mGpsLocationTime)> 3*MIN_DELAY){
       mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));

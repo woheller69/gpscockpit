@@ -1,1 +1,1 @@
-Zeigt GPS Daten in Cockpitdarstellung
+GPS Cockpit & Head-Up Display

@@ -5,9 +5,11 @@ Eine Liste der sichtbaren Satelliten mit ihren Kennungen und der Signalqualität
 Die Ortskoordinaten können in die Zwischenablage kopiert werden, geteilt werden oder in einer Karten-App geöffnet werden.
 Das Löschen von A-GPS Daten wird ebenfalls unterstützt.
 Der Geschwindigkeitsbereich kann durch Klick auf den Tachometer geändert werden.
+Wenn man auf dem Tachometer nach links wischt, wird ein Höhenmesser angezeigt.
 Beim Drücken der START-Taste wird die Fahrstrecke aufgezeichnet (horizontale Bewegung und auch kumulierte Auf- und Abbewegungen).
 Eine Änderung wird nur erkannt und zur Distanz addiert, wenn sich die Position um mehr als 2x GPS-Genauigkeit für horizontale Bewegung ändert
 und 3x GPS-Genauigkeit für vertikale Bewegungen und nur bei einer Genauigkeit von mindestens 15 m.
+Eine umgedrehte Ansicht zur Verwendung als Head-up Display ist ebenfalls verfügbar.
 
 Nötige Berechtigungen:
  - GPS zur Positionsbestimmung

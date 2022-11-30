@@ -1,1 +1,1 @@
-Show your GPS data in a cockpit view
+GPS Cockpit & Head-Up Display

@@ -76,7 +76,7 @@ public class GpsSvc extends Service implements LocationListener {
 
   @Override
   public void onDestroy() {
-    stop();
+
     super.onDestroy();
   }
 

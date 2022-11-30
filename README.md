@@ -1,4 +1,4 @@
-# GPS Cockpit 
+# GPS Cockpit & Head-Up Display
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> 
 
@@ -19,6 +19,7 @@ When the START button is pressed travel distance is recorded (horizontal movemen
 accumulated up and down movements). A change is only recognized and added to the distance if
 the position changes by more than 2x GPS accuracy for horizontal movement and 3x GPS accuracy for
 vertical movements and only if accuracy is at least 15m.
+A flipped view for use as head-up display is also available.
 
 Depending on the device this may or may not work with screen off. 
 Some manufacturers have implemented hostile energy management options and do not respect
