@@ -1,3 +1,6 @@
+
+<pre> If you want to support this app you can send a coffee via PayPal to woheller69@t-online.de <a href= "https://www.paypal.com/signin"><img  align="right" src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-100px.png"></a> </pre> 
+
 # GPS Cockpit & Head-Up Display
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" width="250"> 
