@@ -8,8 +8,8 @@ android {
         applicationId "org.woheller69.gpscockpit"
         minSdk 24
         targetSdk 31
-        versionCode 210
-        versionName "2.1"
+        versionCode 220
+        versionName "2.2"
     }
 
     buildTypes {
@@ -38,7 +38,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
-    implementation 'com.github.woheller69:CompassView:3f9a9a38fe'
+    implementation 'com.github.woheller69:CompassView:a63c67da90'
     implementation 'com.github.anastr:speedviewlib:1.6.0'
     implementation 'com.github.woheller69:AltimeterView:f448e00632'
     // For BottomSheetDialogFragment
