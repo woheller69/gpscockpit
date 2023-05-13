@@ -1,0 +1,73 @@
+<resources>
+
+  <string name="app_name" translatable="false">GPS Cockpit</string>
+
+  <string name="gps">GPS</string>
+
+  <string name="grant_permission">Geef toegang</string>
+  <string name="clear_agps_data">Leeg AGPS Data</string>
+  <string name="lock_gps">Vergrendel GPS</string>
+  <string name="unlock_gps">Ontgrendel GPS</string>
+
+  <string name="not_supported">Niet ondersteund</string>
+  <string name="perm_not_granted">Toegang vereist</string>
+  <string name="turned_off">Uitgeschakeld</string>
+  <string name="failed">Mislukt</string>
+
+  <string name="map">Kaart</string>
+  <string name="copy">Kopieer</string>
+  <string name="share" maxLength="15">Deel</string>
+  <string name="satellites">Satellieten</string>
+
+  <string name="total">Totaal</string>
+  <string name="good">Goed</string>
+  <string name="fixed">Gefixeerd</string>
+
+  <string name="satellites_count">Satellieten Totaal: %1$d, Goed: %2$d, Gefixeerd: %3$d</string>
+  <string name="accuracy">Nauwkeurigheid:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
+  <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
+  <string name="dist_unit_nautical2">%s nmi</string>
+  <string name="speed_unit">km/u</string>
+  <string name="speed_unit_imperial">mpu</string>
+  <string name="speed_unit_nautical">kn</string>
+  <string name="last_update">%1$d s geleden</string>
+  <string name="reset" translatable="false">0.0</string>
+  <string name="record">Start</string>
+  <string name="stop">Stop</string>
+
+  <string name="no_browser_installed" maxLength="20">Geen web browser app geinstalleerd</string>
+  <string name="no_maps_installed" maxLength="20">Geen maps app geinstalleerd</string>
+  <string name="failed_open_app_settings" maxLength="20">Failed to open app settings</string>
+  <string name="cleared" maxLength="20">Geleegd</string>
+  <string name="copied" maxLength="20">Gekopieerd</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+
+  <!-- Menu -->
+  <string name="dark_theme_menu_item" maxLength="15">Donker Thema</string>
+  <string name="about_menu_item"  maxLength="15">Over</string>
+  <string name="debug_menu_item">Debug</string>
+  <string name="compass_degrees_menu_item">Kompas: Toon graden</string>
+  <string name="units_menu_item">Eenheden</string>
+  <string name="units_metric_menu_item">Metrisch</string>
+  <string name="units_imperial_menu_item">Imperisch</string>
+  <string name="units_nautical_menu_item">Nautisch</string>
+
+  <!-- AboutDialog -->
+  <string name="source" maxLength="15">Bron</string>
+  <string name="source_url" translatable="false">https://github.com/woheller69/gpscockpit</string>
+
+  <!-- StarDialog -->
+  <string name="dialog_OK_button">OK</string>
+  <string name="dialog_NO_button">Nee</string>
+  <string name="dialog_Later_button">Misschien later</string>
+  <string name="dialog_StarOnGitHub">Bevalt deze app? Geef een ster op GitHub.</string>
+  <string name="headup_display">Geprojecteerde weergave (HUD)</string>
+
+
+</resources>
