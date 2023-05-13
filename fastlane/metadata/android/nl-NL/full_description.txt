@@ -1,0 +1,26 @@
+<big><b>Eigenschappen:</b></big>
+
+Met GPS Cockpit kan je de positie van je apparaat bepalen met behulp van GPS en de meest relevante data
+weergeven in een cockpit stijl.
+Je kunt ook een lijst zien van de zichtbare satellieten met hun identificatie en signaal kwaliteit.
+
+Locatie coordinaten kunnen gekopieerd worden naar het klembord, gedeeld worden of geopend worden in een
+maps app, indien deze is geinstalleerd.
+
+Het legen van A-GPS ondersteunende data is ook ondersteund.
+
+Het bereik van de snelheidsweergave kan gekozen worden door er op te klikken.
+
+Naar links swipen op de snelheidsmeter geeft een hoogte meter.
+
+Door op de START knop te drukken wordt de reisafstand gemeten (horizontale beweging en daar bij opgeteld op en neerwaarde bewegingen).
+
+Beweging wordt alleen herkent en opgeteld bij de afstand als de positie meer dan 2x de GPS nauwkeurigheid wijzigd voor horizontale beweging en 3x de GPS nauwkeugheid voor verticate beweging en alleen als de nauwkeurigheid is tenminste 15m.
+
+Een gespiegelde weergave voor een geprojecteerde weergave is ook mogelijk.
+
+Vereiste toegang:
+ - GPS om toegang te krijgen tot de locatie
+ - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE om GPS actief te houden op de achtergrond indien ingesteld door de gebruiker ("VERGRENDEL GPS")
+
+Geen advertenties, geen tracker.
