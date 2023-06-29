@@ -64,6 +64,5 @@
   <string name="dialog_Later_button">Kanskje senere</string>
   <string name="dialog_StarOnGitHub">Liker du appen? Gi en stjerne på GitHub.</string>
   <string name="headup_display">Head-Up display</string>
-
-
+  <string name="turned_on">En</string>
 </resources>
