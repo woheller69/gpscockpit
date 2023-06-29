@@ -17,6 +17,7 @@ import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.OnNmeaMessageListener;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -41,6 +42,9 @@ public class GpsSvc extends Service implements LocationListener {
   public static boolean mIsRunning = false;
 
   private GnssStatus.Callback mGnssStatusCallback;
+
+  private OnNmeaMessageListener mOnNmeaMessageListener;
+  private Double mNmeaAltitude = null;
 
   private final LocationManager mLocManager =
       (LocationManager) App.getCxt().getSystemService(Context.LOCATION_SERVICE);
@@ -169,13 +173,24 @@ public class GpsSvc extends Service implements LocationListener {
             mUsedSats++;
           }
         }
-        if ((mUsedSats<4) || (mGpsLoc!=null && System.currentTimeMillis()-mGpsLocTime > 2*MIN_DELAY)) mGpsLoc=null;  //delete last location if less then 4 sats are in use or last update time longer than 2*MIN_DELAY-> fix lost
+        if ((mUsedSats<4) || (mGpsLoc!=null && System.currentTimeMillis()-mGpsLocTime > 2*MIN_DELAY)) {
+          mGpsLoc=null;  //delete last location if less then 4 sats are in use or last update time longer than 2*MIN_DELAY-> fix lost
+          mNmeaAltitude=null;
+        }
         updateNotification();
         super.onSatelliteStatusChanged(status);
       }
     };
     mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_DELAY, 0, this);
     mLocManager.registerGnssStatusCallback(mGnssStatusCallback,new Handler(Looper.getMainLooper()));
+
+    mOnNmeaMessageListener = (message, timestamp) -> {
+      Double msl = MainActivity.getAltitudeMeanSeaLevel(message);
+      if (msl != null) {
+        mNmeaAltitude = msl;
+      }
+    };
+    mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
   }
 
   private void stopGpsLocListener() {
@@ -186,6 +201,7 @@ public class GpsSvc extends Service implements LocationListener {
       mWakeLock = null;
     }
     mLocManager.removeUpdates(this);
+    mLocManager.removeNmeaListener(mOnNmeaMessageListener);
     mLocManager.unregisterGnssStatusCallback(mGnssStatusCallback);
   }
 
@@ -218,6 +234,7 @@ public class GpsSvc extends Service implements LocationListener {
 
       String sText, bText;
       long when = 0;
+      mNotifBuilder.setContentTitle(getString(R.string.channel_gps_lock));
       if (!mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
         sText = bText = getString(R.string.turned_off);
       } else {
@@ -228,8 +245,14 @@ public class GpsSvc extends Service implements LocationListener {
             && (lng = mGpsLoc.getLongitude()) != 0) {
           if (SETTINGS.getIntPref(R.string.pref_units_key, MainActivity.METRIC) == MainActivity.METRIC){
             sText = getString(R.string.accuracy) + getString(R.string.dist_unit, formatLocAccuracy(mGpsLoc.getAccuracy()));
+            if (mNmeaAltitude!=null){
+             mNotifBuilder.setContentTitle(getString(R.string.channel_gps_lock) + " \u26F0 "+ getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude )));
+            }
           } else {
             sText = getString(R.string.accuracy) + getString(R.string.dist_unit_imperial, formatLocAccuracy(mGpsLoc.getAccuracy()*3.28084f));
+            if (mNmeaAltitude!=null){
+              mNotifBuilder.setContentTitle(getString(R.string.channel_gps_lock) + " \u26F0 "+ getString(R.string.dist_unit_imperial, Utils.formatInt(mNmeaAltitude*3.28084f)));
+            }
           }
           bText += "\n" + sText;
         }

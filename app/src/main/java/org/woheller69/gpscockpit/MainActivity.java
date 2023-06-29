@@ -414,12 +414,15 @@ public class MainActivity extends AppCompatActivity {
     synchronized (LOC_LISTENER_LOCK) {
       if (mGpsLocListener != null) {
         mLocManager.removeUpdates(mGpsLocListener);
-        mLocManager.removeNmeaListener(mOnNmeaMessageListener);
         mGpsLocListener = null;
       }
       if (mGnssStatusCallback != null) {
         mLocManager.unregisterGnssStatusCallback(mGnssStatusCallback);
         mGnssStatusCallback = null;
+      }
+      if (mOnNmeaMessageListener != null) {
+        mLocManager.removeNmeaListener(mOnNmeaMessageListener);
+        mOnNmeaMessageListener = null;
       }
       clearGpsData();
     }
@@ -643,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
     }
     mB.gpsCont.speedMax.setText(speed_max);
 
-    if (mGpsLocation!=null && mGpsLocation.hasBearing()) mB.gpsCont.compass.setDegrees(bearing,true);
+    if (mGpsLocation!=null && mGpsLocation.hasBearing() && bearing != 0) mB.gpsCont.compass.setDegrees(bearing,true);
     mB.gpsCont.debugCounter.setText(Long.toString(mDebugCounter)+" - "+Long.toString(mDestroyCounter));
 
     if (mGpsLocation==null || (System.currentTimeMillis()-mGpsLocationTime)> 3*MIN_DELAY){
