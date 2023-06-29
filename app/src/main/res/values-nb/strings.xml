@@ -1,0 +1,69 @@
+<resources>
+
+  <string name="gps">GPS</string>
+
+  <string name="grant_permission">Gi tillatelse</string>
+  <string name="clear_agps_data">Slett AGPS-data</string>
+  <string name="lock_gps">Lås GPS</string>
+  <string name="unlock_gps">Lås opp GPS</string>
+
+  <string name="not_supported">Ikke støttet</string>
+  <string name="perm_not_granted">Tillatelse kreves</string>
+  <string name="turned_off">Avslått</string>
+  <string name="failed">Feilet</string>
+
+  <string name="map">Kart</string>
+  <string name="copy">Kopier</string>
+  <string name="share" maxLength="15">Del</string>
+  <string name="satellites">Satellitter</string>
+
+  <string name="total">Totalt</string>
+  <string name="good">Gode</string>
+  <string name="fixed">Fikserte</string>
+
+  <string name="satellites_count">Satellitter Totalt: %1$d, Gode: %2$d, Fikserte: %3$d</string>
+  <string name="accuracy">Nøyaktighet:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
+  <string name="dist_unit_imperial">%s ft</string>
+  <string name="dist_unit_imperial2">%s mi</string>
+  <string name="dist_unit_nautical2">%s nmi</string>
+  <string name="speed_unit">km/t</string>
+  <string name="speed_unit_imperial">mph</string>
+  <string name="speed_unit_nautical">kn</string>
+  <string name="last_update">%1$d s siden</string>
+  <string name="record">Start</string>
+  <string name="stop">Stopp</string>
+
+  <string name="no_browser_installed" maxLength="20">Ingen nettleser-app installert</string>
+  <string name="no_maps_installed" maxLength="20">Ingen kart-app installert</string>
+  <string name="failed_open_app_settings" maxLength="20">Feilet i å åpne app-innstillinger</string>
+  <string name="cleared" maxLength="20">Fjernet</string>
+  <string name="copied" maxLength="20">Kopiert</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+
+  <!-- Menu -->
+  <string name="dark_theme_menu_item" maxLength="15">Mørkt tema</string>
+  <string name="about_menu_item"  maxLength="15">Om</string>
+  <string name="debug_menu_item">Feilsøk</string>
+  <string name="compass_degrees_menu_item">Kompass: Vis grader</string>
+  <string name="units_menu_item">Enheter</string>
+  <string name="units_metric_menu_item">Metrisk</string>
+  <string name="units_imperial_menu_item">Britisk</string>
+  <string name="units_nautical_menu_item">Nautisk</string>
+
+  <!-- AboutDialog -->
+  <string name="source" maxLength="15">Kildekode</string>
+
+  <!-- StarDialog -->
+  <string name="dialog_OK_button">OK</string>
+  <string name="dialog_NO_button">Nei</string>
+  <string name="dialog_Later_button">Kanskje senere</string>
+  <string name="dialog_StarOnGitHub">Liker du appen? Gi en stjerne på GitHub.</string>
+  <string name="headup_display">Head-Up display</string>
+
+
+</resources>
