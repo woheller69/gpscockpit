@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
   private boolean mGpsProviderSupported = false;
   private static boolean recording = false;
-  private boolean gpsLocked = false;
+  public static boolean gpsLocked = false;
   private boolean gpsLockedBeforeStart = false;
   private static long mDebugCounter = 0;
   private final float[] speedList = {27,45,90,135,180,270,1350};

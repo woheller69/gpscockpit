@@ -11,6 +11,8 @@ Eine Änderung wird nur erkannt und zur Distanz addiert, wenn sich die Position 
 und 3x GPS-Genauigkeit für vertikale Bewegungen und nur bei einer Genauigkeit von mindestens 15 m.
 Eine umgedrehte Ansicht zur Verwendung als Head-up Display ist ebenfalls verfügbar.
 
+Eine Kachel in den Schnelleinstellungen erlaubt das Ein-/Ausschalten der GPS Sperre.
+
 Nötige Berechtigungen:
  - GPS zur Positionsbestimmung
  - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE um GPS auf Wunsch des Nutzers ("GPS SPERREN") auch im Hintergrund aktiv halten zu können

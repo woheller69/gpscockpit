@@ -19,6 +19,8 @@ Beweging wordt alleen herkent en opgeteld bij de afstand als de positie meer dan
 
 Een gespiegelde weergave voor een geprojecteerde weergave is ook mogelijk.
 
+Met een tegel in snelle instellingen kunt u GPS-vergrendeling in- of uitschakelen.
+
 Vereiste toegang:
  - GPS om toegang te krijgen tot de locatie
  - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE om GPS actief te houden op de achtergrond indien ingesteld door de gebruiker ("VERGRENDEL GPS")

@@ -25,6 +25,8 @@ the position changes by more than 2x GPS accuracy for horizontal movement and 3x
 vertical movements and only if accuracy is at least 15m.
 A flipped view for use as head-up display is also available.
 
+A tile in quick settings allows you to enable/disable GPS lock.
+
 Depending on the device this may or may not work with screen off. 
 Some manufacturers have implemented hostile energy management options and do not respect
 app permissions for holding wake locks or ignore battery optimizations.

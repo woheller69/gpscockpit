@@ -10,6 +10,8 @@ Ao clicar no botão LIGAR você começa a registrar a distância de percurso (mo
 Uma diferença é reconhecida e acrescentada à distância, se a posição alterar mais que 2x em precisão do GPS para movimento horizontal e 3x em precisão do GPS para movimentos verticais e somente quando a precisão for de pelo menos 15m.
 Uma visualização invertida para uso como head-up display também está disponível.
 
+Um bloco nas configurações rápidas permite ativar/desativar o bloqueio do GPS.
+
 Permissões necessárias:
  - GPS para acessar a localização
  - REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE para manter o GPS ativo em segundo plano, se solicitado por usuário ("FIXAR GPS")

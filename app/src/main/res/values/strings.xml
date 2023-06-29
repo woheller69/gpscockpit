@@ -68,6 +68,5 @@
   <string name="dialog_Later_button">Maybe later</string>
   <string name="dialog_StarOnGitHub">Do you like this app? Please star it on GitHub.</string>
   <string name="headup_display">Head-Up Display</string>
-
-
+  <string name="turned_on">On</string>
 </resources>
