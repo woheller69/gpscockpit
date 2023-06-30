@@ -1,0 +1,3 @@
+Tile in quick settings to enable/disable GPS lock
+Display altitude in notification
+Norwegian translation
