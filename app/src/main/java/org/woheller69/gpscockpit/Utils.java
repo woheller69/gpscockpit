@@ -2,6 +2,7 @@ package org.woheller69.gpscockpit;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 import android.app.Activity;
@@ -27,6 +28,8 @@ import android.util.TypedValue;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.TooltipCompat;
@@ -40,10 +43,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -187,6 +190,11 @@ public class Utils {
 
   public static boolean hasPerm(String perm) {
     return ActivityCompat.checkSelfPermission(App.getCxt(), perm) == PERMISSION_GRANTED;
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+  public static boolean hasNotifPerm() {
+    return hasPerm(POST_NOTIFICATIONS);
   }
 
   public static SharedPreferences getDefPrefs() {
@@ -374,8 +382,26 @@ public class Utils {
     }
   }
 
-
   public static int getPiFlags() {
     return PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE;
+  }
+
+  /**
+   *
+   * @param type true:latitude, false:longitude
+   */
+  public static String getDMSfromDD(Context context, Double coord, Boolean type){
+    BigDecimal coordBD = new BigDecimal(coord);
+    BigDecimal degrees = coordBD.setScale(0, RoundingMode.DOWN);
+    BigDecimal minTemp = coordBD.subtract(degrees).multiply(new BigDecimal(60)).abs();
+    BigDecimal minutes = minTemp.setScale(0,RoundingMode.DOWN);
+    BigDecimal seconds = minTemp.subtract(minutes).multiply(new BigDecimal(60)).setScale(1,RoundingMode.HALF_UP);
+    String hemisphere;
+    if (type) {
+      hemisphere = coord < 0 ? context.getString(com.redinput.compassview.R.string.compass_south) : context.getString(com.redinput.compassview.R.string.compass_north);
+    } else {
+      hemisphere = coord < 0 ? context.getString(com.redinput.compassview.R.string.compass_west) : context.getString(com.redinput.compassview.R.string.compass_east);
+    }
+    return degrees.abs()+"°"+minutes+"'"+seconds+"\"\u2009"+hemisphere;
   }
 }

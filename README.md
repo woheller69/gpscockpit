@@ -43,7 +43,7 @@ See https://dontkillmyapp.com/
 * https://github.com/saket/Better-Link-Movement-Method published under Apache License 2.0
 * https://github.com/anastr/SpeedView published under Apache License 2.0
 * https://github.com/kix2902/CompassView published under Apache License 2.0
-* https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings) published under Apache License 2.0
+* https://github.com/barbeau/gpstest  (getAltitudeMeanSeaLevel from NMEA strings and getDMSFromLocation) published under Apache License 2.0
 * https://github.com/woheller69/AltimeterView (forked from https://github.com/leondzn/simple-analog-clock ) published under Apache License 2.0
 
 ## License 

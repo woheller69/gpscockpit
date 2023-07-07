@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "org.woheller69.gpscockpit"
         minSdk 24
-        targetSdk 31
-        versionCode 230
-        versionName "2.3"
+        targetSdk 33
+        versionCode 240
+        versionName "2.4"
     }
 
     buildTypes {
@@ -40,7 +40,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'com.github.woheller69:CompassView:a63c67da90'
     implementation 'com.github.anastr:speedviewlib:1.6.0'
-    implementation 'com.github.woheller69:AltimeterView:f448e00632'
+    implementation 'com.github.woheller69:AltimeterView:8671d7e700'
     // For BottomSheetDialogFragment
     implementation 'com.google.android.material:material:1.6.1'
 

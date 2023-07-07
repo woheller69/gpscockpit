@@ -41,28 +41,34 @@ public class GPSLockTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        if (GpsSvc.mIsRunning) {
-            startService(new Intent(App.getCxt(), GpsSvc.class).setAction(ACTION_STOP_SERVICE));
-            MainActivity.gpsLocked = false;
-        } else {
-            Intent intent = new Intent(App.getCxt(), GpsSvc.class);
-            Intent intent2 = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:"+getPackageName()));
-            intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            MainActivity.gpsLocked = true;
-            if (SDK_INT >= Build.VERSION_CODES.O) {
-                if (!GpsSvc.mIsRunning) startForegroundService(intent);
-                startActivity(intent2);
+        if (MainActivity.checkPermsOnly().isEmpty()) {
+            if (GpsSvc.mIsRunning) {
+                startService(new Intent(App.getCxt(), GpsSvc.class).setAction(ACTION_STOP_SERVICE));
+                MainActivity.gpsLocked = false;
             } else {
-                if (!GpsSvc.mIsRunning) startService(intent);
-                startActivity(intent2);
+                Intent intent = new Intent(App.getCxt(), GpsSvc.class);
+                Intent intent2 = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + getPackageName()));
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MainActivity.gpsLocked = true;
+                if (SDK_INT >= Build.VERSION_CODES.O) {
+                    if (!GpsSvc.mIsRunning) startForegroundService(intent);
+                    startActivity(intent2);
+                } else {
+                    if (!GpsSvc.mIsRunning) startService(intent);
+                    startActivity(intent2);
+                }
             }
+            Tile qsTile = getQsTile();
+            if (SDK_INT >= Build.VERSION_CODES.Q) {
+                qsTile.setSubtitle(MainActivity.gpsLocked ? getString(R.string.turned_on) : getString(R.string.turned_off));
+            }
+            qsTile.setState(MainActivity.gpsLocked ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            qsTile.updateTile();
+        } else {
+            Intent intent = new Intent(App.getCxt(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivityAndCollapse(intent);
         }
-        Tile qsTile = getQsTile();
-        if (SDK_INT >= Build.VERSION_CODES.Q) {
-            qsTile.setSubtitle(MainActivity.gpsLocked ? getString(R.string.turned_on):getString(R.string.turned_off));
-        }
-        qsTile.setState(MainActivity.gpsLocked ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        qsTile.updateTile();
     }
 
     // Called when the user removes your tile.

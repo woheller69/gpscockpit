@@ -6,6 +6,7 @@ import static android.os.Build.VERSION.SDK_INT;
 import static org.woheller69.gpscockpit.GpsSvc.ACTION_STOP_SERVICE;
 import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 import static org.woheller69.gpscockpit.Utils.copyLoc;
+import static org.woheller69.gpscockpit.Utils.hasNotifPerm;
 import static org.woheller69.gpscockpit.Utils.shareLoc;
 import static org.woheller69.gpscockpit.Utils.hasCoarseLocPerm;
 import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
@@ -24,6 +25,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.OnNmeaMessageListener;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
       }
     }
     initView();
-    checkPerms();
+    checkAndRequestPerms();
     if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
 
@@ -286,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
       return true;
     }
     if (itemId == R.id.action_about) {
-      AboutDialogFragment.show(this);
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.source_url))));
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -511,8 +513,20 @@ public class MainActivity extends AppCompatActivity {
           locAvailable = true;
           updateDistance();
 
-          lat = Utils.formatLatLng(mGpsLocation.getLatitude());
-          lng = Utils.formatLatLng(mGpsLocation.getLongitude());
+          if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
+            lat = Utils.getDMSfromDD(this, mGpsLocation.getLatitude(),true);
+            lng = Utils.getDMSfromDD(this, mGpsLocation.getLongitude(),false);
+            mB.gpsCont.latV.setTextScaleX(0.9f);
+            mB.gpsCont.lngV.setTextScaleX(0.9f);
+            mB.gpsCont.accV.setTextScaleX(0.9f);
+          } else {
+            lat = Utils.formatLatLng(mGpsLocation.getLatitude());
+            lng = Utils.formatLatLng(mGpsLocation.getLongitude());
+            mB.gpsCont.latV.setTextScaleX(1.0f);
+            mB.gpsCont.lngV.setTextScaleX(1.0f);
+            mB.gpsCont.accV.setTextScaleX(1.0f);
+          }
+
           mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
           if (mNmeaAltitude!=null) {
@@ -673,7 +687,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void setGrantPermButtonState() {
     if (mB != null) {
-      if (hasFineLocPerm() && hasCoarseLocPerm()) {
+      if (checkPermsOnly().isEmpty()) {
         mB.grantPerm.setVisibility(View.GONE);
       } else {
         mB.grantPerm.setVisibility(View.VISIBLE);
@@ -700,7 +714,7 @@ public class MainActivity extends AppCompatActivity {
   /////////////////////////// PERM REQUEST /////////////////////////
   //////////////////////////////////////////////////////////////////
 
-  private void checkPerms() {
+  public static List<String> checkPermsOnly(){
     List<String> perms = new ArrayList<>();
     if (!hasFineLocPerm()) {
       perms.add(permission.ACCESS_FINE_LOCATION);
@@ -708,6 +722,17 @@ public class MainActivity extends AppCompatActivity {
     if (!hasCoarseLocPerm()) {
       perms.add(permission.ACCESS_COARSE_LOCATION);
     }
+    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU) {
+      if (!hasNotifPerm()) {
+        perms.add(permission.POST_NOTIFICATIONS);
+      }
+    }
+    return perms;  //returns true if all permissions were already granted before
+  }
+
+  private void checkAndRequestPerms() {
+    List<String> perms = new ArrayList<>();
+    perms = checkPermsOnly();
     if (!perms.isEmpty()) {
       ActivityCompat.requestPermissions(this, perms.toArray(new String[] {}), 0);
     }

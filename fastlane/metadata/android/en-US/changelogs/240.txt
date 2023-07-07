@@ -1,0 +1,5 @@
+Show GPS position in DMS format in nautical mode
+Open Readme on GitHub via "About"
+Improved Altimeter dial
+Update to Android 13
+Bugfixes
