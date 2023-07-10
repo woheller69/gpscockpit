@@ -146,6 +146,7 @@
       android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/lat_img"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -163,6 +164,7 @@
         android:layout_weight="1" />
 
     <ImageView
+        android:id="@+id/lon_img"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

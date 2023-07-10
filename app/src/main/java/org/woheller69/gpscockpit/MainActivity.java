@@ -516,15 +516,13 @@ public class MainActivity extends AppCompatActivity {
           if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
             lat = Utils.getDMSfromDD(this, mGpsLocation.getLatitude(),true);
             lng = Utils.getDMSfromDD(this, mGpsLocation.getLongitude(),false);
-            mB.gpsCont.latV.setTextScaleX(0.9f);
-            mB.gpsCont.lngV.setTextScaleX(0.9f);
-            mB.gpsCont.accV.setTextScaleX(0.9f);
+            mB.gpsCont.latImg.setImageResource(R.drawable.ic_gps_fixed_white_24dp);
+            mB.gpsCont.lonImg.setVisibility(View.GONE);
           } else {
             lat = Utils.formatLatLng(mGpsLocation.getLatitude());
             lng = Utils.formatLatLng(mGpsLocation.getLongitude());
-            mB.gpsCont.latV.setTextScaleX(1.0f);
-            mB.gpsCont.lngV.setTextScaleX(1.0f);
-            mB.gpsCont.accV.setTextScaleX(1.0f);
+            mB.gpsCont.latImg.setImageResource(R.drawable.ic_latitude);
+            mB.gpsCont.lonImg.setVisibility(View.VISIBLE);
           }
 
           mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
