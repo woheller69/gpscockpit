@@ -2,4 +2,5 @@ GPS-Position im nautischen Modus  im DMS Format anzeigen
 Readme-Datei auf GitHub mit „Über“ öffnen
 Verbessertes Höhenmesser-Zifferblatt
 Update auf Android 13
+Unterstützung für Monochromes Icon
 Fehlerbehebung
