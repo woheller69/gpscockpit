@@ -16,6 +16,13 @@
     android:title="@string/dark_theme_menu_item"
     app:showAsAction="never" />
 
+  <item
+      android:id="@+id/action_dynamic_colors"
+      android:checkable="true"
+      android:icon="@drawable/ic_color_24px"
+      android:title="@string/dyn_color_menu_item"
+      app:showAsAction="never" />
+
   <group
       android:id="@+id/action_units_group"
       android:checkableBehavior="single">

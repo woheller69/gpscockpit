@@ -69,4 +69,6 @@
   <string name="dialog_StarOnGitHub">Bevalt deze app? Geef een ster op GitHub.</string>
   <string name="headup_display">Geprojecteerde weergave (HUD)</string>
   <string name="turned_on">Op</string>
+    <string name="dyn_color_menu_item">Dynamische kleuren</string>
+    <string name="restart">App moet opnieuw worden gestart</string>
 </resources>

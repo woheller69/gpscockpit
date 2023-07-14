@@ -8,7 +8,7 @@
     <corners android:radius="16dp" />
     <solid android:color="?android:attr/colorBackground" />
     <stroke
-      android:color="@color/accentTrans"
+      android:color="?attr/colorPrimaryInverse"
       android:width="2dp" />
   </shape>
 </inset>

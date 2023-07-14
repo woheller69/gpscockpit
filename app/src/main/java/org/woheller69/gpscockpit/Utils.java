@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -403,5 +404,12 @@ public class Utils {
       hemisphere = coord < 0 ? context.getString(com.redinput.compassview.R.string.compass_west) : context.getString(com.redinput.compassview.R.string.compass_east);
     }
     return degrees.abs()+"°"+minutes+"'"+seconds+"\"\u2009"+hemisphere;
+  }
+  public static int getThemeColor(Context context, int colorResId) {
+    TypedValue typedValue = new TypedValue();
+    TypedArray typedArray = context.obtainStyledAttributes(typedValue.data, new int[] {colorResId});
+    int color = typedArray.getColor(0, 0);
+    typedArray.recycle();
+    return color;
   }
 }

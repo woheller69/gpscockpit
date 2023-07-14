@@ -1,8 +1,8 @@
 package org.woheller69.gpscockpit;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,7 @@ public class SatAdapter extends RecyclerView.Adapter<SatViewHolder> {
   @Override
   public SatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    return new SatViewHolder(SatItemBinding.inflate(inflater, parent, false));
+    return new SatViewHolder(SatItemBinding.inflate(inflater, parent, false),parent.getContext());
   }
 
   @Override
@@ -49,10 +49,12 @@ public class SatAdapter extends RecyclerView.Adapter<SatViewHolder> {
   protected class SatViewHolder extends RecyclerView.ViewHolder {
 
     private final SatItemBinding mB;
+    private Context mcontext;
 
-    public SatViewHolder(@NonNull SatItemBinding binding) {
+    public SatViewHolder(@NonNull SatItemBinding binding, Context context) {
       super(binding.getRoot());
       mB = binding;
+      mcontext = context;
     }
 
     private void bind(int pos) {
@@ -68,7 +70,7 @@ public class SatAdapter extends RecyclerView.Adapter<SatViewHolder> {
       }
       mB.progV.setProgress(strength);
       float ratio = Math.max(Math.min((float) strength / 100, 1), 0);
-      int color = ColorUtils.blendARGB(Color.RED, Color.GREEN, ratio);
+      int color = ColorUtils.blendARGB(Utils.getThemeColor(mcontext,R.attr.colorSurface), Utils.getThemeColor(mcontext,R.attr.colorPrimary), ratio);
       mB.progV.setProgressTintList(ColorStateList.valueOf(color));
 
       mB.signalV.setText(String.valueOf(sat.mSnr));

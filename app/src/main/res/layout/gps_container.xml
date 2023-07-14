@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:visibility="gone"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="16dp"
         android:layout_weight="1" />
 
@@ -42,7 +41,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:layout_gravity="center_vertical"
-      android:textColor="@color/error"
+      android:textColor="?attr/colorError"
       android:textSize="14sp"
       app:autoSizeTextType="uniform" />
 
@@ -94,11 +93,11 @@
         app:sv_unitUnderSpeedText="true"
         app:sv_withTremble="false"
         app:sv_speedTextFormat="INTEGER"
-        app:sv_speedBackgroundColor="@color/dynamicBg"
+        app:sv_speedBackgroundColor="?attr/colorSurface"
         app:sv_centerCircleColor="#00000000"
-        app:sv_backgroundCircleColor="@color/dynamicBg"
+        app:sv_backgroundCircleColor="?attr/colorSurface"
         app:sv_speedTextColor="@color/disabledStateColor"
-        app:sv_unitTextColor="@color/dynamicFgDim"
+        app:sv_unitTextColor="?attr/colorControlNormal"
         app:sv_speedTextSize="30dp"
         app:sv_textSize="15dp"
         app:sv_unitSpeedInterval="10dp"
@@ -106,9 +105,9 @@
         app:sv_tickNumber="10"
         app:sv_tickPadding="10dp"
         app:sv_speedTextPosition="CENTER"
-        app:sv_textColor="@color/dynamicFgDim"
-        app:sv_markColor="@color/dynamicFgDim"
-        app:sv_indicatorColor="@color/primaryTrans"/>
+        app:sv_textColor="?attr/colorControlNormal"
+        app:sv_markColor="?attr/colorControlNormal"
+        app:sv_indicatorColor="?attr/colorPrimary"/>
 
     <org.woheller69.altimeterview.AltimeterView
           android:layout_width="160dp"
@@ -117,9 +116,9 @@
           android:id="@+id/altimeterView"
           android:layout_margin="16dp"
           android:paddingBottom="20dp"
-          app:backTint="@color/accent"
-          app:ticksTint="@color/dynamicFgDim"
-          app:numbersTint="@color/dynamicFgDim"
+          app:backTint="?attr/colorPrimaryInverse"
+          app:ticksTint="?attr/colorControlNormal"
+          app:numbersTint="?attr/colorControlNormal"
           app:hand10kTint="@color/disabledStateColor"
           app:hand1kTint="@color/disabledStateColor"
           app:hand100Tint="@color/disabledStateColor" />
@@ -131,9 +130,9 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="-15dp"
-      app:backgroundColor="@color/dynamicBg"
+      app:backgroundColor="?attr/colorSurface"
       app:showMarker="false"
-      app:markerColor="@color/primaryTrans"
+      app:markerColor="?attr/colorPrimary"
       app:lineColor="@color/disabledStateColor"
       app:textColor="@color/disabledStateColor"
       app:textSize="12dp"
@@ -159,7 +158,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
+
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -177,7 +176,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
+
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -201,7 +200,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -212,7 +210,7 @@
       android:layout_height="1dp"
       android:layout_marginTop="4dp"
       android:layout_marginBottom="5dp"
-      android:background="@color/accentTrans" />
+      android:background="?attr/colorPrimaryInverse" />
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -234,7 +232,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
+
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -251,7 +249,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -278,7 +275,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -295,7 +291,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -320,7 +315,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 
@@ -337,7 +331,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/dynamicFgDim"
         android:textSize="18dp"
         android:layout_weight="1" />
 

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <color name="dynamicFgDim">#BFBFBF</color>
-  <color name="dynamicBg">#303030</color>
   <color name="disabledStateColor">#7F7F7F</color>
-  <color name="primaryTrans">#BBFFEB3B</color>  //Color Speed Indicator
 
 </resources>

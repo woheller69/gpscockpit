@@ -39,6 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.app.ActivityCompat;
@@ -90,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
   @Override
   public void onConfigurationChanged(Configuration newConfig){
     super.onConfigurationChanged(newConfig);
-    initView();
+    recreate();
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    setTheme(R.style.AppTheme);
+    setNightTheme();
     super.onCreate(savedInstanceState);
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
@@ -127,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    setNightTheme();
   }
 
   private void initView() {
@@ -136,7 +136,11 @@ public class MainActivity extends AppCompatActivity {
     mB.grantPerm.setOnClickListener(v -> Utils.openAppSettings(this, getPackageName()));
     setGrantPermButtonState();
     setupSpeedView();
-    mB.record.setChecked(recording);
+    if (recording) {
+      mB.record.setText(getResources().getString(R.string.stop));
+    } else {
+      mB.record.setText(getResources().getString(R.string.record));
+    }
     setupGps();
     updateGpsUi();
   }
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
       }
     });
     mB.gpsCont.deluxeSpeedView.addSections(
-            new Section(.0f, 1.0f, ContextCompat.getColor(this, R.color.accent),10));
+            new Section(.0f, 1.0f, Utils.getThemeColor(this, R.attr.colorPrimaryInverse),10));
   }
 
   @Override
@@ -181,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
     else{
       if (VERSION.SDK_INT == VERSION_CODES.Q) {
-         // Bug: https://issuetracker.google.com/issues/139738913
+        // Bug: https://issuetracker.google.com/issues/139738913
         finishAfterTransition();
       } else {
         super.onBackPressed();
@@ -199,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
       ((MenuBuilder) menu).setOptionalIconsVisible(true);
     }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
+    menu.findItem(R.id.action_dynamic_colors).setChecked(SETTINGS.getDynamicColors());
+    menu.findItem(R.id.action_dynamic_colors).setEnabled(SDK_INT >= VERSION_CODES.TIRAMISU);
 
     int units = SETTINGS.getIntPref(R.string.pref_units_key,METRIC);
     if (units == METRIC){
@@ -220,8 +226,27 @@ public class MainActivity extends AppCompatActivity {
     int itemId = item.getItemId();
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
-      setNightTheme();
       invalidateOptionsMenu();
+      new AlertDialog.Builder(this)
+              .setTitle(getString(R.string.restart))
+              .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                lockGPS(false);
+                Runtime.getRuntime().exit(0);
+              })
+              .show();
+      return true;
+    }
+
+    if (itemId == R.id.action_dynamic_colors) {
+      SETTINGS.setDynamicColors(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
+      invalidateOptionsMenu();
+      new AlertDialog.Builder(this)
+              .setTitle(getString(R.string.restart))
+              .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                lockGPS(false);
+                Runtime.getRuntime().exit(0);
+              })
+              .show();
       return true;
     }
 
@@ -330,23 +355,26 @@ public class MainActivity extends AppCompatActivity {
 
     mB.reset.setOnClickListener(v -> resetDistances());
     mB.record.setOnClickListener(v -> {
-      recording=mB.record.isChecked();
-      if (mB.record.isChecked()){
+      if (!recording){
+        mB.record.setText(getResources().getString(R.string.stop));
         if (gpsLocked) gpsLockedBeforeStart = true; //register if GPS was locked before "Start" already
         lockGPS(true);
+        recording=true;
       } else {
+        mB.record.setText(getResources().getString(R.string.record));
         if (!gpsLockedBeforeStart) lockGPS(false); //switch off GPS Service only if it was not locked before "Start"
         gpsLockedBeforeStart=false; //Reset to false when "Stop" is pressed
+        recording=false;
       }
 
-      if (mB.record.isChecked()){
+      if (recording){
         mOldGpsLocation=null;  //reset old position when recording is started so counting continues from current position / altitude
         mNmeaOldAltitude=null;
         mStartTime=System.currentTimeMillis()/1000-(mEndTime-mStartTime);
         mEndTime=System.currentTimeMillis()/1000;
       }
       invalidateOptionsMenu();
-      });
+    });
 
     mB.gpsCont.map.setOnClickListener(v -> openMap(this, mGpsLocation));
     mB.gpsCont.copy.setOnClickListener(v -> copyLoc(mGpsLocation));
@@ -396,13 +424,13 @@ public class MainActivity extends AppCompatActivity {
 
         mLocManager.registerGnssStatusCallback(mGnssStatusCallback,new Handler(Looper.getMainLooper()));
 
-          mOnNmeaMessageListener = (message, timestamp) -> {
-            Double msl = getAltitudeMeanSeaLevel(message);
-            if (msl != null) {
-              mNmeaAltitude = msl;
-            }
-          };
-          mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
+        mOnNmeaMessageListener = (message, timestamp) -> {
+          Double msl = getAltitudeMeanSeaLevel(message);
+          if (msl != null) {
+            mNmeaAltitude = msl;
+          }
+        };
+        mLocManager.addNmeaListener(mOnNmeaMessageListener, new Handler(Looper.getMainLooper()));
       }
     }
   }
@@ -525,8 +553,8 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.lonImg.setVisibility(View.VISIBLE);
           }
 
-          mB.gpsCont.latV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
-          mB.gpsCont.lngV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+          mB.gpsCont.latV.setTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
+          mB.gpsCont.lngV.setTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
           if (mNmeaAltitude!=null) {
             if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               altMSL = getString(R.string.dist_unit, Utils.formatInt(mNmeaAltitude ));
@@ -544,12 +572,12 @@ public class MainActivity extends AppCompatActivity {
             }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
               speedval = mGpsLocation.getSpeed() * 1.943844f; //convert to kn
             }
-            mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+            mB.gpsCont.deluxeSpeedView.setSpeedTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
           }else{
             mB.gpsCont.deluxeSpeedView.setSpeedTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasAccuracy()) {
-            mB.gpsCont.accV.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+            mB.gpsCont.accV.setTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
             if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
               acc = getString(R.string.dist_unit, Utils.formatLocAccuracy(mGpsLocation.getAccuracy()));
             } else {
@@ -557,10 +585,10 @@ public class MainActivity extends AppCompatActivity {
             }
           }
           if (mGpsLocation.hasAltitude() && mNmeaAltitude!=null) {
-            mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
-            mB.gpsCont.altimeterView.setHand10kTint(ContextCompat.getColor(this,R.color.primaryTrans));
-            mB.gpsCont.altimeterView.setHand1kTint(ContextCompat.getColor(this,R.color.primaryTrans));
-            mB.gpsCont.altimeterView.setHand100Tint(ContextCompat.getColor(this,R.color.primaryTrans));
+            mB.gpsCont.altitudeMSL.setTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
+            mB.gpsCont.altimeterView.setHand10kTint(Utils.getThemeColor(this, R.attr.colorPrimary));
+            mB.gpsCont.altimeterView.setHand1kTint(Utils.getThemeColor(this, R.attr.colorPrimary));
+            mB.gpsCont.altimeterView.setHand100Tint(Utils.getThemeColor(this, R.attr.colorPrimary));
           } else {
             mB.gpsCont.altitudeMSL.setTextColor(ContextCompat.getColor(this,R.color.disabledStateColor));
             mB.gpsCont.altimeterView.setHand10kTint(ContextCompat.getColor(this,R.color.disabledStateColor));
@@ -568,8 +596,8 @@ public class MainActivity extends AppCompatActivity {
             mB.gpsCont.altimeterView.setHand100Tint(ContextCompat.getColor(this,R.color.disabledStateColor));
           }
           if (mGpsLocation.hasBearing()) {
-            mB.gpsCont.compass.setLineColor(ContextCompat.getColor(this,R.color.accent));
-            mB.gpsCont.compass.setTextColor(ContextCompat.getColor(this,R.color.dynamicFgDim));
+            mB.gpsCont.compass.setLineColor(Utils.getThemeColor(this, R.attr.colorPrimaryInverse));
+            mB.gpsCont.compass.setTextColor(Utils.getThemeColor(this, R.attr.colorControlNormal));
             mB.gpsCont.compass.setShowMarker(true);
             bearing = mGpsLocation.getBearing();
           } else {
@@ -641,9 +669,9 @@ public class MainActivity extends AppCompatActivity {
       speedAverage = mTravelDistance / (mEndTime - mStartTime);  // im m/s
     }
     if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
-       speed_av = Utils.formatInt(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
+      speed_av = Utils.formatInt(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
-       speed_av = Utils.formatInt(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+      speed_av = Utils.formatInt(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
       speed_av = Utils.formatInt(speedAverage * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
     }
@@ -910,19 +938,19 @@ public class MainActivity extends AppCompatActivity {
         float[] distance = new float[1];
         Location.distanceBetween(mOldGpsLocation.getLatitude(), mOldGpsLocation
                 .getLongitude(), latitude, longitude, distance);
-          if (distance[0] > 2*mGpsLocation.getAccuracy()) { // Update the total of travel distance only if distance is larger than 2x accuracy.
-            mTravelDistance += distance[0];
-            mOldGpsLocation = mGpsLocation;
+        if (distance[0] > 2*mGpsLocation.getAccuracy()) { // Update the total of travel distance only if distance is larger than 2x accuracy.
+          mTravelDistance += distance[0];
+          mOldGpsLocation = mGpsLocation;
+        }
+        if (mNmeaAltitude!=null) {
+          if ((mNmeaAltitude - mNmeaOldAltitude) > 3 * mGpsLocation.getAccuracy()) {
+            mAltUp = mAltUp + mNmeaAltitude - mNmeaOldAltitude;
+            mNmeaOldAltitude = mNmeaAltitude;
+          } else if ((mNmeaOldAltitude - mNmeaAltitude) > 3 * mGpsLocation.getAccuracy()) {
+            mAltDown = mAltDown + mNmeaOldAltitude - mNmeaAltitude;
+            mNmeaOldAltitude = mNmeaAltitude;
           }
-          if (mNmeaAltitude!=null) {
-            if ((mNmeaAltitude - mNmeaOldAltitude) > 3 * mGpsLocation.getAccuracy()) {
-              mAltUp = mAltUp + mNmeaAltitude - mNmeaOldAltitude;
-              mNmeaOldAltitude = mNmeaAltitude;
-            } else if ((mNmeaOldAltitude - mNmeaAltitude) > 3 * mGpsLocation.getAccuracy()) {
-              mAltDown = mAltDown + mNmeaOldAltitude - mNmeaAltitude;
-              mNmeaOldAltitude = mNmeaAltitude;
-            }
-          }
+        }
         if (mGpsLocation.hasSpeed() && mGpsLocation.getSpeed()>mMaxSpeed) mMaxSpeed=mGpsLocation.getSpeed();
       }
     }

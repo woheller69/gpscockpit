@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSecondary"
+    android:background="?attr/colorSurface"
     android:keepScreenOn="true">
 
   <androidx.core.widget.NestedScrollView
@@ -22,14 +22,13 @@
           android:id="@+id/grant_perm"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:textColor="@android:color/holo_red_dark"
+          android:textColor="?attr/colorError"
           android:text="@string/grant_permission"
            />
 
       <include
           android:id="@+id/gps_cont"
           layout="@layout/gps_container" />
-
 
       <LinearLayout
           android:id="@+id/buttonLayout"
@@ -43,43 +42,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
+            android:layout_marginEnd="5dp"
             android:text="@string/reset" />
 
-        <ToggleButton
+        <Button
             android:id="@+id/record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:textStyle="bold"
-            android:textOff="@string/record"
-            android:textOn="@string/stop" />
+            android:text="@string/record"/>
       </LinearLayout>
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 
-  <!--
-   The only layout inside CoordinatorLayout must be the moving container. Otherwise
-   the other layout may intercept the touch events and Behaviour may not work correctly.
-  -->
-  <org.woheller69.gpscockpit.MyCoordinatorLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom">
-
-    <LinearLayout
-        android:id="@+id/feedback_cont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/accentTrans" />
-
-    </LinearLayout>
-
-  </org.woheller69.gpscockpit.MyCoordinatorLayout>
 
 </FrameLayout>

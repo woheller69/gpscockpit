@@ -65,4 +65,6 @@
   <string name="dialog_StarOnGitHub">Liker du appen? Gi en stjerne på GitHub.</string>
   <string name="headup_display">Head-Up display</string>
   <string name="turned_on">På</string>
+    <string name="dyn_color_menu_item">Dynamiske farger</string>
+    <string name="restart">Appen må startes på nytt</string>
 </resources>

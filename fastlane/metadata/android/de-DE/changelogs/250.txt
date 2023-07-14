@@ -1,0 +1,2 @@
+Material3 Design
+Option für dynamische Farben (Android 13+)

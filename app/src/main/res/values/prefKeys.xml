@@ -3,6 +3,7 @@
     <string name="pref_main_crash_report_count_key" translatable="false">pref_main_crash_report_count</string>
     <string name="pref_main_crash_report_ts_key" translatable="false">pref_main_crash_report_ts</string>
     <string name="pref_main_dark_theme_key" translatable="false">pref_main_dark_theme</string>
+    <string name="pref_main_dynamic_colors_key" translatable="false">pref_main_dynamic_colors</string>
     <string name="pref_main_locale_key" translatable="false">pref_main_locale</string>
     <string name="pref_max_speed_index_key" translatable="false">pref_max_speed_index</string>
     <string name="pref_debug_key" translatable="false">pref_debug</string>

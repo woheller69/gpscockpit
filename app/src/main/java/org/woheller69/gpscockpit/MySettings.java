@@ -79,8 +79,16 @@ public enum MySettings {
     return getBoolPref(R.string.pref_main_dark_theme_key, true);
   }
 
+  public boolean getDynamicColors() {
+    return getBoolPref(R.string.pref_main_dynamic_colors_key, false);
+  }
+
   public void setForceDarkMode(boolean force) {
     savePref(R.string.pref_main_dark_theme_key, force);
+  }
+
+  public void setDynamicColors(boolean dyn) {
+    savePref(R.string.pref_main_dynamic_colors_key, dyn);
   }
   
   public String getLocale() {
