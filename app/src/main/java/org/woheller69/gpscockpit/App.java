@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.material.color.DynamicColors;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -22,7 +23,8 @@ public class App extends Application {
     mAppContext = getApplicationContext();
     updateContext();
     if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivitiesIfAvailable(this);
-    defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+    if (SETTINGS.getForceDarkMode()) { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
+      defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
     Thread.setDefaultUncaughtExceptionHandler(
         (t, e) -> {

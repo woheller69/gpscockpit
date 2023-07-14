@@ -12,7 +12,6 @@ import static org.woheller69.gpscockpit.Utils.hasCoarseLocPerm;
 import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
 import static org.woheller69.gpscockpit.Utils.isNaN;
 import static org.woheller69.gpscockpit.Utils.openMap;
-import static org.woheller69.gpscockpit.Utils.setNightTheme;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    setNightTheme();
     super.onCreate(savedInstanceState);
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {

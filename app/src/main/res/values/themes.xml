@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Theme.GpsCockpit" parent="Theme.Material3.DayNight">
+    <style name="Theme.GpsCockpit" parent="Theme.Material3.Light">
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
@@ -31,7 +31,5 @@
         <item name="android:actionBarSize">36dp</item>
         <item name="actionBarSize">36dp</item>
     </style>
-
-    <style name="Theme.GpsCockpit" parent="Base.Theme.GpsCockpit" />
 
 </resources>

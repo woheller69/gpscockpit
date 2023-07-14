@@ -329,16 +329,6 @@ public class Utils {
     TooltipCompat.setTooltipText(v, v.getContentDescription());
   }
 
-
-  public static void setNightTheme() {
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);  //first reset night mode. Otherwise problems on some devices
-    if (!SETTINGS.getForceDarkMode()) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-    } else {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-    }
-  }
-
   public static AlertDialog setDialogBg(AlertDialog dialog) {
     Window window = dialog.getWindow();
     if (window != null) {

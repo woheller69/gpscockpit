@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-
   <color name="disabledStateColor">#BFBFBF</color>
 
   <color name="seed">#008577</color>
@@ -66,6 +64,5 @@
   <color name="md_theme_dark_surfaceTint">#54DBC8</color>
   <color name="md_theme_dark_outlineVariant">#3F4946</color>
   <color name="md_theme_dark_scrim">#000000</color>
-
 
 </resources>
