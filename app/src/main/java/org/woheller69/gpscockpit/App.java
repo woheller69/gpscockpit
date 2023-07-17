@@ -23,8 +23,7 @@ public class App extends Application {
     mAppContext = getApplicationContext();
     updateContext();
     if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivitiesIfAvailable(this);
-    if (SETTINGS.getForceDarkMode()) { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
-      defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+    defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
     Thread.setDefaultUncaughtExceptionHandler(
         (t, e) -> {

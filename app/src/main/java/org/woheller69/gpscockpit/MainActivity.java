@@ -40,6 +40,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -48,6 +49,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.anastr.speedviewlib.components.Section;
+import com.google.android.material.color.DynamicColors;
 import org.woheller69.gpscockpit.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
       }
     }
     initView();
+    if (SETTINGS.getForceDarkMode()) { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
+    else {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    }
     checkAndRequestPerms();
     if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
@@ -202,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     }
     menu.findItem(R.id.action_dark_theme).setChecked(SETTINGS.getForceDarkMode());
     menu.findItem(R.id.action_dynamic_colors).setChecked(SETTINGS.getDynamicColors());
-    menu.findItem(R.id.action_dynamic_colors).setEnabled(SDK_INT >= VERSION_CODES.TIRAMISU);
+    menu.findItem(R.id.action_dynamic_colors).setEnabled(DynamicColors.isDynamicColorAvailable());
 
     int units = SETTINGS.getIntPref(R.string.pref_units_key,METRIC);
     if (units == METRIC){
@@ -225,13 +231,7 @@ public class MainActivity extends AppCompatActivity {
     if (itemId == R.id.action_dark_theme) {
       SETTINGS.setForceDarkMode(!item.isChecked());  // item.isChecked always previous value until invalidated, so value has to be inverted
       invalidateOptionsMenu();
-      new AlertDialog.Builder(this)
-              .setTitle(getString(R.string.restart))
-              .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                lockGPS(false);
-                Runtime.getRuntime().exit(0);
-              })
-              .show();
+      recreate();
       return true;
     }
 

@@ -40,8 +40,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'com.github.woheller69:CompassView:948f3db329'
     implementation 'com.github.anastr:speedviewlib:1.6.0'
-    implementation 'com.github.woheller69:AltimeterView:8671d7e700'
-    // For BottomSheetDialogFragment
+    implementation 'com.github.woheller69:AltimeterView:ec43e732c3'
     implementation 'com.google.android.material:material:1.9.0'
 
     // To handle hyperlink onClick in TextView
