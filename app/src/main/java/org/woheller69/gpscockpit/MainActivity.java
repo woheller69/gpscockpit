@@ -36,6 +36,7 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.core.splashscreen.SplashScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -97,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.installSplashScreen(this);
+    if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivityIfAvailable(this);
+    getWindow().setStatusBarColor(Utils.getThemeColor(this,R.attr.colorPrimaryDark));
     super.onCreate(savedInstanceState);
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
@@ -240,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
       invalidateOptionsMenu();
       new AlertDialog.Builder(this)
               .setTitle(getString(R.string.restart))
-              .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+              .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 lockGPS(false);
                 Runtime.getRuntime().exit(0);
               })

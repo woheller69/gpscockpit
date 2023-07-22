@@ -19,7 +19,7 @@
     android:label="@string/app_name"
     android:name=".App"
     android:supportsRtl="true"
-    android:theme="@style/Theme.GpsCockpit"
+    android:theme="@style/AppStarting"
     tools:ignore="AllowBackup">
 
     <activity

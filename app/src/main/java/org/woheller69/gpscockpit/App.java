@@ -1,12 +1,9 @@
 package org.woheller69.gpscockpit;
 
-import static org.woheller69.gpscockpit.MySettings.SETTINGS;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
-import androidx.appcompat.app.AppCompatDelegate;
-import com.google.android.material.color.DynamicColors;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -22,7 +19,6 @@ public class App extends Application {
     super.onCreate();
     mAppContext = getApplicationContext();
     updateContext();
-    if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivitiesIfAvailable(this);
     defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
     Thread.setDefaultUncaughtExceptionHandler(

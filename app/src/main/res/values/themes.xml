@@ -32,4 +32,9 @@
         <item name="actionBarSize">36dp</item>
     </style>
 
+    <style name="AppStarting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.GpsCockpit</item>
+    </style>
+
 </resources>

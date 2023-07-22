@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.github.anastr:speedviewlib:1.6.0'
     implementation 'com.github.woheller69:AltimeterView:ec43e732c3'
     implementation 'com.google.android.material:material:1.9.0'
-
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     // To handle hyperlink onClick in TextView
     implementation 'me.saket:better-link-movement-method:2.2.0'
 }
