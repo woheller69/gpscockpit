@@ -77,7 +77,7 @@ public class SatAdapter extends RecyclerView.Adapter<SatViewHolder> {
       if (sat.mUsed) {
         mB.fixedV.setVisibility(View.VISIBLE);
       } else {
-        mB.fixedV.setVisibility(View.GONE);
+        mB.fixedV.setVisibility(View.INVISIBLE);
       }
     }
   }
