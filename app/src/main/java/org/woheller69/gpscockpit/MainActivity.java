@@ -633,7 +633,8 @@ public class MainActivity extends AppCompatActivity {
     mB.gpsCont.map.setEnabled(locAvailable);
     mB.gpsCont.copy.setEnabled(locAvailable);
     mB.gpsCont.share.setEnabled(locAvailable);
-    mB.gpsCont.stateV.setText(state);
+    mB.gpsCont.stateV.setText("\u2316\u2009"+state);
+    mB.gpsCont.stateV.setVisibility(state==null ? View.INVISIBLE:View.VISIBLE);
     mB.gpsCont.latV.setText(lat);
     mB.gpsCont.lngV.setText(lng);
     mB.gpsCont.altitudeMSL.setText(altMSL);
