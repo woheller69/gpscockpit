@@ -39,7 +39,7 @@
       android:id="@+id/state_v"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_weight="1"
+      android:layout_weight="2"
       android:layout_gravity="center_vertical"
       android:textColor="?attr/colorError"
       android:textSize="14sp"
