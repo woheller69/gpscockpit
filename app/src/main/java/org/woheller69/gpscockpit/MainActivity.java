@@ -55,6 +55,7 @@ import org.woheller69.gpscockpit.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
     SplashScreen.installSplashScreen(this);
     if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivityIfAvailable(this);
     getWindow().setStatusBarColor(Utils.getThemeColor(this,R.attr.colorPrimaryDark));
+    Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
     super.onCreate(savedInstanceState);
     for (String provider : mLocManager.getAllProviders()) {
       if (provider.equals(GPS_PROVIDER)) {
