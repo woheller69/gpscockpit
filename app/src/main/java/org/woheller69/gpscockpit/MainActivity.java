@@ -13,6 +13,7 @@ import static org.woheller69.gpscockpit.Utils.hasFineLocPerm;
 import static org.woheller69.gpscockpit.Utils.isNaN;
 import static org.woheller69.gpscockpit.Utils.openMap;
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -98,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.installSplashScreen(this);
     if (SETTINGS.getDynamicColors()) DynamicColors.applyToActivityIfAvailable(this);
@@ -138,6 +145,19 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
+    Intent intent = getIntent();
+    if (intent != null && intent.getAction().equals("RequestBackgroundLocation") && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+      String message = getString(R.string.perm_not_granted);
+      message = message + ": \n\n >> " + getPackageManager().getBackgroundPermissionOptionLabel().toString() +" <<";
+      alertDialogBuilder.setMessage(message);
+      alertDialogBuilder.setPositiveButton(getString(R.string.dialog_OK_button), (dialog, which) -> ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 2));
+      alertDialogBuilder.setNegativeButton(getString(R.string.dialog_NO_button), (dialog, which) -> {
+      });
+      AlertDialog alertDialog = alertDialogBuilder.create();
+      alertDialog.show();
+      setIntent(null); //Intent has been consumed, otherwise a loop is created
+    }
     invalidateOptionsMenu();
   }
 

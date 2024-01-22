@@ -3,12 +3,16 @@ package org.woheller69.gpscockpit;
 import static android.os.Build.VERSION.SDK_INT;
 import static org.woheller69.gpscockpit.GpsSvc.ACTION_STOP_SERVICE;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import androidx.core.app.ActivityCompat;
 
 public class GPSLockTileService extends TileService {
     // Called when the user adds your tile.
@@ -49,13 +53,31 @@ public class GPSLockTileService extends TileService {
                 Intent intent = new Intent(App.getCxt(), GpsSvc.class);
                 Intent intent2 = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + getPackageName()));
                 intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                MainActivity.gpsLocked = true;
+                PendingIntent pi2 = PendingIntent.getActivity(App.getCxt(),0,intent2,PendingIntent.FLAG_IMMUTABLE);
                 if (SDK_INT >= Build.VERSION_CODES.O) {
-                    if (!GpsSvc.mIsRunning) startForegroundService(intent);
-                    startActivityAndCollapse(intent2);
+                    if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) && (SDK_INT > Build.VERSION_CODES.TIRAMISU)){
+                        Intent intent3 = new Intent(App.getCxt(), MainActivity.class);
+                        intent3.setAction("RequestBackgroundLocation");
+                        intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        PendingIntent pi3 = PendingIntent.getActivity(App.getCxt(),0, intent3, PendingIntent.FLAG_IMMUTABLE);
+                        startActivityAndCollapse(pi3);
+                    } else {
+                        if (SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                            startActivityAndCollapse(pi2);
+                        } else {
+                            startActivityAndCollapse(intent2);
+                        }
+                        if (!GpsSvc.mIsRunning){
+                            startForegroundService(intent);
+                            MainActivity.gpsLocked = true;
+                        }
+                    }
                 } else {
-                    if (!GpsSvc.mIsRunning) startService(intent);
-                    startActivity(intent2);
+                    startActivityAndCollapse(intent2);
+                    if (!GpsSvc.mIsRunning) {
+                        startService(intent);
+                        MainActivity.gpsLocked = true;
+                    }
                 }
             }
             Tile qsTile = getQsTile();

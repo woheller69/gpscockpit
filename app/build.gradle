@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "org.woheller69.gpscockpit"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 250
         versionName "2.5"
     }

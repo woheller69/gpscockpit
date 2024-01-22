@@ -13,6 +13,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationListener;
@@ -146,7 +147,7 @@ public class GpsSvc extends Service implements LocationListener {
             .setContentTitle(getString(R.string.channel_gps_lock));
 
     if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-      startForeground(NOTIF_ID, mNotifBuilder.build(), FOREGROUND_SERVICE_TYPE_MANIFEST);
+      startForeground(NOTIF_ID, mNotifBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
     } else {
       startForeground(NOTIF_ID, mNotifBuilder.build());
     }
