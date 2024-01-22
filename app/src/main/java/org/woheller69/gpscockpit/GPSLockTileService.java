@@ -52,7 +52,7 @@ public class GPSLockTileService extends TileService {
                 MainActivity.gpsLocked = true;
                 if (SDK_INT >= Build.VERSION_CODES.O) {
                     if (!GpsSvc.mIsRunning) startForegroundService(intent);
-                    startActivity(intent2);
+                    startActivityAndCollapse(intent2);
                 } else {
                     if (!GpsSvc.mIsRunning) startService(intent);
                     startActivity(intent2);

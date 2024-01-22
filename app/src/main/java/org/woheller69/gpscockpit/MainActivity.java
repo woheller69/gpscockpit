@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
+    invalidateOptionsMenu();
   }
 
   private void initView() {
