@@ -1,0 +1,70 @@
+<resources>
+
+  <string name="gps">GPS</string>
+
+  <string name="grant_permission">İzin Ver</string>
+  <string name="clear_agps_data">AGPS Verilerini Temizle</string>
+  <string name="lock_gps">GPS\'i Kilitle</string>
+  <string name="unlock_gps">GPS Kilidini Aç</string>
+
+  <string name="not_supported">Desteklenmiyor</string>
+  <string name="perm_not_granted">İzin gerekli</string>
+  <string name="turned_off">Kapalı</string>
+  <string name="failed">Başarısız</string>
+
+  <string name="map">Harita</string>
+  <string name="copy">Kopyala</string>
+  <string name="share" maxLength="15">Paylaş</string>
+  <string name="satellites">Uydular</string>
+
+  <string name="total">Toplam</string>
+  <string name="good">İyi</string>
+  <string name="fixed">Sabit</string>
+
+  <string name="satellites_count">Toplam Uydu: %1$d, İyi: %2$d, Sabit: %3$d</string>
+  <string name="accuracy">Doğruluk:\u0020</string>
+  <string name="dist_unit">%s m</string>
+  <string name="dist_unit2">%s km</string>
+  <string name="dist_unit_imperial">%s fit</string>
+  <string name="dist_unit_imperial2">%s mil</string>
+  <string name="dist_unit_nautical2">%s deniz mili</string>
+  <string name="speed_unit">km/sa</string>
+  <string name="speed_unit_imperial">mil/sa</string>
+  <string name="speed_unit_nautical">knot</string>
+  <string name="last_update">%1$d sn önce</string>
+  <string name="record">Başlat</string>
+  <string name="stop">Durdur</string>
+
+  <string name="no_browser_installed" maxLength="20">Web tarayıcısı kurulu değil</string>
+  <string name="no_maps_installed" maxLength="20">Harita uygulaması kurulu değil</string>
+  <string name="failed_open_app_settings" maxLength="20">Uygulama ayarları açılamadı</string>
+  <string name="cleared" maxLength="20">Temizlendi</string>
+  <string name="copied" maxLength="20">Kopyalandı</string>
+
+  <!-- Notification Channels -->
+  <string name="channel_gps_lock">GPS</string>
+  <integer name="channel_gps_lock">100</integer>
+
+  <!-- Menu -->
+  <string name="dark_theme_menu_item" maxLength="15">Koyu Tema</string>
+  <string name="about_menu_item"  maxLength="15">Hakkında</string>
+  <string name="debug_menu_item">Hata Ayıkla</string>
+  <string name="compass_degrees_menu_item">Pusula: Dereceleri göster</string>
+  <string name="units_menu_item">Birimler</string>
+  <string name="units_metric_menu_item">Metrik</string>
+  <string name="units_imperial_menu_item">İngiliz</string>
+  <string name="units_nautical_menu_item">Denizcilik</string>
+
+  <!-- AboutDialog -->
+  <string name="source" maxLength="15">Kaynak</string>
+
+  <!-- StarDialog -->
+  <string name="dialog_OK_button">Tamam</string>
+  <string name="dialog_NO_button">Hayır</string>
+  <string name="dialog_Later_button">Belki daha sonra</string>
+  <string name="dialog_StarOnGitHub">Bu uygulamayı beğendiniz mi? Lütfen GitHub\'da yıldız verin.</string>
+  <string name="headup_display">Gösterge Ekranı</string>
+  <string name="turned_on">Açık</string>
+    <string name="dyn_color_menu_item">Değişken renkler</string>
+    <string name="restart">Uygulama yeniden başlatılmalı</string>
+</resources>
