@@ -1,0 +1,20 @@
+<big><b>Özellikler:</b></big>
+
+GPS Cockpit, GPS aracılığıyla aygıtınızın konumunu bulur ve en ilgili verileri bir kokpit biçiminde gösterir.
+Ayrıca görünür uyduların listesini tanımlayıcıları ve sinyal kaliteleriyle birlikte görebilirsiniz.
+Konum koordinatları panoya kopyalanabilir, paylaşılabilir veya kuruluysa bir harita uygulamasında açılabilir.
+A-GPS yardımcı verilerinin temizlenmesi de desteklenir.
+Hız aralığı, hız göstergesine tıklanarak seçilebilir.
+Hız göstergesinde sola kaydırma yapıldığında bunun yerine yükseklik ölçer gösterilir.
+BAŞLAT düğmesine basıldığında seyahat mesafesi kaydedilir (yatay hareket ve ayrıca toplam yukarı ve aşağı hareketler).
+Bir değişiklik yalnızca konum yatay hareket için 2 kat GPS doğruluğundan ve dikey hareketler için 3 kat GPS doğruluğundan daha
+fazla değişirse ve yalnızca doğruluk en az 15 m ise tanınır ve mesafeye eklenir.
+Gösterge ekranı olarak kullanmak için çevrilmiş bir görünüm de bulunmaktadır.
+
+Hızlı ayarlardaki bir kutucuk GPS kilidini etkinleştirmenizi/devre dışı bırakmanızı sağlar.
+
+Gerekli izinler:
+ - Konuma erişmek için GPS
+ - Kullanıcı isterse GPS'i arka planda etkin tutmak ("GPS'i Kilitle") için REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, WAKE_LOCK, FOREGROUND_SERVICE
+
+Reklam yok, izleyiciler yok.
