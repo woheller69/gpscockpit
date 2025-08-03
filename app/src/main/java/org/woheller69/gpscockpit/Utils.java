@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Window;
+import android.view.WindowInsetsController;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -394,6 +395,7 @@ public class Utils {
     }
     return degrees.abs()+"°"+minutes+"'"+seconds+"\"\u2009"+hemisphere;
   }
+
   public static int getThemeColor(Context context, int colorResId) {
     TypedValue typedValue = new TypedValue();
     TypedArray typedArray = context.obtainStyledAttributes(typedValue.data, new int[] {colorResId});
@@ -401,4 +403,28 @@ public class Utils {
     typedArray.recycle();
     return color;
   }
+
+  public static void setStatusBarAppearance(Activity activity){
+    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+      int nightModeFlags = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+      boolean isDarkMode = (nightModeFlags == Configuration.UI_MODE_NIGHT_YES);
+      WindowInsetsController insetsController = activity.getWindow().getInsetsController();
+      if (insetsController != null) {
+        if (isDarkMode) {
+          // Dark mode: remove light status bar appearance (use light icons)
+          insetsController.setSystemBarsAppearance(
+                  0,
+                  WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+          );
+        } else {
+          // Light mode: enable light status bar appearance (dark icons)
+          insetsController.setSystemBarsAppearance(
+                  WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                  WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+          );
+        }
+      }
+    }
+  }
+
 }

@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="colorSurface" format="reference|color" />
+        <attr name="colorPrimary" format="reference|color" />
+        <attr name="colorPrimaryDark" format="reference|color" />
+        <attr name="colorPrimaryInverse" format="reference|color"/>
+        <attr name="colorControlNormal" format="reference|color"/>
+    </declare-styleable>
+</resources>

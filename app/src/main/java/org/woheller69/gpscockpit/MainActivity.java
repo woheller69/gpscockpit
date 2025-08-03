@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
     else {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
+    Utils.setStatusBarAppearance(this);
     checkAndRequestPerms();
     if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
