@@ -52,6 +52,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.github.anastr.speedviewlib.components.Section;
 import com.google.android.material.color.DynamicColors;
+
+import org.woheller69.freeDroidWarn.FreeDroidWarn;
 import org.woheller69.gpscockpit.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
     Utils.setStatusBarAppearance(this);
     checkAndRequestPerms();
+    FreeDroidWarn.showWarningOnUpgrade(this, BuildConfig.VERSION_CODE);
     if (GithubStar.shouldShowStarDialog()) GithubStar.starDialog(this,"https://github.com/woheller69/gpscockpit");
   }
 
@@ -696,20 +699,20 @@ public class MainActivity extends AppCompatActivity {
       speedAverage = mTravelDistance / (mEndTime - mStartTime);  // im m/s
     }
     if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
-      speed_av = Utils.formatInt(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
+      speed_av = Utils.formatSpeed(speedAverage * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
-      speed_av = Utils.formatInt(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+      speed_av = Utils.formatSpeed(speedAverage * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
-      speed_av = Utils.formatInt(speedAverage * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
+      speed_av = Utils.formatSpeed(speedAverage * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
     }
     mB.gpsCont.speedAv.setText(speed_av);
 
     if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == METRIC){
-      speed_max = Utils.formatInt(mMaxSpeed * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
+      speed_max = Utils.formatSpeed(mMaxSpeed * 3.6f) + " " + getString(R.string.speed_unit); //convert to km/h
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == IMPERIAL){
-      speed_max = Utils.formatInt(mMaxSpeed * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
+      speed_max = Utils.formatSpeed(mMaxSpeed * 2.236936f) + " " + getString(R.string.speed_unit_imperial); //convert to mph
     }else if (SETTINGS.getIntPref(R.string.pref_units_key, METRIC) == NAUTICAL){
-      speed_max = Utils.formatInt(mMaxSpeed * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
+      speed_max = Utils.formatSpeed(mMaxSpeed * 1.943844f) + " " + getString(R.string.speed_unit_nautical); //convert to kn
     }
     mB.gpsCont.speedMax.setText(speed_max);
 

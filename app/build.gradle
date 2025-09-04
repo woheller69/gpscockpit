@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android'
 android {
     compileSdk 35
     namespace 'org.woheller69.gpscockpit'
-    android.buildFeatures.buildConfig true
+
     defaultConfig {
         applicationId "org.woheller69.gpscockpit"
         minSdk 24
         targetSdk 35
-        versionCode 270
-        versionName "2.7"
+        versionCode 280
+        versionName "2.8"
     }
 
     buildTypes {
@@ -32,6 +32,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
@@ -46,6 +47,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
     // To handle hyperlink onClick in TextView
     implementation 'me.saket:better-link-movement-method:2.2.0'
+    implementation 'com.github.woheller69:FreeDroidWarn:+'
 }
 
 

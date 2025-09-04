@@ -1,0 +1,2 @@
+Show low average and max speeds with higher precision
+Add deprecation warning
