@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
   private Location mGpsLocation;
   private long mGpsLocationTime;
   private Location mOldGpsLocation;
+  public static Location lastKnownLocation;
   private static float mTravelDistance = 0;
   private static Double mAltUp = 0d;
   private static Double mAltDown = 0d;
@@ -341,6 +342,12 @@ public class MainActivity extends AppCompatActivity {
       invalidateOptionsMenu();
       return true;
     }
+
+    if (itemId == R.id.action_last_location) {
+      shareLoc(this, lastKnownLocation);
+      return true;
+    }
+
     if (itemId == R.id.action_about) {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.source_url))));
       return true;
@@ -842,6 +849,7 @@ public class MainActivity extends AppCompatActivity {
       if (mIsGps) {
         mGpsLocation = location;
         mGpsLocationTime=System.currentTimeMillis(); // because location.getTime() gives wrong time
+        lastKnownLocation = mGpsLocation;
         if (recording) mDebugCounter++;
         updateUi();
       }

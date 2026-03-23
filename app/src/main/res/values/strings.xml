@@ -71,4 +71,5 @@
   <string name="turned_on">On</string>
     <string name="dyn_color_menu_item">Dynamic colors</string>
     <string name="restart">App must be restarted</string>
+    <string name="last_known_location">Last known location</string>
 </resources>

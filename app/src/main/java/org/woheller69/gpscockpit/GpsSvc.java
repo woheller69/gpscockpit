@@ -91,6 +91,7 @@ public class GpsSvc extends Service implements LocationListener {
   @Override
   public void onLocationChanged(Location location) {
     mGpsLoc = location;
+    MainActivity.lastKnownLocation = location;
     mGpsLocTime = System.currentTimeMillis();  // because location.getTime() gives wrong time
     updateNotification();
   }

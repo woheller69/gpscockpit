@@ -81,6 +81,15 @@
       app:showAsAction="never" />
   </group>
 
+  <group android:id="@+id/lastLocationGroup">
+    <item
+        android:id="@+id/action_last_location"
+        android:icon="@drawable/map"
+        android:title="@string/last_known_location"
+        app:showAsAction="never" />
+
+  </group>
+
   <group android:id="@+id/groupAbout">
     <item
       android:id="@+id/action_about"
