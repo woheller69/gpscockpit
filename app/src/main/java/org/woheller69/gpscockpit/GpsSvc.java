@@ -1,6 +1,5 @@
 package org.woheller69.gpscockpit;
 
-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_DEFAULT;
 import static org.woheller69.gpscockpit.BuildConfig.APPLICATION_ID;
 import static org.woheller69.gpscockpit.Utils.formatLocAccuracy;
@@ -81,7 +80,8 @@ public class GpsSvc extends Service implements LocationListener {
 
   @Override
   public void onDestroy() {
-
+    // Ensure cleanup happens even if the OS kills the service directly
+    stopGpsLocListener();
     super.onDestroy();
   }
 
@@ -157,7 +157,8 @@ public class GpsSvc extends Service implements LocationListener {
     updateNotification();
   }
 
-  public static final long MIN_DELAY = 10000;
+  public static final long MIN_DELAY = 2000;
+  private static final long MAX_LOCATION_AGE = 30000;
 
   @SuppressLint("MissingPermission")
   private void startGpsLocListener() {
@@ -175,8 +176,10 @@ public class GpsSvc extends Service implements LocationListener {
             mUsedSats++;
           }
         }
-        if ((mUsedSats<4) || (mGpsLoc!=null && System.currentTimeMillis()-mGpsLocTime > 2*MIN_DELAY)) {
-          mGpsLoc=null;  //delete last location if less then 4 sats are in use or last update time longer than 2*MIN_DELAY-> fix lost
+
+        //delete last location if less then 4 sats are in use or last update time longer than MAX_LOCATION_AGE_MS -> fix lost
+        if ((mUsedSats < 4) || (mGpsLoc != null && System.currentTimeMillis() - mGpsLocTime > MAX_LOCATION_AGE)) {
+          mGpsLoc = null;
           mNmeaAltitude=null;
         }
         updateNotification();
