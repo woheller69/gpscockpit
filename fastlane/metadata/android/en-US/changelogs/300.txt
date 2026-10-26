@@ -1,0 +1,1 @@
+GPS Service: increased update frequency to prevent GPS from going to sleep
